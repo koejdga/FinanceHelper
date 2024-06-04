@@ -59,14 +59,13 @@ const yellow = {
   20: "#FCEED4",
 };
 
-const accent = violet;
+export const Accent = violet;
 
 const tintColorLight = "#0a7ea4";
 const tintColorDark = "#fff";
 
 export const Colors = {
   light: {
-    accent,
     text: "#11181C",
     background: "#fff",
     tint: tintColorLight,
@@ -75,7 +74,6 @@ export const Colors = {
     tabIconSelected: tintColorLight,
   },
   dark: {
-    accent,
     text: "#ECEDEE",
     background: "#151718",
     tint: tintColorDark,
