@@ -19,7 +19,7 @@ const base = {
   },
 };
 
-const violet = {
+export const violet = {
   100: "#7F3DFF",
   80: "#8F57FF",
   60: "#B18AFF",
@@ -27,7 +27,7 @@ const violet = {
   20: "#EEE5FF",
 };
 
-const blue = {
+export const blue = {
   100: "#0077FF",
   80: "#248AFF",
   60: "#57A5FF",
@@ -35,7 +35,7 @@ const blue = {
   20: "#BDDCFF",
 };
 
-const red = {
+export const red = {
   100: "#FD3C4A",
   80: "#FD5662",
   60: "#FD6F7A",
@@ -43,7 +43,7 @@ const red = {
   20: "#FDD5D7",
 };
 
-const green = {
+export const green = {
   100: "#00A86B",
   80: "#2AB784",
   60: "#65D1AA",
@@ -51,7 +51,7 @@ const green = {
   20: "#CFFAEA",
 };
 
-const yellow = {
+export const yellow = {
   100: "#FCAC12",
   80: "#FCBB3C",
   60: "#FCCC6F",
@@ -59,10 +59,10 @@ const yellow = {
   20: "#FCEED4",
 };
 
-const accent = violet;
+export const accent = violet;
 
-const tintColorLight = "#0a7ea4";
-const tintColorDark = "#fff";
+export const tintColorLight = "#0a7ea4";
+export const tintColorDark = "#fff";
 
 export const Colors = {
   light: {
