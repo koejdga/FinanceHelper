@@ -1,6 +1,6 @@
-import {StyleSheet, View, TextInput, Button, Text} from 'react-native';
+import {StyleSheet, View, TextInput, Button, Text, Alert} from 'react-native';
 import {useState} from "react";
-import {RectButton} from "react-native-gesture-handler";
+import {BorderlessButton, PureNativeButton, RectButton} from "react-native-gesture-handler";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { violet } from '@/constants/Colors';
 import {GestureHandlerRootView} from "react-native-gesture-handler";
@@ -9,6 +9,25 @@ export function SimpleLoginForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+
+    const emailChecker = () => {
+        if(!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email))
+            return {isValid: false, message: "Email is not valid"};
+        return {isValid: true, message: ""};
+    }
+    const passwordChecker = () => {
+        if(password.length < 8) return {isValid: false, message: "Password must contain at least 8 characters"};
+        return {isValid: true, message: ""};
+    }
+    const requirementsChecker = () => {
+        let emailCorrectness = emailChecker();
+        let passwordCorrectness = passwordChecker();
+        if(!emailCorrectness.isValid || !passwordCorrectness.isValid){
+            let message = emailCorrectness.isValid?passwordCorrectness.message:emailCorrectness.message;
+            Alert.alert("", message, [{text: "OK"}]);
+        }
+    }
+
     return (
         <GestureHandlerRootView>
             <View style={styles.goodAlign}>
@@ -26,6 +45,7 @@ export function SimpleLoginForm() {
                         placeholder="Password"
                         placeholderTextColor={"gray"}
                         onChangeText={(value) => setPassword(value)}
+
                         style={[styles.textInput,
                             {borderBottomRightRadius: 0,
                                 borderTopRightRadius: 0}]}/>
@@ -36,11 +56,12 @@ export function SimpleLoginForm() {
                         style={styles.showIcon}>
                     </Ionicons>
                 </View>
-                <RectButton
-                    onPress={() => {}}
+                <BorderlessButton
+                    onPress={() => { requirementsChecker()}}
+
                     style={styles.button}>
                     <Text style={{color: "white"}}>Login</Text>
-                </RectButton>
+                </BorderlessButton>
             </View>
         </GestureHandlerRootView>
     );
