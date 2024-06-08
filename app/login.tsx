@@ -1,7 +1,7 @@
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 
 import {SimpleLoginForm} from "@/components/SimpleLoginForm";
-import {violet} from "@/constants/Colors";
+import {accent} from "@/constants/Colors";
 import {Link} from "expo-router";
 
 export default function Login() {
@@ -17,33 +17,33 @@ export default function Login() {
                 </View>
             </View>
         </ScrollView>
-        );
-    }
+    );
+}
 
-    const styles = StyleSheet.create({
-        alignForm: {
-            marginTop: "30%",
-            height: "60%"
-        },
-        alignCenter: {
-            marginLeft: "auto",
-            marginRight: "auto"
-        },
-        bigFont: {
-            fontSize: 22,
-            padding: 20
-        },
-        violetBoldText: {
-            fontSize: 18,
-            fontWeight: "bold",
-            color: violet["100"],
-            padding: 40
-        },
-        simpleText: {
-            fontSize: 16,
-        },
-        link: {
-            color: violet["100"],
-            fontSize: 16
-        }
-    });
+const styles = StyleSheet.create({
+    alignForm: {
+        marginTop: "30%",
+        height: "60%"
+    },
+    alignCenter: {
+        marginLeft: "auto",
+        marginRight: "auto"
+    },
+    bigFont: {
+        fontSize: 22,
+        padding: 20
+    },
+    violetBoldText: {
+        fontSize: 18,
+        fontWeight: "bold",
+        color: accent["100"],
+        padding: 40
+    },
+    simpleText: {
+        fontSize: 16,
+    },
+    link: {
+        color: accent["100"],
+        fontSize: 16
+    }
+});
