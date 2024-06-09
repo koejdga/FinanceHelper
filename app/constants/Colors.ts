@@ -3,7 +3,7 @@
  * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
  */
 
-const base = {
+export const base = {
   light: {
     light20: "#91919F",
     light40: "#929292",
@@ -58,7 +58,6 @@ export const yellow = {
   40: "#FCDDA1",
   20: "#FCEED4",
 };
-
 
 export const Accent = violet;
 

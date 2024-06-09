@@ -1,60 +1,72 @@
-const Inter = {
-  medium: require("../assets/fonts/Inter-Medium.ttf"),
-  semiBold: require("../assets/fonts/Inter-SemiBold.ttf"),
-  bold: require("../assets/fonts/Inter-Bold.ttf"),
-};
+enum FontsEnum {
+  MEDIUM = "Inter-Medium",
+  SEMIBOLD = "Inter-SemiBold",
+  BOLD = "Inter-Bold",
+}
+
+export enum FontNames {
+  TINY,
+  SMALL,
+  BODY_3,
+  BODY_2,
+  BODY_1,
+  TITLE_3,
+  TITLE_2,
+  TITLE_1,
+  TITLE_X,
+}
 
 type Font = {
-  type: NodeRequire;
-  size: number;
+  fontFamily: string;
+  fontSize: number;
   lineHeight: number;
 };
 
 // TODO: auto line height means what? I made line height equal to size where auto was specified (Sonya)
-export const Fonts: Record<string, Font> = {
-  tiny: {
-    type: Inter.medium,
-    size: 12,
+export const Fonts: Record<FontNames, Font> = {
+  [FontNames.TINY]: {
+    fontFamily: FontsEnum.MEDIUM,
+    fontSize: 12,
     lineHeight: 12,
   },
-  small: {
-    type: Inter.medium,
-    size: 13,
+  [FontNames.SMALL]: {
+    fontFamily: FontsEnum.MEDIUM,
+    fontSize: 13,
     lineHeight: 16,
   },
-  body3: {
-    type: Inter.medium,
-    size: 14,
+  [FontNames.BODY_3]: {
+    fontFamily: FontsEnum.MEDIUM,
+    fontSize: 14,
     lineHeight: 18,
   },
-  body2: {
-    type: Inter.semiBold,
-    size: 16,
+  [FontNames.BODY_2]: {
+    fontFamily: FontsEnum.SEMIBOLD,
+    fontSize: 16,
     lineHeight: 16,
   },
-  body1: {
-    type: Inter.medium,
-    size: 16,
-    lineHeight: 16,
+  [FontNames.BODY_1]: {
+    fontFamily: FontsEnum.MEDIUM,
+    fontSize: 16,
+    lineHeight: 19.36,
   },
-  title3: {
-    type: Inter.semiBold,
-    size: 18,
+  [FontNames.TITLE_3]: {
+    fontFamily: FontsEnum.SEMIBOLD,
+    fontSize: 18,
     lineHeight: 18,
   },
-  title2: {
-    type: Inter.semiBold,
-    size: 24,
+  [FontNames.TITLE_2]: {
+    fontFamily: FontsEnum.SEMIBOLD,
+    fontSize: 24,
     lineHeight: 24,
   },
-  title1: {
-    type: Inter.bold,
-    size: 32,
+  [FontNames.TITLE_1]: {
+    fontFamily: FontsEnum.BOLD,
+    fontSize: 32,
     lineHeight: 39,
   },
-  titleX: {
-    type: Inter.bold,
-    size: 64,
+  [FontNames.TITLE_X]: {
+    fontFamily: FontsEnum.BOLD,
+    fontSize: 64,
     lineHeight: 80,
   },
 };
