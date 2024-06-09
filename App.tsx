@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Launch from "./app/screens/Launch";
 import Login from "./app/screens/Login";
 import OnboardingScreen from "./app/screens/OnboardingScreen";
-import Settings from "./app/screens/Settings";
+import SettingsStack from "./app/screens/SettingsStack";
 import Signup from "@/app/screens/Signup";
 
 const Stack = createNativeStackNavigator();
@@ -12,7 +12,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Settings"
+        initialRouteName="SettingsStack"
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="Login" component={Login} />
@@ -23,7 +23,7 @@ const App = () => {
           initialParams={{ screenNumber: 1 }}
         />
         <Stack.Screen name="Launch" component={Launch} />
-        <Stack.Screen name="Settings" component={Settings} />
+        <Stack.Screen name="SettingsStack" component={SettingsStack} />
       </Stack.Navigator>
     </NavigationContainer>
   );
