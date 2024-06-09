@@ -83,7 +83,7 @@ const OnboardingScreen = ({ route, navigation }) => {
         <CustomButton
           title="Sign Up"
           onPress={() => {
-            navigation.push("Login"); // TODO: change to Signup
+            navigation.push("Signup");
           }}
         />
         <CustomButton
