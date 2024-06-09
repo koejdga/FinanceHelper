@@ -22,7 +22,11 @@ const ThreeDots: React.FC<Props> = ({ style, bigNumber }) => {
       ]}
     >
       {Array.from({ length: 3 }).map((_, index) =>
-        index + 1 === bigNumber ? <BigDot /> : <SmallDot />
+        index + 1 === bigNumber ? (
+          <BigDot key={"bigdot" + index} />
+        ) : (
+          <SmallDot key={"smalldot" + index} />
+        )
       )}
     </View>
   );

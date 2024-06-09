@@ -4,6 +4,7 @@ import Launch from "@/app/screens/Launch";
 import Login from "@/app/screens/Login";
 import OnboardingScreen from "@/app/screens/OnboardingScreen";
 import MainApp from "@/app/screens/MainApp";
+import Settings from "./app/screens/Settings";
 import Signup from "@/app/screens/Signup";
 
 const Stack = createNativeStackNavigator();
@@ -12,7 +13,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="MainApp"
+        initialRouteName="Settings"
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="Login" component={Login} />
@@ -24,6 +25,7 @@ const App = () => {
         />
         <Stack.Screen name="Launch" component={Launch} />
         <Stack.Screen name="MainApp" component={MainApp} />
+        <Stack.Screen name="Settings" component={Settings} />
       </Stack.Navigator>
     </NavigationContainer>
   );
