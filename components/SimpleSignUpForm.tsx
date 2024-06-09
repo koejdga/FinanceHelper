@@ -2,32 +2,42 @@ import {View, Text, Alert} from 'react-native';
 import {useState} from "react";
 import {BorderlessButton} from "react-native-gesture-handler";
 import {GestureHandlerRootView} from "react-native-gesture-handler";
-import {emailChecker, passwordChecker} from "@/scripts/validation-scripts/login-validation";
+import {emailChecker, nameChecker, passwordChecker} from "@/scripts/validation-scripts/login-validation";
 import {SecureTextInput} from "@/components/SecureTextInput";
 import {formStyles} from "@/constants/Styles";
 import {FormTextInput} from "@/components/FormTextInput";
 
-type LoginFormProps = {
-    onSubmit?: (email: string, password: string) => any;
+type SignUpFormProps = {
+    onSubmit?: (name: string, email: string, password: string) => any;
 }
 
-export function SimpleLoginForm(props: LoginFormProps) {
+export function SimpleSignUpForm(props: SignUpFormProps) {
+    const [name, setName] = useState('')
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const requirementsChecker = () => {
+        let nameCorrectness = nameChecker(name);
         let emailCorrectness = emailChecker(email);
         let passwordCorrectness = passwordChecker(password);
-        if(!emailCorrectness.isValid || !passwordCorrectness.isValid){
-            let message = emailCorrectness.isValid ? passwordCorrectness.message:emailCorrectness.message;
+
+        if(!nameCorrectness.isValid || !emailCorrectness.isValid || !passwordCorrectness.isValid){
+            let message = nameCorrectness.isValid ?
+                (passwordCorrectness.isValid?
+                    emailCorrectness.message:
+                    passwordCorrectness.message)
+                :nameCorrectness.message;
             Alert.alert("", message, [{text: "OK"}]);
         }
-        else if(props.onSubmit) props.onSubmit(email, password);
+        else if(props.onSubmit) props.onSubmit(name, email, password);
     }
 
     return (
         <GestureHandlerRootView>
             <View style={formStyles.container}>
+                <FormTextInput
+                    placeholder="Name"
+                    onChangeText={(value) => setName(value)}/>
                 <FormTextInput
                     placeholder="Email"
                     onChangeText={(value) => setEmail(value)}/>
@@ -35,7 +45,7 @@ export function SimpleLoginForm(props: LoginFormProps) {
                 <BorderlessButton
                     onPress={() => { requirementsChecker()}}
                     style={formStyles.button}>
-                    <Text style={{color: "white"}}>Login</Text>
+                    <Text style={{color: "white"}}>Sign Up</Text>
                 </BorderlessButton>
             </View>
         </GestureHandlerRootView>
