@@ -1,6 +1,5 @@
 import {StyleSheet} from "react-native";
-import {Fonts} from "@/constants/Fonts";
-import {accent} from "@/constants/Colors";
+import {Accent} from "@/app/constants/Colors";
 
 export const formStyles = StyleSheet.create({
     textInputWrap: {
@@ -14,21 +13,21 @@ export const formStyles = StyleSheet.create({
     textInput: {
         borderRadius: 15,
         opacity: 0.9,
-        width: "90%",
+        width: "100%",
         height: "100%",
         padding: 10,
-        fontSize: Fonts.body1.size,
+        fontSize: 16,
         borderWidth: 0,
     },
     button: {
         borderRadius: 10,
-        fontSize: Fonts.title3.size,
+        fontSize: 18,
         height: 60,
         color: "white",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: accent["100"]
+        backgroundColor: Accent["100"]
     },
     container: {
         width: "90%",
@@ -44,7 +43,7 @@ export const formStyles = StyleSheet.create({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        padding: 4
+        padding: 8
     }
 });
 
@@ -64,14 +63,14 @@ export const formContainerStyles = StyleSheet.create({
     accentBoldText: {
         fontSize: 18,
         fontWeight: "bold",
-        color: accent["100"],
+        color: Accent["100"],
         padding: 40
     },
     simpleText: {
         fontSize: 16,
     },
     link: {
-        color: accent["100"],
+        color: Accent["100"],
         fontSize: 16,
         textDecorationLine: "underline"
     }

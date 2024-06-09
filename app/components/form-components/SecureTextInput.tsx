@@ -1,7 +1,7 @@
 import {TextInput, View} from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import {useState} from "react";
-import {formStyles} from "@/constants/Styles";
+import {formStyles} from "@/app/constants/Styles";
 
 type SecureTextProps = {
     onChangeText?: ((text: string) => void);
@@ -19,7 +19,8 @@ export function SecureTextInput(props: SecureTextProps){
 
             style={[formStyles.textInput,
                 {borderBottomRightRadius: 0,
-                    borderTopRightRadius: 0}]}/>
+                    borderTopRightRadius: 0,
+                width: "88%"}]}/>
         <Ionicons
             name={showPassword ? 'eye-off' : 'eye'}
             size={30}

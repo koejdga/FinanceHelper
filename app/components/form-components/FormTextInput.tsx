@@ -1,5 +1,5 @@
-import {ColorValue, TextInput, View} from "react-native";
-import {formStyles} from "@/constants/Styles";
+import {TextInput, View} from "react-native";
+import {formStyles} from "@/app/constants/Styles";
 
 type FormTextInputProps = {
     onChangeText?: ((text: string) => void);

@@ -1,9 +1,9 @@
 import {ScrollView, Text, View} from "react-native";
-import {formContainerStyles} from "@/constants/Styles";
 import {Link} from "expo-router";
-import {SimpleSignUpForm} from "@/components/SimpleSignUpForm";
+import {SimpleSignUpForm} from "@/app/components/form-components/SimpleSignUpForm";
+import {formContainerStyles} from "@/app/constants/Styles";
 
-export default function SignUp() {
+export default function Signup() {
     return (
         <ScrollView>
             <View style={formContainerStyles.alignForm}>

@@ -3,9 +3,9 @@ import {useState} from "react";
 import {BorderlessButton} from "react-native-gesture-handler";
 import {GestureHandlerRootView} from "react-native-gesture-handler";
 import {emailChecker, nameChecker, passwordChecker} from "@/scripts/validation-scripts/login-validation";
-import {SecureTextInput} from "@/components/SecureTextInput";
-import {formStyles} from "@/constants/Styles";
-import {FormTextInput} from "@/components/FormTextInput";
+import {SecureTextInput} from "@/app/components/form-components/SecureTextInput";
+import {formStyles} from "@/app/constants/Styles";
+import {FormTextInput} from "@/app/components/form-components/FormTextInput";
 
 type SignUpFormProps = {
     onSubmit?: (name: string, email: string, password: string) => any;
