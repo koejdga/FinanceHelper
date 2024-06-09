@@ -28,6 +28,18 @@
     },
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "plugins": [
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./app/assets/fonts/Inter-Bold.ttf",
+            "./app/assets/fonts/Inter-Medium.ttf",
+            "./app/assets/fonts/Inter-SemiBold.ttf"
+          ]
+        }
+      ]
+    ]
   }
 }
