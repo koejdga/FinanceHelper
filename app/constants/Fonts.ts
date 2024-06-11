@@ -57,7 +57,7 @@ export const Fonts: Record<FontNames, Font> = {
   [FontNames.TITLE_2]: {
     fontFamily: FontsEnum.SEMIBOLD,
     fontSize: 24,
-    lineHeight: 24,
+    lineHeight: 29,
   },
   [FontNames.TITLE_1]: {
     fontFamily: FontsEnum.BOLD,

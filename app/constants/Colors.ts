@@ -41,6 +41,7 @@ export const red = {
   60: "#FD6F7A",
   40: "#FDA2A9",
   20: "#FDD5D7",
+  10: "#FFE2E4",
 };
 
 export const green = {
