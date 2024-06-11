@@ -3,7 +3,7 @@ import SettingsRow from "../components/SettingsRow";
 
 const Settings = ({ navigation }) => {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ backgroundColor: "#FFF", flex: 1 }}>
       <SettingsRow
         title="Currency"
         additionalText="UAH"
@@ -16,6 +16,7 @@ const Settings = ({ navigation }) => {
               "United Kingdom (GDP)",
               "Germany (EUR)",
             ],
+            title: "Currency",
           });
         }}
       />
@@ -25,6 +26,7 @@ const Settings = ({ navigation }) => {
         onPress={() => {
           navigation.push("ListWithChoices", {
             options: ["English (EN)", "Ukrainian (UA)"],
+            title: "Language",
           });
         }}
       />
@@ -34,6 +36,7 @@ const Settings = ({ navigation }) => {
         onPress={() => {
           navigation.push("ListWithChoices", {
             options: ["Light", "Dark", "Use device theme"],
+            title: "Theme",
           });
         }}
       />

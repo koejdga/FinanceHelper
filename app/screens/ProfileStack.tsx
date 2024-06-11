@@ -1,12 +1,18 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import ListWithChoices from "./ListWithChoices";
+import Profile from "./Profile";
 import Settings from "./Settings";
+import ListWithChoices from "./ListWithChoices";
 
 const Stack = createNativeStackNavigator();
 
-const SettingsStack = () => {
+const ProfileStack = () => {
   return (
-    <Stack.Navigator initialRouteName="Settings">
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen name="Settings" component={Settings} />
       <Stack.Screen
         name="ListWithChoices"
@@ -17,4 +23,4 @@ const SettingsStack = () => {
   );
 };
 
-export default SettingsStack;
+export default ProfileStack;

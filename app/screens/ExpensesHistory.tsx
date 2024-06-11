@@ -12,7 +12,7 @@ import DailyExpensesHistory from "../components/expenses_screen/DailyExpensesHis
 const ExpensesHistory = () => {
   const [selected, setSelected] = useState(Options.DAILY);
   const [monthNumber, setMonthNumber] = useState(4);
-  const [year, setYear] = useState(2021);
+  const [year, setYear] = useState(2024);
 
   return (
     <SafeAreaView style={{ backgroundColor: "#FFF", flex: 1 }}>

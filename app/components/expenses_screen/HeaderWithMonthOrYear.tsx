@@ -20,7 +20,7 @@ const HeaderWithMonthOrYear: React.FC<Props> = ({
   setYear,
   showOnlyYear,
 }) => {
-  const MIN_YEAR = 2024;
+  const MIN_YEAR = 2021;
   const MAX_YEAR = new Date().getFullYear();
 
   const [canGoLeft, setCanGoLeft] = useState(true);
