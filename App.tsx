@@ -4,6 +4,7 @@ import Launch from "./app/screens/Launch";
 import Login from "./app/screens/Login";
 import OnboardingScreen from "./app/screens/OnboardingScreen";
 import SettingsStack from "./app/screens/SettingsStack";
+import Profile from "./app/screens/Profile";
 import MainApp from "@/app/screens/MainApp";
 import Settings from "./app/screens/Settings";
 import Signup from "@/app/screens/Signup";
@@ -14,7 +15,6 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="SettingsStack"
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="Login" component={Login} />
@@ -26,6 +26,7 @@ const App = () => {
         />
         <Stack.Screen name="Launch" component={Launch} />
         <Stack.Screen name="SettingsStack" component={SettingsStack} />
+        <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="MainApp" component={MainApp} />
       </Stack.Navigator>
     </NavigationContainer>
