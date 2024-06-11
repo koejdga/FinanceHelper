@@ -1,9 +1,9 @@
 import { ScrollView, Text, View } from "react-native";
-import { ExpenseRed, IncomeBlue } from "../constants/Colors";
-import { FontNames, Fonts } from "../constants/Fonts";
-import Separator from "./Separator";
+import { ExpenseRed, IncomeBlue } from "../../constants/Colors";
+import { FontNames, Fonts } from "../../constants/Fonts";
+import Separator from "../Separator";
 import OneExpenseRow from "./OneExpenseRow";
-import { convertNumberToMoney } from "../utils/Utils";
+import { convertNumberToMoney } from "../../utils/Utils";
 import OneSummaryRow from "./OneSummaryRow";
 
 type Expense = {

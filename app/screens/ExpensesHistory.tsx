@@ -1,13 +1,13 @@
 import { SafeAreaView } from "react-native";
 import DailyMonthlyLimitsButtons, {
   Options,
-} from "../components/DailyMonthlyLimitsButtons";
-import HeaderWithMonthOrYear from "../components/HeaderWithMonthOrYear";
-import IncomeExpenseTotal from "../components/IncomeExpenseTotal";
-import MonthlyExpensesHistory from "../components/MonthlyExpensesHistory";
+} from "../components/expenses_screen/DailyMonthlyLimitsButtons";
+import HeaderWithMonthOrYear from "../components/expenses_screen/HeaderWithMonthOrYear";
+import IncomeExpenseTotal from "../components/expenses_screen/IncomeExpenseTotal";
+import MonthlyExpensesHistory from "../components/expenses_screen/MonthlyExpensesHistory";
 import Separator from "../components/Separator";
 import { useState } from "react";
-import DailyExpensesHistory from "../components/DailyExpensesHistory";
+import DailyExpensesHistory from "../components/expenses_screen/DailyExpensesHistory";
 
 const ExpensesHistory = () => {
   const [selected, setSelected] = useState(Options.DAILY);

@@ -1,7 +1,7 @@
 import { Text, View } from "react-native";
-import { ExpenseRed, IncomeBlue } from "../constants/Colors";
-import { FontNames, Fonts } from "../constants/Fonts";
-import { convertNumberToMoney } from "../utils/Utils";
+import { ExpenseRed, IncomeBlue } from "../../constants/Colors";
+import { FontNames, Fonts } from "../../constants/Fonts";
+import { convertNumberToMoney } from "../../utils/Utils";
 
 type Props = {
   name: string;

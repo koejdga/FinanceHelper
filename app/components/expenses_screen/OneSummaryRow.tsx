@@ -1,8 +1,8 @@
 import { View, Text } from "react-native";
 import React from "react";
-import { convertNumberToMoney } from "../utils/Utils";
-import { FontNames, Fonts } from "../constants/Fonts";
-import { ExpenseRed, IncomeBlue } from "../constants/Colors";
+import { convertNumberToMoney } from "../../utils/Utils";
+import { FontNames, Fonts } from "../../constants/Fonts";
+import { ExpenseRed, IncomeBlue } from "../../constants/Colors";
 
 type Props = {
   periodName: string; // either date ("24 Fri") or month ("May")

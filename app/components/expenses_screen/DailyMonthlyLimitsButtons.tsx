@@ -1,6 +1,6 @@
 import { View, Text, Pressable } from "react-native";
 import React, { useState } from "react";
-import { FontNames, Fonts } from "../constants/Fonts";
+import { FontNames, Fonts } from "../../constants/Fonts";
 import HomeIndicator from "./HomeIndicator";
 
 export enum Options {

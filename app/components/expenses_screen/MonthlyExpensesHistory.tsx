@@ -1,8 +1,8 @@
 import { View, Text } from "react-native";
 import React from "react";
 import OneSummaryRow from "./OneSummaryRow";
-import { convertNumberToMonthName } from "../utils/Utils";
-import Separator from "./Separator";
+import { convertNumberToMonthName } from "../../utils/Utils";
+import Separator from "../Separator";
 
 type Props = {
   monthNumber: number;

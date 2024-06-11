@@ -1,6 +1,6 @@
-import { View, Text, Animated } from "react-native";
-import React, { useEffect, useRef } from "react";
-import { Accent } from "../constants/Colors";
+import { useEffect, useRef } from "react";
+import { Animated } from "react-native";
+import { Accent } from "../../constants/Colors";
 
 const HomeIndicator = ({ dictOfPositions, selected }) => {
   const DURATION = 200;

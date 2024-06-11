@@ -1,9 +1,9 @@
 import { View, Text } from "react-native";
 import React from "react";
-import ArrowLeftMainIcon from "./icons/ArrowLeftMainIcon";
-import ArrowRightMainIcon from "./icons/ArrowRightMainIcon";
-import { FontNames, Fonts } from "../constants/Fonts";
-import { convertNumberToMonthName } from "../utils/Utils";
+import ArrowLeftMainIcon from "../icons/ArrowLeftMainIcon";
+import ArrowRightMainIcon from "../icons/ArrowRightMainIcon";
+import { FontNames, Fonts } from "../../constants/Fonts";
+import { convertNumberToMonthName } from "../../utils/Utils";
 
 type Props = {
   monthNumber?: number;
