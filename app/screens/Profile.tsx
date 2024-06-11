@@ -1,11 +1,11 @@
 import { Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
-import { Accent, base, red } from "../constants/Colors";
-import { FontNames, Fonts } from "../constants/Fonts";
-import EditIcon from "../components/icons/EditIcon";
-import WalletIcon from "../components/icons/WalletIcon";
+import EditIconProfile from "../components/icons/EditIconProfile";
+import LogoutIcon from "../components/icons/LogoutIcon";
 import SettingsIcon from "../components/icons/SettingsIcon";
 import UploadIcon from "../components/icons/UploadIcon";
-import LogoutIcon from "../components/icons/LogoutIcon";
+import WalletIcon from "../components/icons/WalletIcon";
+import { Accent, base, red } from "../constants/Colors";
+import { FontNames, Fonts } from "../constants/Fonts";
 
 const Profile = () => {
   return (
@@ -30,7 +30,7 @@ const Profile = () => {
             Kate Johnson
           </Text>
         </View>
-        <EditIcon color={base.dark.dark50} />
+        <EditIconProfile color={base.dark.dark50} />
       </View>
 
       <Pressable
@@ -86,7 +86,6 @@ const Profile = () => {
     </SafeAreaView>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
