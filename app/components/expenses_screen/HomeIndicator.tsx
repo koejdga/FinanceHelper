@@ -12,7 +12,6 @@ const HomeIndicator = ({ dictOfPositions, selected }) => {
     if (!dictOfPositions[selected]) {
       return;
     }
-    console.log(dictOfPositions[selected]);
     Animated.timing(widthAnim, {
       toValue: dictOfPositions[selected].width + 5,
       duration: DURATION,

@@ -4,11 +4,11 @@
     "slug": "FinanceHelper",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "@/app/assets/images/icon.png",
+    "icon": "./app/assets/images/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "@/app/assets/images/splash.png",
+      "image": "./app/assets/images/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -17,14 +17,14 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "@/app/assets/images/adaptive-icon.png",
+        "foregroundImage": "./app/assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "@/app/assets/images/favicon.png"
+      "favicon": "./app/assets/images/favicon.png"
     },
     "experiments": {
       "typedRoutes": true

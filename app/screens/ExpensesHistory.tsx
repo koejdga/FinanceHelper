@@ -11,12 +11,16 @@ import DailyExpensesHistory from "../components/expenses_screen/DailyExpensesHis
 
 const ExpensesHistory = () => {
   const [selected, setSelected] = useState(Options.DAILY);
+  const [monthNumber, setMonthNumber] = useState(4);
+  const [year, setYear] = useState(2021);
 
   return (
     <SafeAreaView style={{ backgroundColor: "#FFF", flex: 1 }}>
       <HeaderWithMonthOrYear
-        monthNumber={4}
-        year={2024}
+        monthNumber={monthNumber}
+        setMonthNumber={setMonthNumber}
+        year={year}
+        setYear={setYear}
         showOnlyYear={selected === Options.MONTHLY}
       />
       <Separator />
