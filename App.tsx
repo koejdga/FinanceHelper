@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Launch from "./app/screens/Launch";
 import Login from "./app/screens/Login";
 import OnboardingScreen from "./app/screens/OnboardingScreen";
+import SettingsStack from "./app/screens/SettingsStack";
 import Profile from "./app/screens/Profile";
 import MainApp from "@/app/screens/MainApp";
 import Settings from "./app/screens/Settings";
@@ -24,9 +25,9 @@ const App = () => {
           initialParams={{ screenNumber: 1 }}
         />
         <Stack.Screen name="Launch" component={Launch} />
+        <Stack.Screen name="SettingsStack" component={SettingsStack} />
         <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="MainApp" component={MainApp} />
-        <Stack.Screen name="Settings" component={Settings} />
       </Stack.Navigator>
     </NavigationContainer>
   );
