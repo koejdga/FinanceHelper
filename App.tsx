@@ -6,6 +6,7 @@ import OnboardingScreen from "@/app/screens/OnboardingScreen";
 import MainApp from "@/app/screens/MainApp";
 import Settings from "./app/screens/Settings";
 import Signup from "@/app/screens/Signup";
+import ExpensesHistory from "./app/screens/ExpensesHistory";
 
 const Stack = createNativeStackNavigator();
 
@@ -13,7 +14,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Settings"
+        initialRouteName="MainApp"
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="Login" component={Login} />

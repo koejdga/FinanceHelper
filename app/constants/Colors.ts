@@ -61,6 +61,9 @@ export const yellow = {
 
 export const Accent = violet;
 
+export const IncomeBlue = "#2346C1";
+export const ExpenseRed = "#C12323";
+
 export const tintColorLight = "#0a7ea4";
 export const tintColorDark = "#fff";
 
