@@ -14,9 +14,10 @@ export default function Login() {
                 const user = userCredential.user;
                 console.log(user.email);
                 console.log(user.uid);
+                console.log(user.displayName);
             })
             .catch((error) => {
-                console.log("Sign in was unsuccessful")
+                console.log("Login was unsuccessful")
             });
     }
   return (
