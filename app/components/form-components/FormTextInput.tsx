@@ -9,6 +9,7 @@ type FormTextInputProps = {
 export function FormTextInput(props: FormTextInputProps){
     return <View style={formStyles.textInputWrap}>
         <TextInput
+            spellCheck={false}
             placeholder={props.placeholder}
             placeholderTextColor={"gray"}
             onChangeText={(value) => props.onChangeText?props.onChangeText(value):null}
