@@ -21,17 +21,19 @@ export default function Login({navigation }) {
     }
   return (
       <ScrollView>
-        <View style={formContainerStyles.alignForm}>
-          <Text style={[formContainerStyles.alignCenter, formContainerStyles.title]}>Login</Text>
-          <SimpleLoginForm onSubmit={(email, password) => {signIn(email, password)}}/>
-          <Link style={[formContainerStyles.accentBoldText, formContainerStyles.alignCenter]} href={""}>Forgot password?</Link>
-          <View style={[{flexDirection: "row"}, formContainerStyles.alignCenter]}>
-            <Text style={formContainerStyles.simpleText}>Don't have an account yet? </Text>
-              <Pressable onPress={() => navigation.navigate("Signup")}>
-                  <Text style={formContainerStyles.link}>Sign up</Text>
+          <View style={formContainerStyles.alignForm}>
+              <Text style={[formContainerStyles.alignCenter, formContainerStyles.title]}>Login</Text>
+              <SimpleLoginForm onSubmit={(email, password) => {signIn(email, password)}}/>
+              <Pressable onPress={() => navigation.navigate("ResetPassword")}>
+                  <Text style={[formContainerStyles.accentBoldText, formContainerStyles.alignCenter]}>Forgot password?</Text>
               </Pressable>
+              <View style={[{flexDirection: "row"}, formContainerStyles.alignCenter]}>
+                  <Text style={formContainerStyles.simpleText}>Don't have an account yet? </Text>
+                  <Pressable onPress={() => navigation.navigate("Signup")}>
+                      <Text style={formContainerStyles.link}>Sign up</Text>
+                  </Pressable>
+              </View>
           </View>
-        </View>
       </ScrollView>
   );
 }

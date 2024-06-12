@@ -8,6 +8,7 @@ import Profile from "./app/screens/Profile";
 import MainApp from "@/app/screens/MainApp";
 import Settings from "./app/screens/Settings";
 import Signup from "@/app/screens/Signup";
+import ResetPassword from "@/app/screens/ResetPassword";
 
 const Stack = createNativeStackNavigator();
 
@@ -19,7 +20,9 @@ const App = () => {
       >
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Signup" component={Signup} />
-        <Stack.Screen
+          <Stack.Screen name="ResetPassword" component={ResetPassword} />
+
+          <Stack.Screen
           name="OnboardingScreen"
           component={OnboardingScreen}
           initialParams={{ screenNumber: 1 }}

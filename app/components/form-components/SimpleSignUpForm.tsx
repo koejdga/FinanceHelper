@@ -45,7 +45,7 @@ export function SimpleSignUpForm(props: SignUpFormProps) {
                 <BorderlessButton
                     onPress={() => { requirementsChecker()}}
                     style={formStyles.button}>
-                    <Text style={{color: "white"}}>Sign Up</Text>
+                    <Text style={formStyles.buttonText}>Sign Up</Text>
                 </BorderlessButton>
             </View>
         </GestureHandlerRootView>

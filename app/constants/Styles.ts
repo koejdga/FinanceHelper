@@ -1,5 +1,7 @@
 import {StyleSheet} from "react-native";
 import {Accent} from "@/app/constants/Colors";
+import {FontNames, Fonts} from "./Fonts";
+import {FONT_TYPES} from "expo-asset/plugin/build/utils";
 
 export const formStyles = StyleSheet.create({
     textInputWrap: {
@@ -20,14 +22,22 @@ export const formStyles = StyleSheet.create({
         borderWidth: 0,
     },
     button: {
-        borderRadius: 10,
-        fontSize: 18,
-        height: 60,
-        color: "white",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: Accent["100"]
+        ...Fonts[FontNames.TITLE_3],
+        ...{
+            borderRadius: 10,
+            height: 60,
+            color: "white",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: Accent["100"]
+        }
+    },
+    buttonText: {
+        ...Fonts[FontNames.BODY_1],
+        ...{
+             color: "white"
+        }
     },
     container: {
         width: "90%",
@@ -57,18 +67,19 @@ export const formContainerStyles = StyleSheet.create({
         marginRight: "auto"
     },
     title: {
-        fontSize: 22,
+        ...Fonts[FontNames.TITLE_2],
+        ...{
         padding: 20
-    },
+    }},
     accentBoldText: {
-        fontSize: 18,
-        fontWeight: "bold",
-        color: Accent["100"],
-        padding: 40
+        ...Fonts[FontNames.TITLE_3],
+        ...{
+            fontWeight: "bold",
+            color: Accent["100"],
+         padding: 40
+        }
     },
-    simpleText: {
-        fontSize: 16,
-    },
+    simpleText: Fonts[FontNames.BODY_2],
     link: {
         color: Accent["100"],
         fontSize: 16,
