@@ -42,7 +42,13 @@ const Profile = ({ navigation }) => {
           navigation.push("Settings");
         }}
       />
-      <RowInProfileScreen text="Export Data" Icon={UploadIcon} />
+      <RowInProfileScreen
+        text="Export Data"
+        Icon={UploadIcon}
+        onPress={() => {
+          navigation.push("ExportData");
+        }}
+      />
       <RowInProfileScreen
         text="Logout"
         Icon={LogoutIcon}
