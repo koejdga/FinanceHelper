@@ -1,21 +1,57 @@
-import {ScrollView, Text, View} from 'react-native';
+import { Pressable, SafeAreaView, Text, View } from "react-native";
+import { SimpleLoginForm } from "@/app/components/form-components/SimpleLoginForm";
+import { formContainerStyles } from "@/app/constants/Styles";
+import { base } from "../constants/Colors";
+import { FontNames, Fonts } from "../constants/Fonts";
 
-import {SimpleLoginForm} from "@/app/components/form-components/SimpleLoginForm";
-import {Link} from "expo-router";
-import {formContainerStyles} from "@/app/constants/Styles";
+export default function Login({ navigation }) {
+  const navigateToSignUp = () => {
+    navigation.navigate("Signup");
+  };
 
-export default function Login() {
+  const navigateToForgotPassword = () => {
+    navigation.navigate("ForgotPassword");
+  };
+
   return (
-      <ScrollView>
-        <View style={formContainerStyles.alignForm}>
-          <Text style={[formContainerStyles.alignCenter, formContainerStyles.title]}>Login</Text>
-          <SimpleLoginForm onSubmit={(email, password) => {}}/>
-          <Link style={[formContainerStyles.accentBoldText, formContainerStyles.alignCenter]} href={""}>Forgot password?</Link>
-          <View style={[{flexDirection: "row"}, formContainerStyles.alignCenter]}>
-            <Text style={formContainerStyles.simpleText}>Don't have an account yet? </Text>
-            <Link style={formContainerStyles.link} href={""}>Sign up</Link>
-          </View>
+    <SafeAreaView style={{ backgroundColor: "#FFF", flex: 1 }}>
+      <View style={formContainerStyles.alignForm}>
+        <Text
+          style={[
+            formContainerStyles.alignCenter,
+            formContainerStyles.title,
+            Fonts[FontNames.TITLE_3],
+          ]}
+        >
+          Login
+        </Text>
+        <SimpleLoginForm onSubmit={(email, password) => {}} />
+        <Pressable onPress={navigateToForgotPassword}>
+          <Text
+            style={[
+              Fonts[FontNames.TITLE_3],
+              formContainerStyles.accentText,
+              formContainerStyles.alignCenter,
+            ]}
+          >
+            Forgot password?
+          </Text>
+        </Pressable>
+        <View
+          style={[{ flexDirection: "row" }, formContainerStyles.alignCenter]}
+        >
+          <Text
+            style={[Fonts[FontNames.BODY_2], { color: base.light.light20 }]}
+          >
+            Don't have an account yet?{" "}
+          </Text>
+          <Pressable onPress={navigateToSignUp}>
+            <Text style={[Fonts[FontNames.BODY_2], formContainerStyles.link]}>
+              Sign Up
+            </Text>
+          </Pressable>
         </View>
-      </ScrollView>
+      </View>
+    </SafeAreaView>
   );
 }

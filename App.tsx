@@ -5,6 +5,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Launch from "./app/screens/Launch";
 import Login from "./app/screens/Login";
 import OnboardingScreen from "./app/screens/OnboardingScreen";
+import ForgotPassword from "./app/screens/ForgotPassword";
+import EmailOnTheWay from "./app/screens/EmailOnTheWay";
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +25,12 @@ const App = () => {
           initialParams={{ screenNumber: 1 }}
         />
         <Stack.Screen name="Launch" component={Launch} />
+        <Stack.Screen
+          name="ForgotPassword"
+          component={ForgotPassword}
+          options={{ headerShown: true, headerTitle: "Forgot Password" }}
+        />
+        <Stack.Screen name="EmailOnTheWay" component={EmailOnTheWay} />
         <Stack.Screen name="MainApp" component={MainApp} />
       </Stack.Navigator>
     </NavigationContainer>
