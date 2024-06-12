@@ -9,7 +9,7 @@ import TransactionIcon from "./icons/TransactionIcon";
 export enum TabNames {
   TRANSACTION = "Transaction",
   BUDGET = "Budget",
-  PROFILE = "Profile",
+  PROFILE = "ProfileStack",
 }
 
 const TabsConfig: Record<

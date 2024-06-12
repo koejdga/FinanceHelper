@@ -1,12 +1,12 @@
 import { Image } from "react-native";
 
-const EditIcon = () => {
+const AddIcon = () => {
   return (
     <Image
       style={{ width: 30, height: 30 }}
-      source={require("@/app/assets/images/icons/edit.png")}
+      source={require("@/app/assets/images/icons/plus.png")}
     ></Image>
   );
 };
 
-export default EditIcon;
+export default AddIcon;

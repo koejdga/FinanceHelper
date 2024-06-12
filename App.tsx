@@ -1,13 +1,12 @@
+import MainApp from "@/app/screens/MainApp";
+import Signup from "@/app/screens/Signup";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Launch from "./app/screens/Launch";
 import Login from "./app/screens/Login";
 import OnboardingScreen from "./app/screens/OnboardingScreen";
-import SettingsStack from "./app/screens/SettingsStack";
-import Profile from "./app/screens/Profile";
-import MainApp from "@/app/screens/MainApp";
-import Settings from "./app/screens/Settings";
-import Signup from "@/app/screens/Signup";
+import ForgotPassword from "./app/screens/ForgotPassword";
+import EmailOnTheWay from "./app/screens/EmailOnTheWay";
 import ResetPassword from "@/app/screens/ResetPassword";
 
 const Stack = createNativeStackNavigator();
@@ -17,19 +16,24 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{ headerShown: false }}
+        initialRouteName="Login"
       >
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Signup" component={Signup} />
-          <Stack.Screen name="ResetPassword" component={ResetPassword} />
+        <Stack.Screen name="ResetPassword" component={ResetPassword} />
 
-          <Stack.Screen
+        <Stack.Screen
           name="OnboardingScreen"
           component={OnboardingScreen}
           initialParams={{ screenNumber: 1 }}
         />
         <Stack.Screen name="Launch" component={Launch} />
-        <Stack.Screen name="SettingsStack" component={SettingsStack} />
-        <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen
+          name="ForgotPassword"
+          component={ForgotPassword}
+          options={{ headerShown: true, headerTitle: "Forgot Password" }}
+        />
+        <Stack.Screen name="EmailOnTheWay" component={EmailOnTheWay} />
         <Stack.Screen name="MainApp" component={MainApp} />
       </Stack.Navigator>
     </NavigationContainer>
