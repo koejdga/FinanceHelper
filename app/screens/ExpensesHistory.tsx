@@ -1,4 +1,4 @@
-import { Pressable, SafeAreaView } from "react-native";
+import { Pressable, SafeAreaView, Text } from "react-native";
 import DailyMonthlyLimitsButtons, {
   Options,
 } from "../components/expenses_screen/DailyMonthlyLimitsButtons";
@@ -11,6 +11,7 @@ import DailyExpensesHistory from "../components/expenses_screen/DailyExpensesHis
 import Limits from "./Limits";
 import AddIcon from "../components/icons/AddIcon";
 import { Accent, base } from "../constants/Colors";
+import Statistics from "./Statistics";
 
 const ExpensesHistory = () => {
   const [selected, setSelected] = useState(Options.LIMITS);
@@ -34,7 +35,7 @@ const ExpensesHistory = () => {
       />
       <Separator />
 
-      {selected !== Options.LIMITS && (
+      {(selected === Options.DAILY || selected === Options.MONTHLY) && (
         <>
           <IncomeExpenseTotal income={15500} expense={4878.5} />
           <Separator />
@@ -70,6 +71,8 @@ const ExpensesHistory = () => {
       )}
 
       {selected === Options.LIMITS && <Limits />}
+
+      {selected === Options.STATISTICS && <Statistics />}
 
       <Pressable
         style={{

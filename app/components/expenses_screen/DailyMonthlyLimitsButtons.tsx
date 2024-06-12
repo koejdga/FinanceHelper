@@ -7,6 +7,7 @@ export enum Options {
   DAILY,
   MONTHLY,
   LIMITS,
+  STATISTICS,
 }
 
 type Props = {
@@ -66,6 +67,19 @@ const DailyMonthlyLimitsButtons: React.FC<Props> = ({
           }}
         >
           <Text style={[Fonts[FontNames.BODY_2]]}>Monthly</Text>
+        </Pressable>
+
+        <Pressable
+          onPress={() => setSelected(Options.STATISTICS)}
+          onLayout={(event) => {
+            const { x, width } = event.nativeEvent.layout;
+            setDictOfPositions({
+              ...dictOfPositions,
+              [Options.STATISTICS]: { x, width },
+            });
+          }}
+        >
+          <Text style={[Fonts[FontNames.BODY_2]]}>Statistics</Text>
         </Pressable>
       </View>
       <HomeIndicator dictOfPositions={dictOfPositions} selected={selected} />

@@ -44,10 +44,11 @@ const Limits = () => {
         $1500 spent, $3000 left
       </Text>
       <View style={{ marginTop: 30, gap: 15 }}>
-        {categories.map((category) => (
+        {categories.map((category, index) => (
           <CategoryProgressBar
             categoryName={category.categoryName}
             progress={category.progress}
+            key={"categoryProgressBar" + index}
           />
         ))}
       </View>
