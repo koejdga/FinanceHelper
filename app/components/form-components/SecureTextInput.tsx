@@ -20,16 +20,14 @@ export function SecureTextInput(props: SecureTextProps) {
       ]}
     >
       <TextInput
+        spellCheck={false}
         secureTextEntry={!showPassword}
         placeholder="Password"
         placeholderTextColor={base.light.light20}
         onChangeText={(value) =>
           props.onChangeText ? props.onChangeText(value) : null
         }
-        style={[
-          formStyles.textInput,
-          // { borderBottomRightRadius: 0, borderTopRightRadius: 0, width: "88%" },
-        ]}
+        style={[formStyles.textInput]}
       />
       <Ionicons
         name={showPassword ? "eye-off" : "eye"}

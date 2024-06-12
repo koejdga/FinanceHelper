@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
 import { Accent, base } from "@/app/constants/Colors";
+import { StyleSheet } from "react-native";
 
 export const formStyles = StyleSheet.create({
   textInputWrap: {

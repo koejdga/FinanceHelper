@@ -1,17 +1,13 @@
-import { View, Text, Alert } from "react-native";
-import { useState } from "react";
-import { BorderlessButton } from "react-native-gesture-handler";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { FormTextInput } from "@/app/components/form-components/FormTextInput";
+import { SecureTextInput } from "@/app/components/form-components/SecureTextInput";
 import {
   emailChecker,
   nameChecker,
   passwordChecker,
 } from "@/scripts/validation-scripts/login-validation";
-import { SecureTextInput } from "@/app/components/form-components/SecureTextInput";
-import { formStyles } from "@/app/constants/Styles";
-import { FormTextInput } from "@/app/components/form-components/FormTextInput";
-import { FontNames, Fonts } from "@/app/constants/Fonts";
-import { base } from "@/app/constants/Colors";
+import { useState } from "react";
+import { Alert, View } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import CustomButton from "../CustomButton";
 
 type SignUpFormProps = {
@@ -50,6 +46,7 @@ export function SimpleSignUpForm(props: SignUpFormProps) {
           onChangeText={(value) => setName(value)}
         />
         <FormTextInput
+          keyboardType="email-address"
           placeholder="Email"
           onChangeText={(value) => setEmail(value)}
         />
@@ -60,18 +57,6 @@ export function SimpleSignUpForm(props: SignUpFormProps) {
             requirementsChecker();
           }}
         />
-        {/* <BorderlessButton
-          onPress={() => {
-            requirementsChecker();
-          }}
-          style={formStyles.button}
-        >
-          <Text
-            style={[Fonts[FontNames.TITLE_3], { color: base.light.light80 }]}
-          >
-            Sign Up
-          </Text>
-        </BorderlessButton> */}
       </View>
     </GestureHandlerRootView>
   );

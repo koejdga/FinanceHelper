@@ -172,3 +172,5 @@ expo-env.d.ts
 
 # Expo
 .expo
+
+ios/

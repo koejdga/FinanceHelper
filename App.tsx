@@ -7,6 +7,7 @@ import Login from "./app/screens/Login";
 import OnboardingScreen from "./app/screens/OnboardingScreen";
 import ForgotPassword from "./app/screens/ForgotPassword";
 import EmailOnTheWay from "./app/screens/EmailOnTheWay";
+import ResetPassword from "@/app/screens/ResetPassword";
 
 const Stack = createNativeStackNavigator();
 
@@ -15,10 +16,12 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{ headerShown: false }}
-        initialRouteName="MainApp"
+        initialRouteName="Login"
       >
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Signup" component={Signup} />
+        <Stack.Screen name="ResetPassword" component={ResetPassword} />
+
         <Stack.Screen
           name="OnboardingScreen"
           component={OnboardingScreen}

@@ -1,6 +1,8 @@
-import { Pressable, SafeAreaView, Text, View } from "react-native";
 import { SimpleLoginForm } from "@/app/components/form-components/SimpleLoginForm";
 import { formContainerStyles } from "@/app/constants/Styles";
+import { appAuth } from "@/firebaseConfig";
+import { signInWithEmailAndPassword } from "@firebase/auth";
+import { Alert, Pressable, SafeAreaView, Text, View } from "react-native";
 import { base } from "../constants/Colors";
 import { FontNames, Fonts } from "../constants/Fonts";
 
@@ -11,6 +13,23 @@ export default function Login({ navigation }) {
 
   const navigateToForgotPassword = () => {
     navigation.navigate("ForgotPassword");
+  };
+
+  const signIn = (email: string, password: string) => {
+    signInWithEmailAndPassword(appAuth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        if (user) {
+          console.log("user is logged in");
+          navigation.navigate("MainApp");
+        }
+        //TODO: add login handling (at this point user is just logged in)
+      })
+      .catch(() => {
+        let title = "Something's wrong!";
+        let message = "Email or password is incorrect. Check them, please";
+        Alert.alert(title, message, [{ text: "OK" }]);
+      });
   };
 
   return (
@@ -25,7 +44,11 @@ export default function Login({ navigation }) {
         >
           Login
         </Text>
-        <SimpleLoginForm onSubmit={(email, password) => {}} />
+        <SimpleLoginForm
+          onSubmit={(email, password) => {
+            signIn(email, password);
+          }}
+        />
         <Pressable onPress={navigateToForgotPassword}>
           <Text
             style={[

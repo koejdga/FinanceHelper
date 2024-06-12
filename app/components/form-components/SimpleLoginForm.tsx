@@ -1,16 +1,12 @@
-import { View, Text, Alert } from "react-native";
-import { useState } from "react";
-import { BorderlessButton } from "react-native-gesture-handler";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { FormTextInput } from "@/app/components/form-components/FormTextInput";
+import { SecureTextInput } from "@/app/components/form-components/SecureTextInput";
 import {
   emailChecker,
   passwordChecker,
 } from "@/scripts/validation-scripts/login-validation";
-import { SecureTextInput } from "@/app/components/form-components/SecureTextInput";
-import { formStyles } from "@/app/constants/Styles";
-import { FormTextInput } from "@/app/components/form-components/FormTextInput";
-import { FontNames, Fonts } from "@/app/constants/Fonts";
-import { base } from "@/app/constants/Colors";
+import { useState } from "react";
+import { Alert, View } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import CustomButton from "../CustomButton";
 
 type LoginFormProps = {
@@ -36,14 +32,15 @@ export function SimpleLoginForm(props: LoginFormProps) {
     <GestureHandlerRootView>
       <View>
         <FormTextInput
+          keyboardType="email-address"
           placeholder="Email"
           onChangeText={(value) => setEmail(value)}
         />
         <SecureTextInput onChangeText={(text) => setPassword(text)} />
         <CustomButton
-          title="Sign Up"
+          title="Login"
           onPress={() => {
-            // navigation.push("Signup");
+            requirementsChecker();
           }}
         />
       </View>

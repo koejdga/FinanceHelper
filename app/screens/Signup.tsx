@@ -1,11 +1,32 @@
 import { SimpleSignUpForm } from "@/app/components/form-components/SimpleSignUpForm";
 import { formContainerStyles } from "@/app/constants/Styles";
-import { Pressable, SafeAreaView, Text, View } from "react-native";
+import { Pressable, SafeAreaView, Text, View, Alert } from "react-native";
 import { FontNames, Fonts } from "../constants/Fonts";
+import { createUserWithEmailAndPassword, updateProfile } from "@firebase/auth";
+import { appAuth } from "@/firebaseConfig";
 
 export default function Signup({ navigation }) {
   const navigateToLogin = () => {
     navigation.navigate("Login");
+  };
+
+  const signUp = (name: string, email: string, password: string) => {
+    createUserWithEmailAndPassword(appAuth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        updateProfile(user, {
+          displayName: name,
+        }).then(() => {
+          console.log("user is signed in");
+          navigation.navigate("Login");
+          //TODO: add signup handling (at this point user is just signed up)
+        });
+      })
+      .catch(() => {
+        let title = "Something's wrong!";
+        let message = "Check if your email is not already in use";
+        Alert.alert(title, message, [{ text: "OK" }]);
+      });
   };
 
   return (
@@ -20,7 +41,11 @@ export default function Signup({ navigation }) {
         >
           Sign Up
         </Text>
-        <SimpleSignUpForm onSubmit={(name, email, password) => {}} />
+        <SimpleSignUpForm
+          onSubmit={(name, email, password) => {
+            signUp(name, email, password);
+          }}
+        />
 
         <View
           style={[{ flexDirection: "row" }, formContainerStyles.alignCenter]}
