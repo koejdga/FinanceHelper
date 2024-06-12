@@ -31,6 +31,19 @@ const DailyMonthlyLimitsButtons: React.FC<Props> = ({
         }}
       >
         <Pressable
+          onPress={() => setSelected(Options.LIMITS)}
+          onLayout={(event) => {
+            const { x, width } = event.nativeEvent.layout;
+            setDictOfPositions({
+              ...dictOfPositions,
+              [Options.LIMITS]: { x, width },
+            });
+          }}
+        >
+          <Text style={[Fonts[FontNames.BODY_2]]}>Limits</Text>
+        </Pressable>
+
+        <Pressable
           onPress={() => setSelected(Options.DAILY)}
           onLayout={(event) => {
             const { x, width } = event.nativeEvent.layout;
@@ -53,18 +66,6 @@ const DailyMonthlyLimitsButtons: React.FC<Props> = ({
           }}
         >
           <Text style={[Fonts[FontNames.BODY_2]]}>Monthly</Text>
-        </Pressable>
-        <Pressable
-          onPress={() => setSelected(Options.LIMITS)}
-          onLayout={(event) => {
-            const { x, width } = event.nativeEvent.layout;
-            setDictOfPositions({
-              ...dictOfPositions,
-              [Options.LIMITS]: { x, width },
-            });
-          }}
-        >
-          <Text style={[Fonts[FontNames.BODY_2]]}>Limits</Text>
         </Pressable>
       </View>
       <HomeIndicator dictOfPositions={dictOfPositions} selected={selected} />

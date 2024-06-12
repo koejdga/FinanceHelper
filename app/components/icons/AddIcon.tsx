@@ -1,9 +1,14 @@
-import { Image } from "react-native";
+import { ColorValue, Image } from "react-native";
 
-const AddIcon = () => {
+type Props = {
+  tintColor?: ColorValue;
+  size?: number;
+};
+
+const AddIcon: React.FC<Props> = ({ tintColor, size = 30 }) => {
   return (
     <Image
-      style={{ width: 30, height: 30 }}
+      style={{ width: size, height: size, tintColor: tintColor }}
       source={require("@/app/assets/images/icons/plus.png")}
     ></Image>
   );
