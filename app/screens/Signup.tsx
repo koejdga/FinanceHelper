@@ -1,27 +1,25 @@
-import {ScrollView, Text, View} from "react-native";
-import {Link} from "expo-router";
+import {Alert, Pressable, ScrollView, Text, View} from "react-native";
 import {SimpleSignUpForm} from "@/app/components/form-components/SimpleSignUpForm";
 import {formContainerStyles} from "@/app/constants/Styles";
-import {createUserWithEmailAndPassword, getAuth, updateProfile} from "@firebase/auth";
-import {firebaseApp} from "@/firebaseConfig";
+import {createUserWithEmailAndPassword, updateProfile} from "@firebase/auth";
+import {appAuth} from "@/firebaseConfig";
 
-export default function Signup() {
+export default function Signup({navigation}) {
 
     const signUp = (name:string, email: string, password: string) => {
-        const auth = getAuth(firebaseApp);
-        createUserWithEmailAndPassword(auth, email, password)
+        createUserWithEmailAndPassword(appAuth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
                 updateProfile(user,{
                     displayName: name
                 }).then(() => {
-                    console.log(user.email);
-                    console.log(user.uid);
+                    //TODO: add signup handling (at this point user is just signed up)
                 });
             })
-            .catch((error) => {
-                console.log("Sign up was unsuccessful");
-                console.error(error)
+            .catch(() => {
+                let title = "Something's wrong!";
+                let message = "Check if your email is not already in use";
+                Alert.alert(title, message, [{text: "OK"}]);
             });
     }
 
@@ -32,7 +30,9 @@ export default function Signup() {
                 <SimpleSignUpForm onSubmit={(name, email, password) => {signUp(name, email, password)}}/>
                 <View style={[{flexDirection: "row", padding: 12}, formContainerStyles.alignCenter]}>
                     <Text style={formContainerStyles.simpleText}>Already have an account? </Text>
-                    <Link style={formContainerStyles.link} href={""}>Login</Link>
+                    <Pressable onPress={() => navigation.navigate("Login")}>
+                        <Text style={formContainerStyles.link}>Login</Text>
+                    </Pressable>
                 </View>
             </View>
         </ScrollView>

@@ -1,23 +1,22 @@
-import {ScrollView, Text, View} from 'react-native';
+import {Alert, Pressable, ScrollView, Text, View} from 'react-native';
 
 import {SimpleLoginForm} from "@/app/components/form-components/SimpleLoginForm";
 import {Link} from "expo-router";
 import {formContainerStyles} from "@/app/constants/Styles";
-import {getAuth, signInWithEmailAndPassword} from "@firebase/auth";
-import {firebaseApp} from "@/firebaseConfig";
+import {signInWithEmailAndPassword} from "@firebase/auth";
+import {appAuth} from "@/firebaseConfig";
 
-export default function Login() {
+export default function Login({navigation }) {
     const signIn = (email: string, password: string) => {
-        const auth = getAuth(firebaseApp);
-        signInWithEmailAndPassword(auth, email, password)
+        signInWithEmailAndPassword(appAuth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
-                console.log(user.email);
-                console.log(user.uid);
-                console.log(user.displayName);
+                //TODO: add login handling (at this point user is just logged in)
             })
-            .catch((error) => {
-                console.log("Login was unsuccessful")
+            .catch(() => {
+                let title = "Something's wrong!";
+                let message = "Email or password is incorrect. Check them, please";
+                Alert.alert(title, message, [{text: "OK"}]);
             });
     }
   return (
@@ -28,7 +27,9 @@ export default function Login() {
           <Link style={[formContainerStyles.accentBoldText, formContainerStyles.alignCenter]} href={""}>Forgot password?</Link>
           <View style={[{flexDirection: "row"}, formContainerStyles.alignCenter]}>
             <Text style={formContainerStyles.simpleText}>Don't have an account yet? </Text>
-            <Link style={formContainerStyles.link} href={""}>Sign up</Link>
+              <Pressable onPress={() => navigation.navigate("Signup")}>
+                  <Text style={formContainerStyles.link}>Sign up</Text>
+              </Pressable>
           </View>
         </View>
       </ScrollView>
