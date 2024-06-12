@@ -12,6 +12,7 @@ export function SecureTextInput(props: SecureTextProps){
 
     return <View style={[formStyles.hidePasswordTextField, formStyles.textInputWrap]}>
         <TextInput
+            spellCheck={false}
             secureTextEntry = {!showPassword}
             placeholder="Password"
             placeholderTextColor={"gray"}

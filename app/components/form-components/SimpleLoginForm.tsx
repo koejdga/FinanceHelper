@@ -35,7 +35,7 @@ export function SimpleLoginForm(props: LoginFormProps) {
           <BorderlessButton
               onPress={() => { requirementsChecker()}}
               style={formStyles.button}>
-            <Text style={{color: "white"}}>Login</Text>
+            <Text style={formStyles.buttonText}>Login</Text>
           </BorderlessButton>
         </View>
       </GestureHandlerRootView>
