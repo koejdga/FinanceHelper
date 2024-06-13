@@ -2,8 +2,9 @@ import Budget from "@/app/screens/Budget";
 import Profile from "@/app/screens/Profile";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import SingleBottomTab, { TabNames } from "../components/SingleBottomTab";
-import ExpensesHistory from "./ExpensesHistory";
+import TransactionTabs from "./TransactionTabs";
 import ProfileStack from "./ProfileStack";
+import Transaction from "./Transaction";
 
 const Tab = createBottomTabNavigator();
 
@@ -36,7 +37,7 @@ const MainApp = () => {
         headerShown: false,
       })}
     >
-      <Tab.Screen name={TabNames.TRANSACTION} component={ExpensesHistory} />
+      <Tab.Screen name={TabNames.TRANSACTION} component={Transaction} />
       <Tab.Screen name={TabNames.BUDGET} component={Budget} />
       <Tab.Screen
         name={TabNames.PROFILE}
