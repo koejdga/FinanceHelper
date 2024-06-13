@@ -95,7 +95,7 @@ const TransactionTabs = ({ navigation }) => {
 
       <AddTransactionButton
         onPress={() => {
-          navigation.navigate("AddTransactionForm");
+          navigation.navigate("AddFormGeneral");
         }}
       />
     </SafeAreaView>

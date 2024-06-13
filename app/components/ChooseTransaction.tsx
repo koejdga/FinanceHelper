@@ -1,17 +1,24 @@
 import { useState } from "react";
-import { View } from "react-native";
+import { StyleProp, View, ViewStyle } from "react-native";
 import { Accent } from "../constants/Colors";
 import { FontNames, Fonts } from "../constants/Fonts";
 import ChooseOneOptionButtons, {
   TransactionOptions,
 } from "./ChooseOneOptionButtons";
 
-const ChooseTransaction = ({ style }) => {
+type Props = {
+  selected: string;
+  setSelected: (selected: string) => void;
+  style?: StyleProp<ViewStyle>;
+};
+
+const ChooseTransaction: React.FC<Props> = ({
+  selected,
+  setSelected,
+  style,
+}) => {
   const GAP = 25;
   const [chosenTabHeight, setChosenTabHeight] = useState(0);
-  const [selected, setSelected] = useState<string>(
-    TransactionOptions.INCOME.toString()
-  );
 
   return (
     <View

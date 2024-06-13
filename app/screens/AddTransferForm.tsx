@@ -7,9 +7,7 @@ import RowInAddTransactionForm from "../components/RowInAddTransactionForm";
 import FormTextInput from "../components/form-components/FormTextInput";
 import CustomButton from "../components/CustomButton";
 
-const AddTransactionForm = ({ route, navigation }) => {
-  const isIncome = route.params?.isIncome as boolean;
-
+const AddTransferForm = ({ navigation }) => {
   useEffect(() => {
     navigation.setOptions({
       headerTitle: (props: any) => <ChooseTransaction {...props} />,
@@ -17,18 +15,12 @@ const AddTransactionForm = ({ route, navigation }) => {
   }, []);
 
   const [date, setDate] = useState<Date | undefined>(new Date());
-  const [amount, setAmount] = useState<number>();
-  const [note, setNote] = useState<string>();
+  const [name, setName] = useState("");
 
   const [openDatepicker, setOpenDatepicker] = useState(false);
 
-  const categoriesIncome = [
+  const categories = [
     { label: "Food", value: "1" },
-    { label: "Household", value: "2" },
-    { label: "Hobby", value: "3" },
-  ];
-
-  const categoriesExpense = [
     { label: "Household", value: "2" },
     { label: "Hobby", value: "3" },
   ];
@@ -48,6 +40,7 @@ const AddTransactionForm = ({ route, navigation }) => {
             <FormTextInput
               value={date.toLocaleDateString("en-GB")}
               placeholder={"Date"}
+              onChangeText={(value) => setName(value)}
               onPress={() => setOpenDatepicker(true)}
               style={{ marginBottom: 0, marginHorizontal: 0 }}
               editable={false}
@@ -61,7 +54,7 @@ const AddTransactionForm = ({ route, navigation }) => {
             <FormTextInput
               keyboardType="decimal-pad"
               placeholder={"Write an amount..."}
-              onChangeText={(value) => setAmount(parseFloat(value))}
+              onChangeText={(value) => setName(value)}
               style={{ marginBottom: 0, marginHorizontal: 0 }}
               editable={true}
             />
@@ -69,16 +62,12 @@ const AddTransactionForm = ({ route, navigation }) => {
         />
 
         <RowInAddTransactionForm
-          title={"Category"}
-          inputField={
-            <CustomDropdown
-              variants={isIncome ? categoriesIncome : categoriesExpense}
-            />
-          }
+          title={"From"}
+          inputField={<CustomDropdown variants={accounts} />}
         />
 
         <RowInAddTransactionForm
-          title={"Account"}
+          title={"To"}
           inputField={<CustomDropdown variants={accounts} />}
         />
 
@@ -87,7 +76,7 @@ const AddTransactionForm = ({ route, navigation }) => {
           inputField={
             <FormTextInput
               placeholder={"Write a decription..."}
-              onChangeText={(value) => setNote(value)}
+              onChangeText={(value) => setName(value)}
               style={{ marginBottom: 0, marginHorizontal: 0 }}
               editable={true}
             />
@@ -115,4 +104,4 @@ const AddTransactionForm = ({ route, navigation }) => {
   );
 };
 
-export default AddTransactionForm;
+export default AddTransferForm;

@@ -1,7 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import AddFormGeneral from "./AddFormGeneral";
 import TransactionTabs from "./TransactionTabs";
-import AddTransactionForm from "./AddTransactionForm";
-import { Button } from "react-native";
 
 const Stack = createNativeStackNavigator();
 
@@ -14,13 +13,7 @@ const Transaction = () => {
         options={{ headerShown: false, headerTitle: "Home" }}
       />
 
-      <Stack.Screen
-        name="AddTransactionForm"
-        component={AddTransactionForm}
-        options={{
-          headerTitle: (props) => <Button {...props} title="Buttonn" />,
-        }}
-      />
+      <Stack.Screen name="AddFormGeneral" component={AddFormGeneral} />
     </Stack.Navigator>
   );
 };
