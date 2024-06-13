@@ -1,10 +1,10 @@
+import Separator from "@/app/components/Separator";
+import IncomeExpenseTotal from "@/app/components/expenses-screen/IncomeExpenseTotal";
+import AddIcon from "@/app/components/icons/AddIcon";
+import EditIcon from "@/app/components/icons/EditIcon";
+import OneCardRow from "@/app/components/one-row/OneCardRow";
+import { FontNames, Fonts } from "@/app/constants/Fonts";
 import { SafeAreaView, Text, View } from "react-native";
-import AddIcon from "../components/icons/AddIcon";
-import EditIcon from "../components/icons/EditIcon";
-import { FontNames, Fonts } from "../constants/Fonts";
-import Separator from "../components/Separator";
-import IncomeExpenseTotal from "../components/expenses_screen/IncomeExpenseTotal";
-import OneCardRow from "../components/OneCardRow";
 
 const Budget = () => {
   const mockData = [

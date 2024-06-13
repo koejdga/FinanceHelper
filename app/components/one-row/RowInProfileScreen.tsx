@@ -1,6 +1,6 @@
+import { Accent, base } from "@/app/constants/Colors";
+import { FontNames, Fonts } from "@/app/constants/Fonts";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import { Accent, base } from "../constants/Colors";
-import { FontNames, Fonts } from "../constants/Fonts";
 
 type Props = {
   onPress?: () => void;

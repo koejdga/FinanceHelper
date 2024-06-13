@@ -1,6 +1,6 @@
+import CustomBarChart from "@/app/components/expenses-screen/CustomBarChart";
+import CustomLineGraph from "@/app/components/expenses-screen/CustomLineGraph";
 import { ScrollView } from "react-native";
-import CustomBarChart from "../components/expenses_screen/CustomBarChart";
-import CustomLineGraph from "../components/expenses_screen/CustomLineGraph";
 
 const Statistics = () => {
   return (

@@ -1,8 +1,8 @@
+import { IncomeBlue } from "@/app/constants/Colors";
+import { FontNames, Fonts } from "@/app/constants/Fonts";
+import { convertNumberToMoney } from "@/app/utils/Utils";
 import { Text, View } from "react-native";
-import { FontNames, Fonts } from "../constants/Fonts";
-import { IncomeBlue } from "../constants/Colors";
-import { convertNumberToMoney } from "../utils/Utils";
-import Separator from "./Separator";
+import Separator from "../Separator";
 
 type Props = {
   typeOfCard: string;

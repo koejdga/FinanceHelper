@@ -1,7 +1,7 @@
+import { Fonts, FontNames } from "@/app/constants/Fonts";
 import React from "react";
 import { Text, View } from "react-native";
-import { FontNames, Fonts } from "../constants/Fonts";
-import CustomDropdown from "./form-components/CustomDropdown";
+import CustomDropdown from "../form-components/CustomDropdown";
 
 type Props = {
   question: string;

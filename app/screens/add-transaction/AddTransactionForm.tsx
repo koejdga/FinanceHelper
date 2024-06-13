@@ -1,11 +1,11 @@
+import CustomButton from "@/app/components/buttons/CustomButton";
+import ChooseTransaction from "@/app/components/choose-one-option-buttons/ChooseTransaction";
+import CustomDropdown from "@/app/components/form-components/CustomDropdown";
+import FormTextInput from "@/app/components/form-components/FormTextInput";
+import RowInAddTransactionForm from "@/app/components/one-row/RowInAddTransactionForm";
 import { useEffect, useState } from "react";
 import { SafeAreaView, View } from "react-native";
 import DatePicker from "react-native-date-picker";
-import ChooseTransaction from "../components/ChooseTransaction";
-import CustomDropdown from "../components/CustomDropdown";
-import RowInAddTransactionForm from "../components/RowInAddTransactionForm";
-import FormTextInput from "../components/form-components/FormTextInput";
-import CustomButton from "../components/CustomButton";
 
 const AddTransactionForm = ({ route, navigation }) => {
   const isIncome = route.params?.isIncome as boolean;

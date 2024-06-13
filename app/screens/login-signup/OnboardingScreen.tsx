@@ -1,3 +1,9 @@
+import CustomButton, {
+  ButtonType,
+} from "@/app/components/buttons/CustomButton";
+import ThreeDots from "@/app/components/three-dots/ThreeDots";
+import { base } from "@/app/constants/Colors";
+import { FontNames, Fonts } from "@/app/constants/Fonts";
 import {
   Image,
   Pressable,
@@ -7,10 +13,6 @@ import {
   useWindowDimensions,
   View,
 } from "react-native";
-import CustomButton, { ButtonType } from "../components/CustomButton";
-import ThreeDots from "../components/ThreeDots";
-import { base } from "../constants/Colors";
-import { FontNames, Fonts } from "../constants/Fonts";
 
 export type ScreenNumber = 1 | 2 | 3;
 

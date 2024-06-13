@@ -1,6 +1,6 @@
+import { FontNames, Fonts } from "@/app/constants/Fonts";
 import React from "react";
 import { Text, View } from "react-native";
-import { FontNames, Fonts } from "../constants/Fonts";
 
 type Props = {
   title: string;

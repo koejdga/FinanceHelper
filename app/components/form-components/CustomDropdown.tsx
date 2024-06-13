@@ -1,7 +1,7 @@
+import { base } from "@/app/constants/Colors";
 import React, { useState } from "react";
 import { StyleProp, StyleSheet, ViewStyle } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
-import { base } from "../constants/Colors";
 
 type Props = {
   variants: { label: string; value: string }[];
