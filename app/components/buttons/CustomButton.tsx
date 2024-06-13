@@ -6,8 +6,8 @@ import {
   Text,
   ViewStyle,
 } from "react-native";
-import { Accent, base } from "../constants/Colors";
-import { FontNames, Fonts } from "../constants/Fonts";
+import { Accent, base } from "../../constants/Colors";
+import { FontNames, Fonts } from "../../constants/Fonts";
 
 export enum ButtonType {
   PRIMARY,

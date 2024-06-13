@@ -1,6 +1,6 @@
+import ListItem from "@/app/components/one-row/ListItem";
 import { useEffect, useState } from "react";
 import { Pressable, SafeAreaView } from "react-native";
-import ListItem from "../components/ListItem";
 
 const ListWithChoices = ({ route, navigation }) => {
   const options = route.params?.options as string[];

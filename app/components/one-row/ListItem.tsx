@@ -1,8 +1,8 @@
 import { View, Text } from "react-native";
 import React from "react";
-import { FontNames, Fonts } from "../constants/Fonts";
-import { base } from "../constants/Colors";
-import SuccessIcon from "./icons/SuccessIcon";
+import { FontNames, Fonts } from "../../constants/Fonts";
+import { base } from "../../constants/Colors";
+import SuccessIcon from "../icons/SuccessIcon";
 
 type Props = {
   title: string;

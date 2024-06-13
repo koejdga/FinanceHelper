@@ -1,24 +1,7 @@
 import { Accent } from "@/app/constants/Colors";
-import { useFonts } from "expo-font";
-import * as SplashScreen from "expo-splash-screen";
-import { useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 const Launch = () => {
-  const [loaded] = useFonts({
-    bold: require("../assets/fonts/Inter-Bold.ttf"),
-  });
-
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
-    return null;
-  }
-
   return (
     <View
       style={[
@@ -42,7 +25,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 56,
-    fontFamily: "bold",
+    fontFamily: "Inter-Bold",
     color: "#ffffff",
   },
 });

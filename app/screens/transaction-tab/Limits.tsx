@@ -2,8 +2,8 @@ import { Text, View } from "react-native";
 import { PieChart } from "react-native-chart-kit";
 
 import { Dimensions } from "react-native";
-import CategoryProgressBar from "../components/CategoryProgressBar";
-import { FontNames, Fonts } from "../constants/Fonts";
+import CategoryProgressBar from "../../components/CategoryProgressBar";
+import { FontNames, Fonts } from "../../constants/Fonts";
 const screenWidth = Dimensions.get("window").width;
 
 const Limits = () => {

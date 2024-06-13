@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { Accent } from "../constants/Colors";
+import { Accent } from "../../constants/Colors";
 
 const BigDot = () => {
   return (

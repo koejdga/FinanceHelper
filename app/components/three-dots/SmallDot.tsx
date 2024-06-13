@@ -1,5 +1,5 @@
 import { StyleSheet, View } from "react-native";
-import { Accent } from "../constants/Colors";
+import { Accent } from "../../constants/Colors";
 
 const SmallDot = () => {
   return (

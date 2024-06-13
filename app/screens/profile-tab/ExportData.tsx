@@ -1,6 +1,6 @@
+import CustomButton from "@/app/components/buttons/CustomButton";
+import OneQuestionExportData from "@/app/components/one-row/OneQuestionExportData";
 import { SafeAreaView, View } from "react-native";
-import CustomButton from "../components/CustomButton";
-import OneQuestionExportData from "../components/OneQuestionExportData";
 
 const dataType = [
   { label: "All", value: "1" },

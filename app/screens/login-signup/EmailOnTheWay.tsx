@@ -5,9 +5,9 @@ import {
   Image,
   useWindowDimensions,
 } from "react-native";
-import { FontNames, Fonts } from "../constants/Fonts";
-import { base } from "../constants/Colors";
-import CustomButton from "../components/CustomButton";
+import { FontNames, Fonts } from "../../constants/Fonts";
+import { base } from "../../constants/Colors";
+import CustomButton from "../../components/buttons/CustomButton";
 
 const EmailOnTheWay = ({ navigation }) => {
   const { width } = useWindowDimensions();

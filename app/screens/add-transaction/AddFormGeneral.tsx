@@ -1,10 +1,10 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useEffect, useState } from "react";
-import { TransactionOptions } from "../components/ChooseOneOptionButtons";
-import ChooseTransaction from "../components/ChooseTransaction";
 import AddTransactionForm from "./AddTransactionForm";
 import AddTransferForm from "./AddTransferForm";
-import WhiteScreen from "./WhiteScreen";
+import WhiteScreen from "../WhiteScreen";
+import ChooseTransaction from "@/app/components/choose-one-option-buttons/ChooseTransaction";
+import { TransactionOptions } from "@/app/components/choose-one-option-buttons/ChooseOneOptionButtons";
 
 const Stack = createNativeStackNavigator();
 

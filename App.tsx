@@ -1,13 +1,13 @@
-import MainApp from "@/app/screens/MainApp";
-import Signup from "@/app/screens/Signup";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Launch from "./app/screens/Launch";
-import Login from "./app/screens/Login";
-import OnboardingScreen from "./app/screens/OnboardingScreen";
-import ForgotPassword from "./app/screens/ForgotPassword";
-import EmailOnTheWay from "./app/screens/EmailOnTheWay";
-import ResetPassword from "@/app/screens/ResetPassword";
+import Launch from "./app/screens/login-signup/Launch";
+import Login from "./app/screens/login-signup/Login";
+import ForgotPassword from "./app/screens/login-signup/ForgotPassword";
+import EmailOnTheWay from "./app/screens/login-signup/EmailOnTheWay";
+import Signup from "./app/screens/login-signup/Signup";
+import MainApp from "./app/screens/MainApp";
+import ResetPassword from "./app/screens/login-signup/ResetPassword";
+import OnboardingScreen from "./app/screens/login-signup/OnboardingScreen";
 
 const Stack = createNativeStackNavigator();
 

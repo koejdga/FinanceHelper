@@ -1,5 +1,5 @@
+import SettingsRow from "@/app/components/one-row/SettingsRow";
 import { SafeAreaView, View } from "react-native";
-import SettingsRow from "../components/SettingsRow";
 
 const Settings = ({ navigation }) => {
   return (

@@ -1,10 +1,9 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import ExportDataStack from "./ExportDataStack";
-import ListWithChoices from "./ListWithChoices";
 import Profile from "./Profile";
 import Settings from "./Settings";
-import CheckEmailExportData from "./CheckEmailExportData";
+import ListWithChoices from "./ListWithChoices";
 import ExportData from "./ExportData";
+import CheckEmailExportData from "./CheckEmailExportData";
 
 const Stack = createNativeStackNavigator();
 

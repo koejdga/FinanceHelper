@@ -1,18 +1,18 @@
+import Separator from "@/app/components/Separator";
+import DailyExpensesHistory from "@/app/components/expenses-screen/DailyExpensesHistory";
+import HeaderWithMonthOrYear from "@/app/components/expenses-screen/HeaderWithMonthOrYear";
+import IncomeExpenseTotal from "@/app/components/expenses-screen/IncomeExpenseTotal";
+import MonthlyExpensesHistory from "@/app/components/expenses-screen/MonthlyExpensesHistory";
+import { Accent } from "@/app/constants/Colors";
+import { FontNames, Fonts } from "@/app/constants/Fonts";
 import { useState } from "react";
 import { SafeAreaView } from "react-native";
-import AddTransactionButton from "../components/AddTransactionButton";
-import ChooseOneOptionButtons, {
-  TransactionTabsOptions,
-} from "../components/ChooseOneOptionButtons";
-import Separator from "../components/Separator";
-import DailyExpensesHistory from "../components/expenses_screen/DailyExpensesHistory";
-import HeaderWithMonthOrYear from "../components/expenses_screen/HeaderWithMonthOrYear";
-import IncomeExpenseTotal from "../components/expenses_screen/IncomeExpenseTotal";
-import MonthlyExpensesHistory from "../components/expenses_screen/MonthlyExpensesHistory";
-import { Accent } from "../constants/Colors";
-import { FontNames, Fonts } from "../constants/Fonts";
 import Limits from "./Limits";
 import Statistics from "./Statistics";
+import ChooseOneOptionButtons, {
+  TransactionTabsOptions,
+} from "@/app/components/choose-one-option-buttons/ChooseOneOptionButtons";
+import AddTransactionButton from "@/app/components/buttons/AddTransactionButton";
 
 const TransactionTabs = ({ navigation }) => {
   const [selected, setSelected] = useState<string>(

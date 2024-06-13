@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import AddFormGeneral from "./AddFormGeneral";
 import TransactionTabs from "./TransactionTabs";
+import AddFormGeneral from "../add-transaction/AddFormGeneral";
 
 const Stack = createNativeStackNavigator();
 

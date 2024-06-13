@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { StyleProp, View, ViewStyle } from "react-native";
-import { Accent } from "../constants/Colors";
-import { FontNames, Fonts } from "../constants/Fonts";
+import { Accent } from "../../constants/Colors";
+import { FontNames, Fonts } from "../../constants/Fonts";
 import ChooseOneOptionButtons, {
   TransactionOptions,
 } from "./ChooseOneOptionButtons";

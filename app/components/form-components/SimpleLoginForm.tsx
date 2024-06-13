@@ -7,7 +7,7 @@ import {
 import { useState } from "react";
 import { Alert, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import CustomButton from "../CustomButton";
+import CustomButton from "../buttons/CustomButton";
 
 type LoginFormProps = {
   onSubmit?: (email: string, password: string) => any;

@@ -1,15 +1,14 @@
+import CustomButton from "@/app/components/buttons/CustomButton";
+import { base } from "@/app/constants/Colors";
+import { FontNames, Fonts } from "@/app/constants/Fonts";
 import {
+  Image,
+  SafeAreaView,
   StyleSheet,
   Text,
-  SafeAreaView,
-  Image,
-  useWindowDimensions,
   View,
+  useWindowDimensions,
 } from "react-native";
-import React from "react";
-import { FontNames, Fonts } from "../constants/Fonts";
-import { base } from "../constants/Colors";
-import CustomButton from "../components/CustomButton";
 
 const CheckEmailExportData = ({ navigation }) => {
   const { width } = useWindowDimensions();

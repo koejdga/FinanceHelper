@@ -1,8 +1,8 @@
 import { View, Text, Pressable } from "react-native";
 import React from "react";
-import { FontNames, Fonts } from "../constants/Fonts";
-import { Accent, base } from "../constants/Colors";
-import ArrowRightIcon from "./icons/ArrowRightIcon";
+import { FontNames, Fonts } from "@/app/constants/Fonts";
+import { Accent, base } from "@/app/constants/Colors";
+import ArrowRightIcon from "../icons/ArrowRightIcon";
 
 type Props = {
   title: string;

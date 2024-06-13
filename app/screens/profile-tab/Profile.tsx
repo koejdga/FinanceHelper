@@ -1,12 +1,12 @@
 import { SafeAreaView, Text, View } from "react-native";
-import RowInProfileScreen from "../components/RowInProfileScreen";
-import EditIconProfile from "../components/icons/EditIconProfile";
-import LogoutIcon from "../components/icons/LogoutIcon";
-import SettingsIcon from "../components/icons/SettingsIcon";
-import UploadIcon from "../components/icons/UploadIcon";
-import WalletIcon from "../components/icons/WalletIcon";
-import { base, red } from "../constants/Colors";
-import { FontNames, Fonts } from "../constants/Fonts";
+import EditIconProfile from "../../components/icons/EditIconProfile";
+import LogoutIcon from "../../components/icons/LogoutIcon";
+import SettingsIcon from "../../components/icons/SettingsIcon";
+import UploadIcon from "../../components/icons/UploadIcon";
+import WalletIcon from "../../components/icons/WalletIcon";
+import { base, red } from "../../constants/Colors";
+import { FontNames, Fonts } from "../../constants/Fonts";
+import RowInProfileScreen from "@/app/components/one-row/RowInProfileScreen";
 
 const Profile = ({ navigation }) => {
   return (
@@ -34,7 +34,6 @@ const Profile = ({ navigation }) => {
         <EditIconProfile color={base.dark.dark50} />
       </View>
 
-      <RowInProfileScreen text="Account" Icon={WalletIcon} />
       <RowInProfileScreen
         text="Settings"
         Icon={SettingsIcon}

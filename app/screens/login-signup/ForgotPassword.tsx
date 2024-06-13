@@ -1,7 +1,7 @@
 import { SafeAreaView, Text } from "react-native";
-import CustomButton from "../components/CustomButton";
-import { FormTextInput } from "../components/form-components/FormTextInput";
-import { FontNames, Fonts } from "../constants/Fonts";
+import CustomButton from "../../components/buttons/CustomButton";
+import { FontNames, Fonts } from "../../constants/Fonts";
+import FormTextInput from "@/app/components/form-components/FormTextInput";
 
 const ForgotPassword = ({ navigation }) => {
   return (

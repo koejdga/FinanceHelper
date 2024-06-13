@@ -1,6 +1,6 @@
 import { Pressable } from "react-native";
-import { Accent, base } from "../constants/Colors";
-import AddIcon from "./icons/AddIcon";
+import { Accent, base } from "../../constants/Colors";
+import AddIcon from "../icons/AddIcon";
 
 type Props = {
   onPress?: () => void;
