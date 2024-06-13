@@ -1,7 +1,9 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import ExportDataStack from "./ExportDataStack";
+import ListWithChoices from "./ListWithChoices";
 import Profile from "./Profile";
 import Settings from "./Settings";
-import ListWithChoices from "./ListWithChoices";
+import CheckEmailExportData from "./CheckEmailExportData";
 import ExportData from "./ExportData";
 
 const Stack = createNativeStackNavigator();
@@ -26,6 +28,11 @@ const ProfileStack = () => {
         name="ExportData"
         component={ExportData}
         options={{ headerTitle: "Export Data" }}
+      />
+      <Stack.Screen
+        name="CheckEmailExportData"
+        component={CheckEmailExportData}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );

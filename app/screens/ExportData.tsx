@@ -2,33 +2,48 @@ import { SafeAreaView, View } from "react-native";
 import CustomButton from "../components/CustomButton";
 import OneQuestionExportData from "../components/OneQuestionExportData";
 
-const data = [
-  { label: "Item 1", value: "1" },
-  { label: "Item 2", value: "2" },
-  { label: "Item 3", value: "3" },
-  //   { label: "Item 4", value: "4" },
-  //   { label: "Item 5", value: "5" },
-  //   { label: "Item 6", value: "6" },
-  //   { label: "Item 7", value: "7" },
-  //   { label: "Item 8", value: "8" },
+const dataType = [
+  { label: "All", value: "1" },
+  { label: "Only income", value: "2" },
+  { label: "Only expenses", value: "3" },
 ];
 
-const ExportData = () => {
+const dateRange = [
+  { label: "Last month", value: "1" },
+  { label: "Last 3 months", value: "2" },
+  { label: "All", value: "3" },
+];
+
+const dataFormat = [
+  { label: "CSV", value: "1" },
+  { label: "XLSX", value: "2" },
+  { label: "PDF", value: "3" },
+];
+
+const ExportData = ({ navigation }) => {
   return (
     <SafeAreaView style={{ backgroundColor: "#FFF", flex: 1 }}>
       <View style={{ marginTop: 40, gap: 24 }}>
         <OneQuestionExportData
           question="What data do your want to export?"
-          variants={data}
+          variants={dataType}
         />
-        <OneQuestionExportData question="What date range?" variants={data} />
+        <OneQuestionExportData
+          question="What date range?"
+          variants={dateRange}
+        />
         <OneQuestionExportData
           question="What format do you want to export?"
-          variants={data}
+          variants={dataFormat}
         />
       </View>
       <View style={{ flex: 1 }}></View>
-      <CustomButton title="Export" />
+      <CustomButton
+        title="Export"
+        onPress={() => {
+          navigation.navigate("CheckEmailExportData");
+        }}
+      />
     </SafeAreaView>
   );
 };
