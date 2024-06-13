@@ -1,5 +1,11 @@
 import React from "react";
-import { Pressable, StyleSheet, Text } from "react-native";
+import {
+  Pressable,
+  StyleProp,
+  StyleSheet,
+  Text,
+  ViewStyle,
+} from "react-native";
 import { Accent, base } from "../constants/Colors";
 import { FontNames, Fonts } from "../constants/Fonts";
 
@@ -12,15 +18,17 @@ type Props = {
   onPress?: () => void;
   type?: ButtonType;
   title: string;
+  style?: StyleProp<ViewStyle>;
 };
 
 const CustomButton: React.FC<Props> = ({
   onPress,
   type = ButtonType.PRIMARY,
   title,
+  style,
 }) => {
   return (
-    <Pressable style={styles.button} onPress={onPress}>
+    <Pressable style={[styles.button, style]} onPress={onPress}>
       <Text
         style={[
           Fonts[FontNames.TITLE_3],

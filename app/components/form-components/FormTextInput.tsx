@@ -1,27 +1,20 @@
-import { KeyboardTypeOptions, TextInput, View, ViewStyle } from "react-native";
-import { formStyles } from "@/app/constants/Styles";
 import { base } from "@/app/constants/Colors";
+import { formStyles } from "@/app/constants/Styles";
+import { TextInput, TextInputProps, View } from "react-native";
 
-type FormTextInputProps = {
-  onChangeText?: (text: string) => void;
-  placeholder?: string | undefined;
-  style?: ViewStyle;
-  keyboardType?: KeyboardTypeOptions;
-};
+type Props = TextInputProps;
 
-export function FormTextInput(props: FormTextInputProps) {
+const FormTextInput: React.FC<Props> = (props) => {
   return (
     <View style={[formStyles.textInputWrap, { marginBottom: 24 }, props.style]}>
       <TextInput
-        keyboardType={props.keyboardType}
         spellCheck={false}
-        placeholder={props.placeholder}
         placeholderTextColor={base.light.light20}
-        onChangeText={(value) =>
-          props.onChangeText ? props.onChangeText(value) : null
-        }
-        style={formStyles.textInput}
+        {...props}
+        style={[formStyles.textInput, props.style]}
       />
     </View>
   );
-}
+};
+
+export default FormTextInput;
