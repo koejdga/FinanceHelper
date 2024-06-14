@@ -18,8 +18,7 @@ export default function Signup({ navigation }) {
           displayName: name,
         }).then(() => {
           console.log("user is signed in");
-          navigation.navigate("Login");
-          //TODO: add signup handling (at this point user is just signed up)
+          navigation.replace("Login");
         });
       })
       .catch(() => {

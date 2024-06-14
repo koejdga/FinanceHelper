@@ -1,5 +1,5 @@
 import { Accent, base } from "@/app/constants/Colors";
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import { FontNames, Fonts } from "./Fonts";
 
 export const formStyles = StyleSheet.create({
@@ -33,7 +33,7 @@ export const formStyles = StyleSheet.create({
 
 export const formContainerStyles = StyleSheet.create({
   alignForm: {
-    height: "60%",
+    height: Dimensions.get('window').height * 0.6,
   },
   alignCenter: {
     marginLeft: "auto",

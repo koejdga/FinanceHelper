@@ -1,13 +1,13 @@
-import { FormTextInput } from "@/app/components/form-components/FormTextInput";
 import { SecureTextInput } from "@/app/components/form-components/SecureTextInput";
 import {
   emailChecker,
   passwordChecker,
-} from "@/scripts/validation-scripts/login-validation";
+} from "@/app/utils/validation-scripts/login-validation";
 import { useState } from "react";
 import { Alert, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import CustomButton from "../buttons/CustomButton";
+import FormTextInput from "@/app/components/form-components/FormTextInput";
 
 type LoginFormProps = {
   onSubmit?: (email: string, password: string) => any;

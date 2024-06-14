@@ -6,7 +6,7 @@ import {
   BorderlessButton,
   GestureHandlerRootView,
 } from "react-native-gesture-handler";
-import { emailChecker } from "@/scripts/validation-scripts/login-validation";
+import { emailChecker } from "@/app/utils/validation-scripts/login-validation";
 import { sendPasswordResetEmail } from "@firebase/auth";
 import { appAuth } from "@/firebaseConfig";
 import FormTextInput from "@/app/components/form-components/FormTextInput";
