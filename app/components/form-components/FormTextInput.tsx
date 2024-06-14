@@ -1,27 +1,27 @@
-import { KeyboardTypeOptions, TextInput, View, ViewStyle } from "react-native";
-import { formStyles } from "@/app/constants/Styles";
 import { base } from "@/app/constants/Colors";
+import { formStyles } from "@/app/constants/Styles";
+import { useTheme } from "@react-navigation/native";
+import { TextInput, TextInputProps, View } from "react-native";
 
-type FormTextInputProps = {
-  onChangeText?: (text: string) => void;
-  placeholder?: string | undefined;
-  style?: ViewStyle;
-  keyboardType?: KeyboardTypeOptions;
-};
+type Props = TextInputProps;
 
-export function FormTextInput(props: FormTextInputProps) {
+const FormTextInput: React.FC<Props> = (props) => {
+  const { dark } = useTheme();
+
   return (
     <View style={[formStyles.textInputWrap, { marginBottom: 24 }, props.style]}>
       <TextInput
-        keyboardType={props.keyboardType}
         spellCheck={false}
-        placeholder={props.placeholder}
         placeholderTextColor={base.light.light20}
-        onChangeText={(value) =>
-          props.onChangeText ? props.onChangeText(value) : null
-        }
-        style={formStyles.textInput}
+        {...props}
+        style={[
+          formStyles.textInput,
+          { color: dark ? base.light.light80 : base.dark.dark100 },
+          props.style,
+        ]}
       />
     </View>
   );
-}
+};
+
+export default FormTextInput;
