@@ -2,7 +2,7 @@ import { SimpleLoginForm } from "@/app/components/form-components/SimpleLoginFor
 import { formContainerStyles } from "@/app/constants/Styles";
 import { appAuth } from "@/firebaseConfig";
 import { signInWithEmailAndPassword } from "@firebase/auth";
-import { Alert, Pressable, SafeAreaView, Text, View } from "react-native";
+import {Alert, KeyboardAvoidingView, Pressable, SafeAreaView, Text, View} from "react-native";
 import { base } from "../constants/Colors";
 import { FontNames, Fonts } from "../constants/Fonts";
 
@@ -21,9 +21,8 @@ export default function Login({ navigation }) {
         const user = userCredential.user;
         if (user) {
           console.log("user is logged in");
-          navigation.navigate("MainApp");
+          navigation.replace("MainApp");
         }
-        //TODO: add login handling (at this point user is just logged in)
       })
       .catch(() => {
         let title = "Something's wrong!";

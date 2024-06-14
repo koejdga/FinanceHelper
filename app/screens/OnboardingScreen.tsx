@@ -11,6 +11,10 @@ import CustomButton, { ButtonType } from "../components/CustomButton";
 import ThreeDots from "../components/ThreeDots";
 import { base } from "../constants/Colors";
 import { FontNames, Fonts } from "../constants/Fonts";
+import {useEffect, useState} from "react";
+import {onAuthStateChanged} from "@firebase/auth";
+import {appAuth} from "@/firebaseConfig";
+import * as SplashScreen from "expo-splash-screen";
 
 export type ScreenNumber = 1 | 2 | 3;
 
@@ -33,13 +37,28 @@ const ScreenDetails = [
 ] as const;
 
 const OnboardingScreen = ({ route, navigation }) => {
+  const [loaded, setLoaded] = useState(false)
+  useEffect(() => {
+    onAuthStateChanged(appAuth, (user) => {
+      if (user) {
+        navigation.replace("MainApp");
+      }
+      setLoaded(true);
+    });
+  });
+  useEffect(() => {
+    if (loaded) {
+      SplashScreen.hideAsync().then(r => {});
+    }
+  }, [loaded]);
+
   const screenNumber = route.params?.screenNumber as ScreenNumber;
   const { width } = useWindowDimensions();
   const SCREEN_WIDTH = width;
   const IMAGE_PADDING = 24;
   const IMAGE_WIDTH = SCREEN_WIDTH - IMAGE_PADDING * 2;
 
-  return (
+  return (!loaded?null:
     <SafeAreaView style={styles.container}>
       <Pressable
         style={{ alignItems: "center", flex: 1 }}

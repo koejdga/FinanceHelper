@@ -1,4 +1,4 @@
-import { SafeAreaView, Text, View } from "react-native";
+import {Alert, SafeAreaView, Text, View} from "react-native";
 import RowInProfileScreen from "../components/RowInProfileScreen";
 import EditIconProfile from "../components/icons/EditIconProfile";
 import LogoutIcon from "../components/icons/LogoutIcon";
@@ -7,8 +7,30 @@ import UploadIcon from "../components/icons/UploadIcon";
 import WalletIcon from "../components/icons/WalletIcon";
 import { base, red } from "../constants/Colors";
 import { FontNames, Fonts } from "../constants/Fonts";
+import {appAuth} from "@/firebaseConfig";
 
 const Profile = ({ navigation }) => {
+    const logoutProcedure = () => {
+        Alert.alert(
+            "Logout",
+            "Are you sure you want to logout?",
+            [
+                {
+                    text: "OK",
+                    onPress: () => {
+                        appAuth.signOut().then(() =>{
+                            navigation.replace("Login");
+                        });
+                    }
+                },
+                {
+                    text: "Cancel",
+                    style: "cancel"
+                },
+            ]
+        );
+    }
+
   return (
     <SafeAreaView style={{ backgroundColor: "#FFF", flex: 1 }}>
       <View
@@ -50,6 +72,7 @@ const Profile = ({ navigation }) => {
         }}
       />
       <RowInProfileScreen
+          onPress={logoutProcedure}
         text="Logout"
         Icon={LogoutIcon}
         color={red[100]}
