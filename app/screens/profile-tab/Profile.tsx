@@ -2,7 +2,7 @@ import FormTextInput from "@/app/components/form-components/FormTextInput";
 import CheckIcon from "@/app/components/icons/CheckIcon";
 import RowInProfileScreen from "@/app/components/one-row/RowInProfileScreen";
 import { useState } from "react";
-import { Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import {Alert, Pressable, SafeAreaView, StyleSheet, Text, View} from "react-native";
 import EditIconProfile from "../../components/icons/EditIconProfile";
 import LogoutIcon from "../../components/icons/LogoutIcon";
 import SettingsIcon from "../../components/icons/SettingsIcon";
@@ -10,11 +10,33 @@ import UploadIcon from "../../components/icons/UploadIcon";
 import { base, red } from "../../constants/Colors";
 import { FontNames, Fonts } from "../../constants/Fonts";
 import { useTheme } from "@react-navigation/native";
+import {appAuth} from "@/firebaseConfig";
 
 const Profile = ({ navigation }) => {
   const { dark } = useTheme();
   const [editMode, setEditMode] = useState(false);
   const [username, setUsername] = useState("Kate Johnson");
+
+    const logoutProcedure = () => {
+        Alert.alert(
+            "Logout",
+            "Are you sure you want to logout?",
+            [
+                {
+                    text: "OK",
+                    onPress: () => {
+                        appAuth.signOut().then(() =>{
+                            navigation.replace("Login");
+                        });
+                    }
+                },
+                {
+                    text: "Cancel",
+                    style: "cancel"
+                },
+            ]
+        );
+    }
 
   return (
     <SafeAreaView>
@@ -84,6 +106,7 @@ const Profile = ({ navigation }) => {
         Icon={LogoutIcon}
         color={red[100]}
         backgroundColor={red[10]}
+        onPress={logoutProcedure}
       />
     </SafeAreaView>
   );
