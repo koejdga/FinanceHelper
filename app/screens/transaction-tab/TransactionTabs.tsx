@@ -23,7 +23,7 @@ const TransactionTabs = ({ navigation }) => {
   const [year, setYear] = useState(2024);
 
   return (
-    <SafeAreaView style={{ backgroundColor: "#FFF", flex: 1 }}>
+    <SafeAreaView style={{ flex: 1 }}>
       <HeaderWithMonthOrYear
         monthNumber={monthNumber}
         setMonthNumber={setMonthNumber}

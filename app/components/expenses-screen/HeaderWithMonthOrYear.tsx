@@ -4,6 +4,8 @@ import ArrowLeftMainIcon from "../icons/ArrowLeftMainIcon";
 import ArrowRightMainIcon from "../icons/ArrowRightMainIcon";
 import { FontNames, Fonts } from "../../constants/Fonts";
 import { convertNumberToMonthName } from "../../utils/Utils";
+import { useTheme } from "@react-navigation/native";
+import { base } from "@/app/constants/Colors";
 
 type Props = {
   monthNumber?: number;
@@ -25,6 +27,8 @@ const HeaderWithMonthOrYear: React.FC<Props> = ({
 
   const [canGoLeft, setCanGoLeft] = useState(true);
   const [canGoRight, setCanGoRight] = useState(true);
+
+  const { dark } = useTheme();
 
   if (year < MIN_YEAR || year > new Date().getFullYear()) {
     return <Text>Sorry, wrong year provided</Text>;
@@ -101,7 +105,12 @@ const HeaderWithMonthOrYear: React.FC<Props> = ({
       >
         <ArrowLeftMainIcon />
       </Pressable>
-      <Text style={[Fonts[FontNames.TITLE_2]]}>
+      <Text
+        style={[
+          Fonts[FontNames.TITLE_2],
+          { color: dark ? base.light.light80 : base.dark.dark100 },
+        ]}
+      >
         {showOnlyYear
           ? year
           : `${convertNumberToMonthName(monthNumber)} ${year}`}

@@ -1,4 +1,6 @@
+import { base } from "@/app/constants/Colors";
 import { Pressable, StyleProp, Text, TextStyle, ViewStyle } from "react-native";
+import { useTheme } from "@react-navigation/native";
 
 interface Props<T> {
   dictOfPositions: object;
@@ -17,6 +19,8 @@ const ChooseOneOptionButton = <T,>({
   style,
   textStyle,
 }: Props<T>) => {
+  const { dark } = useTheme();
+
   return (
     <Pressable
       style={style}
@@ -33,7 +37,14 @@ const ChooseOneOptionButton = <T,>({
         });
       }}
     >
-      <Text style={textStyle}>{option}</Text>
+      <Text
+        style={[
+          { color: dark ? base.light.light60 : base.dark.dark100 },
+          textStyle,
+        ]}
+      >
+        {option}
+      </Text>
     </Pressable>
   );
 };

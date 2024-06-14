@@ -20,7 +20,7 @@ const CustomBarChart: React.FC<Props> = ({ labels, values, legend }) => {
     backgroundGradientToOpacity: 0,
     color: (opacity = 1) =>
       `rgba(${accentRgb.r}, ${accentRgb.g}, ${accentRgb.b}, ${opacity})`,
-    strokeWidth: 2, // optional, default 3
+    strokeWidth: 2,
     barPercentage: 0.5,
     useShadowColorFromDataset: false, // optional
   };

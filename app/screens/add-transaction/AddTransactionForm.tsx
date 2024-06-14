@@ -40,7 +40,7 @@ const AddTransactionForm = ({ route, navigation }) => {
   ];
 
   return (
-    <SafeAreaView style={{ backgroundColor: "#FFF", flex: 1 }}>
+    <SafeAreaView style={{ flex: 1 }}>
       <View style={{ gap: 24, marginTop: 24, marginHorizontal: 16, flex: 1 }}>
         <RowInAddTransactionForm
           title={"Date"}

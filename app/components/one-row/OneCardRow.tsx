@@ -1,8 +1,9 @@
-import { IncomeBlue } from "@/app/constants/Colors";
+import { IncomeDark, IncomeLight, base } from "@/app/constants/Colors";
 import { FontNames, Fonts } from "@/app/constants/Fonts";
 import { convertNumberToMoney } from "@/app/utils/Utils";
 import { Text, View } from "react-native";
 import Separator from "../Separator";
+import { useTheme } from "@react-navigation/native";
 
 type Props = {
   typeOfCard: string;
@@ -11,6 +12,8 @@ type Props = {
 };
 
 const OneCardRow: React.FC<Props> = ({ typeOfCard, amountOfMoney }) => {
+  const { dark } = useTheme();
+
   return (
     <>
       <View
@@ -21,14 +24,19 @@ const OneCardRow: React.FC<Props> = ({ typeOfCard, amountOfMoney }) => {
           marginTop: 3,
         }}
       >
-        <Text style={[Fonts[FontNames.SMALL], { flex: 1.5 }]}>
+        <Text
+          style={[
+            Fonts[FontNames.SMALL],
+            { flex: 1.5, color: dark ? base.light.light80 : base.dark.dark100 },
+          ]}
+        >
           {typeOfCard}
         </Text>
         <Text
           style={[
             Fonts[FontNames.SMALL],
             {
-              color: IncomeBlue,
+              color: dark ? IncomeLight : IncomeDark,
               flex: 3,
               textAlign: "right",
             },

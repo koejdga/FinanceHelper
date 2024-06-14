@@ -30,7 +30,7 @@ export default function Signup({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={{ backgroundColor: "#FFF", flex: 1 }}>
+    <SafeAreaView style={{ flex: 1 }}>
       <View style={formContainerStyles.alignForm}>
         <Text
           style={[

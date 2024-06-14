@@ -3,6 +3,7 @@ import React from "react";
 import { FontNames, Fonts } from "@/app/constants/Fonts";
 import { Accent, base } from "@/app/constants/Colors";
 import ArrowRightIcon from "../icons/ArrowRightIcon";
+import { useTheme } from "@react-navigation/native";
 
 type Props = {
   title: string;
@@ -11,6 +12,8 @@ type Props = {
 };
 
 const SettingsRow: React.FC<Props> = ({ title, additionalText, onPress }) => {
+  const { dark } = useTheme();
+
   return (
     <Pressable
       style={{
@@ -21,7 +24,14 @@ const SettingsRow: React.FC<Props> = ({ title, additionalText, onPress }) => {
       }}
       onPress={onPress}
     >
-      <Text style={[Fonts[FontNames.BODY_1]]}>{title}</Text>
+      <Text
+        style={[
+          Fonts[FontNames.BODY_1],
+          { color: dark ? base.light.light80 : base.dark.dark100 },
+        ]}
+      >
+        {title}
+      </Text>
       <View
         style={{
           flexDirection: "row",

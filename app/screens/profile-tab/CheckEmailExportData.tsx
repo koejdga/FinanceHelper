@@ -17,7 +17,7 @@ const CheckEmailExportData = ({ navigation }) => {
   const IMAGE_WIDTH = SCREEN_WIDTH - IMAGE_PADDING * 2;
 
   return (
-    <SafeAreaView style={{ backgroundColor: "#FFF", flex: 1 }}>
+    <SafeAreaView style={{ flex: 1 }}>
       <Image
         style={[styles.image, { width: IMAGE_WIDTH, height: IMAGE_WIDTH }]}
         source={require("@/app/assets/images/check-email.jpg")}

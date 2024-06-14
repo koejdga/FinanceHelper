@@ -5,7 +5,7 @@ import FormTextInput from "@/app/components/form-components/FormTextInput";
 
 const ForgotPassword = ({ navigation }) => {
   return (
-    <SafeAreaView style={{ backgroundColor: "#FFF", flex: 1 }}>
+    <SafeAreaView style={{ flex: 1 }}>
       <Text
         style={[
           Fonts[FontNames.TITLE_2],

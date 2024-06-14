@@ -2,7 +2,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useEffect, useState } from "react";
 import AddTransactionForm from "./AddTransactionForm";
 import AddTransferForm from "./AddTransferForm";
-import WhiteScreen from "../WhiteScreen";
+import EmptyScreen from "../EmptyScreen";
 import ChooseTransaction from "@/app/components/choose-one-option-buttons/ChooseTransaction";
 import { TransactionOptions } from "@/app/components/choose-one-option-buttons/ChooseOneOptionButtons";
 
@@ -24,7 +24,7 @@ const AddFormGeneral = ({ navigation }) => {
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false, animation: "none" }}>
-      <Stack.Screen name="Launch" component={WhiteScreen} />
+      <Stack.Screen name="Launch" component={EmptyScreen} />
       <Stack.Screen
         name={TransactionOptions.INCOME}
         component={AddTransactionForm}

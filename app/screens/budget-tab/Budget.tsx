@@ -3,17 +3,21 @@ import IncomeExpenseTotal from "@/app/components/expenses-screen/IncomeExpenseTo
 import AddIcon from "@/app/components/icons/AddIcon";
 import EditIcon from "@/app/components/icons/EditIcon";
 import OneCardRow from "@/app/components/one-row/OneCardRow";
+import { base } from "@/app/constants/Colors";
 import { FontNames, Fonts } from "@/app/constants/Fonts";
+import { useTheme } from "@react-navigation/native";
 import { SafeAreaView, Text, View } from "react-native";
 
 const Budget = () => {
+  const { dark } = useTheme();
+
   const mockData = [
     { typeOfCard: "Card 1", amountOfMoney: 3000 },
     { typeOfCard: "Cash", amountOfMoney: 134.5 },
   ];
 
   return (
-    <SafeAreaView style={{ backgroundColor: "#FFF", flex: 1 }}>
+    <SafeAreaView>
       <View
         style={{
           flexDirection: "row",
@@ -24,7 +28,14 @@ const Budget = () => {
           marginBottom: 5,
         }}
       >
-        <Text style={[Fonts[FontNames.TITLE_2]]}>Accounts</Text>
+        <Text
+          style={[
+            Fonts[FontNames.TITLE_2],
+            { color: dark ? base.light.light80 : base.dark.dark100 },
+          ]}
+        >
+          Accounts
+        </Text>
         <View
           style={{
             flexDirection: "row",

@@ -1,4 +1,5 @@
 import { base } from "@/app/constants/Colors";
+import { useTheme } from "@react-navigation/native";
 import React, { useState } from "react";
 import { StyleProp, StyleSheet, ViewStyle } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
@@ -9,15 +10,22 @@ type Props = {
 };
 
 const CustomDropdown: React.FC<Props> = ({ variants, style }) => {
+  const { dark } = useTheme();
   const [value, setValue] = useState(variants[0]);
   const [isFocus, setIsFocus] = useState(false);
 
   return (
     <Dropdown
       style={[styles.dropdown, isFocus && { borderColor: "blue" }, style]}
-      placeholderStyle={styles.placeholderStyle}
-      selectedTextStyle={styles.selectedTextStyle}
-      inputSearchStyle={styles.inputSearchStyle}
+      placeholderStyle={[
+        styles.placeholderStyle,
+        { color: dark ? base.light.light80 : base.dark.dark100 },
+      ]}
+      selectedTextStyle={[
+        styles.selectedTextStyle,
+        { color: dark ? base.light.light80 : base.dark.dark100 },
+      ]}
+      inputSearchStyle={[styles.inputSearchStyle]}
       iconStyle={styles.iconStyle}
       data={variants}
       maxHeight={300}

@@ -9,13 +9,15 @@ import SettingsIcon from "../../components/icons/SettingsIcon";
 import UploadIcon from "../../components/icons/UploadIcon";
 import { base, red } from "../../constants/Colors";
 import { FontNames, Fonts } from "../../constants/Fonts";
+import { useTheme } from "@react-navigation/native";
 
 const Profile = ({ navigation }) => {
+  const { dark } = useTheme();
   const [editMode, setEditMode] = useState(false);
   const [username, setUsername] = useState("Kate Johnson");
 
   return (
-    <SafeAreaView style={{ backgroundColor: "#FFF", flex: 1 }}>
+    <SafeAreaView>
       <View
         style={[
           styles.header,
@@ -26,12 +28,18 @@ const Profile = ({ navigation }) => {
           <>
             <View style={{ gap: 8 }}>
               <Text
-                style={[Fonts[FontNames.BODY_3], { color: base.light.light20 }]}
+                style={[
+                  Fonts[FontNames.BODY_3],
+                  { color: dark ? base.light.light60 : base.light.light20 },
+                ]}
               >
                 Username
               </Text>
               <Text
-                style={[Fonts[FontNames.TITLE_2], { color: base.dark.dark75 }]}
+                style={[
+                  Fonts[FontNames.TITLE_2],
+                  { color: dark ? base.light.light80 : base.dark.dark75 },
+                ]}
               >
                 {username}
               </Text>

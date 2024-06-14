@@ -3,7 +3,7 @@ import { SafeAreaView, View } from "react-native";
 
 const Settings = ({ navigation }) => {
   return (
-    <SafeAreaView style={{ backgroundColor: "#FFF", flex: 1 }}>
+    <SafeAreaView>
       <SettingsRow
         title="Currency"
         additionalText="UAH"

@@ -4,9 +4,12 @@ import { PieChart } from "react-native-chart-kit";
 import { Dimensions } from "react-native";
 import CategoryProgressBar from "../../components/CategoryProgressBar";
 import { FontNames, Fonts } from "../../constants/Fonts";
+import { useTheme } from "@react-navigation/native";
+import { base } from "@/app/constants/Colors";
 const screenWidth = Dimensions.get("window").width;
 
 const Limits = () => {
+  const { dark } = useTheme();
   const data = [
     {
       amount: 66,
@@ -40,7 +43,15 @@ const Limits = () => {
         hasLegend={false}
         avoidFalseZero
       />
-      <Text style={[Fonts[FontNames.TITLE_3], { textAlign: "center" }]}>
+      <Text
+        style={[
+          Fonts[FontNames.TITLE_3],
+          {
+            textAlign: "center",
+            color: dark ? base.light.light80 : base.dark.dark100,
+          },
+        ]}
+      >
         $1500 spent, $3000 left
       </Text>
       <View style={{ marginTop: 30, gap: 15 }}>

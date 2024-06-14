@@ -22,7 +22,7 @@ const dataFormat = [
 
 const ExportData = ({ navigation }) => {
   return (
-    <SafeAreaView style={{ backgroundColor: "#FFF", flex: 1 }}>
+    <SafeAreaView style={{ flex: 1 }}>
       <View style={{ marginTop: 40, gap: 24 }}>
         <OneQuestionExportData
           question="What data do your want to export?"

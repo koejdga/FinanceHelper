@@ -1,5 +1,6 @@
 import { Accent, base } from "@/app/constants/Colors";
 import { FontNames, Fonts } from "@/app/constants/Fonts";
+import { useTheme } from "@react-navigation/native";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
 type Props = {
@@ -17,6 +18,8 @@ const RowInProfileScreen: React.FC<Props> = ({
   backgroundColor,
   Icon,
 }) => {
+  const { dark } = useTheme();
+
   return (
     <Pressable style={styles.profileRowContainer} onPress={onPress}>
       <View
@@ -27,7 +30,12 @@ const RowInProfileScreen: React.FC<Props> = ({
       >
         <Icon color={color || Accent[100]} style={styles.icon} />
       </View>
-      <Text style={[Fonts[FontNames.BODY_2], { color: base.dark.dark25 }]}>
+      <Text
+        style={[
+          Fonts[FontNames.BODY_2],
+          { color: dark ? base.light.light60 : base.dark.dark25 },
+        ]}
+      >
         {text}
       </Text>
     </Pressable>

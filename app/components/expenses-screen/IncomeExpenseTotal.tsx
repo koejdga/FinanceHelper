@@ -1,8 +1,15 @@
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import { FontNames, Fonts } from "../../constants/Fonts";
-import { ExpenseRed, IncomeBlue } from "../../constants/Colors";
+import {
+  ExpenseDark,
+  ExpenseLight,
+  IncomeDark,
+  IncomeLight,
+  base,
+} from "../../constants/Colors";
 import { convertNumberToMoney } from "../../utils/Utils";
+import { useTheme } from "@react-navigation/native";
 
 type Props = {
   income: number;
@@ -10,6 +17,14 @@ type Props = {
 };
 
 const IncomeExpenseTotal: React.FC<Props> = ({ income, expense }) => {
+  const { dark } = useTheme();
+  const styles = StyleSheet.create({
+    title: {
+      ...Fonts[FontNames.BODY_2],
+      ...{ color: dark ? base.light.light80 : base.dark.dark100 },
+    },
+  });
+
   if (income < 0) {
     return <Text>Sorry, negative income provided</Text>;
   }
@@ -28,20 +43,35 @@ const IncomeExpenseTotal: React.FC<Props> = ({ income, expense }) => {
       }}
     >
       <View style={{ alignItems: "center" }}>
-        <Text style={[Fonts[FontNames.BODY_2]]}>Income</Text>
-        <Text style={[Fonts[FontNames.BODY_3], { color: IncomeBlue }]}>
+        <Text style={styles.title}>Income</Text>
+        <Text
+          style={[
+            Fonts[FontNames.BODY_3],
+            { color: dark ? IncomeLight : IncomeDark },
+          ]}
+        >
           {convertNumberToMoney(income)}
         </Text>
       </View>
       <View style={{ alignItems: "center" }}>
-        <Text style={[Fonts[FontNames.BODY_2]]}>Expense</Text>
-        <Text style={[Fonts[FontNames.BODY_3], { color: ExpenseRed }]}>
+        <Text style={styles.title}>Expense</Text>
+        <Text
+          style={[
+            Fonts[FontNames.BODY_3],
+            { color: dark ? ExpenseLight : ExpenseDark },
+          ]}
+        >
           {convertNumberToMoney(expense)}
         </Text>
       </View>
       <View style={{ alignItems: "center" }}>
-        <Text style={[Fonts[FontNames.BODY_2]]}>Total</Text>
-        <Text style={[Fonts[FontNames.BODY_3]]}>
+        <Text style={styles.title}>Total</Text>
+        <Text
+          style={[
+            Fonts[FontNames.BODY_3],
+            { color: dark ? base.light.light80 : base.dark.dark100 },
+          ]}
+        >
           {convertNumberToMoney(income - expense)}
         </Text>
       </View>

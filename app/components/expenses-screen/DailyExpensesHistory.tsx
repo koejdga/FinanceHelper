@@ -1,5 +1,5 @@
 import { ScrollView, Text, View } from "react-native";
-import { ExpenseRed, IncomeBlue } from "../../constants/Colors";
+import { ExpenseDark, IncomeDark } from "../../constants/Colors";
 import { FontNames, Fonts } from "../../constants/Fonts";
 import Separator from "../Separator";
 import OneExpenseRow from "./OneExpenseRow";

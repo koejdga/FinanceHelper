@@ -1,7 +1,14 @@
 import { Text, View } from "react-native";
-import { ExpenseRed, IncomeBlue } from "../../constants/Colors";
+import {
+  ExpenseDark,
+  ExpenseLight,
+  IncomeDark,
+  IncomeLight,
+  base,
+} from "../../constants/Colors";
 import { FontNames, Fonts } from "../../constants/Fonts";
 import { convertNumberToMoney } from "../../utils/Utils";
+import { useTheme } from "@react-navigation/native";
 
 type Props = {
   name: string;
@@ -16,6 +23,8 @@ const OneExpenseRow: React.FC<Props> = ({
   amountOfMoney,
   isIncome = false,
 }) => {
+  const { dark } = useTheme();
+
   return (
     <View
       style={{
@@ -25,13 +34,33 @@ const OneExpenseRow: React.FC<Props> = ({
         marginTop: 3,
       }}
     >
-      <Text style={[Fonts[FontNames.SMALL], { flex: 1.5 }]}>{name}</Text>
-      <Text style={[Fonts[FontNames.SMALL], { flex: 2 }]}>{typeOfCard}</Text>
+      <Text
+        style={[
+          Fonts[FontNames.SMALL],
+          { flex: 1.5, color: dark ? base.light.light80 : base.dark.dark100 },
+        ]}
+      >
+        {name}
+      </Text>
+      <Text
+        style={[
+          Fonts[FontNames.SMALL],
+          { flex: 2, color: dark ? base.light.light80 : base.dark.dark100 },
+        ]}
+      >
+        {typeOfCard}
+      </Text>
       <Text
         style={[
           Fonts[FontNames.SMALL],
           {
-            color: isIncome ? IncomeBlue : ExpenseRed,
+            color: isIncome
+              ? dark
+                ? IncomeLight
+                : IncomeDark
+              : dark
+              ? ExpenseLight
+              : ExpenseDark,
             flex: 1,
             textAlign: "right",
           },
