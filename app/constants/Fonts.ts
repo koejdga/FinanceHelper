@@ -2,11 +2,13 @@ enum FontsEnum {
   MEDIUM = "Inter-Medium",
   SEMIBOLD = "Inter-SemiBold",
   BOLD = "Inter-Bold",
+  REGULAR = "Inter-Regular",
 }
 
 export enum FontNames {
   TINY,
   SMALL,
+  BODY_4,
   BODY_3,
   BODY_2,
   BODY_1,
@@ -33,6 +35,11 @@ export const Fonts: Record<FontNames, Font> = {
     fontFamily: FontsEnum.MEDIUM,
     fontSize: 13,
     lineHeight: 16,
+  },
+  [FontNames.BODY_4]: {
+    fontFamily: FontsEnum.REGULAR,
+    fontSize: 16,
+    lineHeight: 18,
   },
   [FontNames.BODY_3]: {
     fontFamily: FontsEnum.MEDIUM,

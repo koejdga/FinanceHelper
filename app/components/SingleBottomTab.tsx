@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import { Text, View } from "react-native";
 import { Accent } from "../constants/Colors";
 import { FontNames, Fonts } from "../constants/Fonts";

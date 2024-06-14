@@ -1,5 +1,6 @@
 import { Accent, base } from "@/app/constants/Colors";
-import {Dimensions, StyleSheet} from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
+import { FontNames, Fonts } from "./Fonts";
 
 export const formStyles = StyleSheet.create({
   textInputWrap: {
@@ -8,16 +9,16 @@ export const formStyles = StyleSheet.create({
     borderRadius: 16,
     borderWidth: 1,
     borderColor: base.light.light60,
-    alignItems: "center",
   },
   textInput: {
-    borderRadius: 15,
-    opacity: 0.9,
-    width: "100%",
-    height: "100%",
-    padding: 16,
-    fontSize: 16,
-    lineHeight: 18,
+    ...Fonts[FontNames.BODY_4],
+    ...{
+      borderRadius: 15,
+      opacity: 0.9,
+      width: "100%",
+      height: "100%",
+      padding: 16,
+    },
   },
   button: {
     borderRadius: 16,

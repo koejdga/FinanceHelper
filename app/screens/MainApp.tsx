@@ -1,10 +1,8 @@
-import Budget from "@/app/screens/Budget";
-import Profile from "@/app/screens/Profile";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import SingleBottomTab, { TabNames } from "../components/SingleBottomTab";
-import TransactionTabs from "./TransactionTabs";
-import ProfileStack from "./ProfileStack";
-import Transaction from "./Transaction";
+import Transaction from "./transaction-tab/Transaction";
+import ProfileStack from "./profile-tab/ProfileStack";
+import Budget from "./budget-tab/Budget";
 
 const Tab = createBottomTabNavigator();
 
