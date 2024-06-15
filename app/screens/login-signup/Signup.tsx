@@ -2,7 +2,7 @@ import { SimpleSignUpForm } from "@/app/components/form-components/SimpleSignUpF
 import { formContainerStyles } from "@/app/constants/Styles";
 import { Pressable, SafeAreaView, Text, View, Alert } from "react-native";
 import { FontNames, Fonts } from "../../constants/Fonts";
-import { createUserWithEmailAndPassword, updateProfile } from "@firebase/auth";
+import {createUserWithEmailAndPassword, sendEmailVerification, updateProfile} from "@firebase/auth";
 import { appAuth } from "@/firebaseConfig";
 
 export default function Signup({ navigation }) {
@@ -18,7 +18,7 @@ export default function Signup({ navigation }) {
           displayName: name,
         }).then(() => {
           console.log("user is signed in");
-          navigation.replace("Login");
+          navigation.replace("EmailVerification");
         });
       })
       .catch(() => {
