@@ -11,9 +11,9 @@ import ForgotPassword from "./app/screens/login-signup/ForgotPassword";
 import EmailOnTheWay from "./app/screens/login-signup/EmailOnTheWay";
 import Signup from "./app/screens/login-signup/Signup";
 import MainApp from "./app/screens/MainApp";
-import ResetPassword from "./app/screens/login-signup/ResetPassword";
 import OnboardingScreen from "./app/screens/login-signup/OnboardingScreen";
 import { useColorScheme } from "react-native";
+import EmailVerification from "@/app/screens/login-signup/EmailVerification";
 
 const Stack = createNativeStackNavigator();
 
@@ -54,7 +54,6 @@ const App = () => {
       >
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Signup" component={Signup} />
-        <Stack.Screen name="ResetPassword" component={ResetPassword} />
 
         <Stack.Screen
           name="OnboardingScreen"
@@ -68,6 +67,9 @@ const App = () => {
           options={{ headerShown: true, headerTitle: "Forgot Password" }}
         />
         <Stack.Screen name="EmailOnTheWay" component={EmailOnTheWay} />
+        <Stack.Screen name="EmailVerification"
+                      component={EmailVerification}
+                      options={{ headerShown: true, headerTitle: "Verify email" }}/>
         <Stack.Screen name="MainApp" component={MainApp} />
       </Stack.Navigator>
     </NavigationContainer>
