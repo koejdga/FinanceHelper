@@ -43,7 +43,7 @@ const OnboardingScreen = ({ route, navigation }) => {
   const [loaded, setLoaded] = useState(false)
   useEffect(() => {
     onAuthStateChanged(appAuth, (user) => {
-      if (user) {
+      if (user && user.emailVerified) {
         navigation.replace("MainApp");
       }
       setLoaded(true);
