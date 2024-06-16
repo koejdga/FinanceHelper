@@ -11,6 +11,7 @@ const FormTextInput: React.FC<Props> = (props) => {
   return (
     <View style={[formStyles.textInputWrap, { marginBottom: 24 }, props.style]}>
       <TextInput
+          testID="input"
         spellCheck={false}
         placeholderTextColor={base.light.light20}
         {...props}
