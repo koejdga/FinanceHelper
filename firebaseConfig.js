@@ -24,3 +24,22 @@ export const firebaseApp = initializeApp(firebaseConfig);
 export const appAuth = initializeAuth(firebaseApp, {
     persistence: getReactNativePersistence(ReactNativeAsyncStorage)
 });
+
+let userIdToken;
+export const getUserIdToken = () => {
+    return userIdToken;
+}
+
+async function refreshIdToken(){
+    if(appAuth && appAuth.currentUser){
+        userIdToken = await appAuth.currentUser.getIdToken(true);
+    }
+    else userIdToken = null;
+}
+
+appAuth.onAuthStateChanged(() => {
+    refreshIdToken().then();
+})
+
+//Refresh once in 30 minutes
+setInterval(refreshIdToken, 1000*60*30);
