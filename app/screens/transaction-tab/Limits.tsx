@@ -1,19 +1,21 @@
-import { Button, Pressable, Text, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import { PieChart } from "react-native-chart-kit";
 
+import AddIcon from "@/app/components/icons/AddIcon";
+import EditIcon from "@/app/components/icons/EditIcon";
+import { base } from "@/app/constants/Colors";
+import { getCategories } from "@/app/utils/ServerCommunication";
+import { useTheme } from "@react-navigation/native";
+import { useEffect, useState } from "react";
 import { Dimensions } from "react-native";
 import CategoryProgressBar from "../../components/CategoryProgressBar";
 import { FontNames, Fonts } from "../../constants/Fonts";
-import { useTheme } from "@react-navigation/native";
-import { base } from "@/app/constants/Colors";
-import AddTransactionButton from "@/app/components/buttons/AddTransactionButton";
-import AddIcon from "@/app/components/icons/AddIcon";
-import { getCategories } from "@/app/utils/ServerCommunication";
-import { useEffect } from "react";
 const screenWidth = Dimensions.get("window").width;
 
 const Limits = ({ navigation }) => {
   const { dark } = useTheme();
+  const [editMode, setEditMode] = useState(false);
+
   const data = [
     {
       amount: 66,
@@ -26,15 +28,15 @@ const Limits = ({ navigation }) => {
   ];
 
   let categories = [
-    { categoryName: "Food", progress: 0.3 },
-    { categoryName: "Clothes", progress: 0.6 },
+    { categoryName: "Food", progress: 0.3, limit: 4000 },
+    { categoryName: "Clothes", progress: 0.6, limit: 10000 },
   ];
   useEffect(() => {
     const init = async () => {
       categories = await getCategories();
       categories = [
-        { categoryName: "Food", progress: 0.3 },
-        { categoryName: "Clothes", progress: 0.6 },
+        { categoryName: "Food", progress: 0.3, limit: 4000 },
+        { categoryName: "Clothes", progress: 0.6, limit: 10000 },
       ];
     };
     init();
@@ -45,7 +47,7 @@ const Limits = ({ navigation }) => {
   };
 
   return (
-    <View>
+    <Pressable onPress={() => setEditMode(false)}>
       <PieChart
         data={data}
         width={screenWidth}
@@ -73,6 +75,14 @@ const Limits = ({ navigation }) => {
           <CategoryProgressBar
             categoryName={category.categoryName}
             progress={category.progress}
+            editMode={editMode}
+            edit={() => {
+              setEditMode(false);
+              navigation.navigate("EditCategoryForm", {
+                name: category.categoryName,
+                limit: category.limit,
+              });
+            }}
             key={"categoryProgressBar" + index}
           />
         ))}
@@ -92,8 +102,24 @@ const Limits = ({ navigation }) => {
             Add category
           </Text>
         </Pressable>
+
+        <Pressable
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            gap: 5,
+          }}
+          onPress={() => {
+            setEditMode(!editMode);
+          }}
+        >
+          <EditIcon tintColor={"#007aff"} size={30} />
+          <Text style={[Fonts[FontNames.BODY_3], { color: "#007aff" }]}>
+            {editMode ? "Stop editting" : "Edit category"}
+          </Text>
+        </Pressable>
       </View>
-    </View>
+    </Pressable>
   );
 };
 

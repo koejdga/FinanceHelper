@@ -1,15 +1,23 @@
-import { Text, View } from "react-native";
+import { useTheme } from "@react-navigation/native";
+import { Pressable, Text, View } from "react-native";
 import * as Progress from "react-native-progress";
 import { base } from "../constants/Colors";
 import { FontNames, Fonts } from "../constants/Fonts";
-import { useTheme } from "@react-navigation/native";
+import WigglyEditIcon from "./icons/WigglyEditIcon";
 
 type Props = {
   categoryName: string;
   progress: number;
+  editMode?: boolean;
+  edit: () => void;
 };
 
-const CategoryProgressBar: React.FC<Props> = ({ categoryName, progress }) => {
+const CategoryProgressBar: React.FC<Props> = ({
+  categoryName,
+  progress,
+  editMode = false,
+  edit,
+}) => {
   const { dark } = useTheme();
 
   const getProgressBarColor = (progress: number) => {
@@ -49,15 +57,21 @@ const CategoryProgressBar: React.FC<Props> = ({ categoryName, progress }) => {
         borderColor={"lightgrey"}
         style={{ flex: 3, borderRadius: 10 }}
       />
-      <Text
-        style={{
-          flex: 0.75,
-          textAlign: "right",
-          color: dark ? base.light.light60 : base.dark.dark25,
-        }}
-      >
-        {progress * 100}%
-      </Text>
+      {editMode ? (
+        <Pressable onPress={edit}>
+          <WigglyEditIcon />
+        </Pressable>
+      ) : (
+        <Text
+          style={{
+            flex: 0.75,
+            textAlign: "right",
+            color: dark ? base.light.light60 : base.dark.dark25,
+          }}
+        >
+          {progress * 100}%
+        </Text>
+      )}
     </View>
   );
 };
