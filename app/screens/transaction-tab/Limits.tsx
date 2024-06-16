@@ -8,8 +8,9 @@ import { getCategories } from "@/app/utils/ServerCommunication";
 import { useTheme } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { Dimensions } from "react-native";
-import CategoryProgressBar from "../../components/CategoryProgressBar";
+import CategoryProgressBar from "../../components/one-row/CategoryProgressBar";
 import { FontNames, Fonts } from "../../constants/Fonts";
+import CancelIcon from "@/app/components/icons/CancelIcon";
 const screenWidth = Dimensions.get("window").width;
 
 const Limits = ({ navigation }) => {
@@ -113,7 +114,11 @@ const Limits = ({ navigation }) => {
             setEditMode(!editMode);
           }}
         >
-          <EditIcon tintColor={"#007aff"} size={30} />
+          {editMode ? (
+            <CancelIcon tintColor={"#007aff"} size={30} />
+          ) : (
+            <EditIcon tintColor={"#007aff"} size={30} />
+          )}
           <Text style={[Fonts[FontNames.BODY_3], { color: "#007aff" }]}>
             {editMode ? "Stop editting" : "Edit category"}
           </Text>

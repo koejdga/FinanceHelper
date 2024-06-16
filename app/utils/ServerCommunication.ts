@@ -31,3 +31,12 @@ export const addCategory = async (name: string, limit: number | undefined) => {
     return [];
   }
 };
+
+export const addAccount = async (name: string, amountOfMoney: number) => {
+  try {
+    const res = await axios.post("accounts/createAccount", {
+      name: name,
+      balance: amountOfMoney,
+    });
+  } catch (e) {}
+};

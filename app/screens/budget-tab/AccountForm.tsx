@@ -1,35 +1,24 @@
 import CustomButton from "@/app/components/buttons/CustomButton";
 import FormTextInput from "@/app/components/form-components/FormTextInput";
 import OneQuestion from "@/app/components/one-row/OneQuestion";
-import { addCategory } from "@/app/utils/ServerCommunication";
 import { useState } from "react";
 import { View } from "react-native";
 
-const AddCategoryForm = ({ route, navigation }) => {
+const AccountForm = ({ route }) => {
   const GAP_IN_QUESTION = 12;
   const [name, setName] = useState((route.params?.name as string) || "");
-  const [limit, setLimit] = useState<number | undefined>(
-    (route.params?.limit as number) || undefined
+  const [amountOfMoney, setAmountOfMoney] = useState<number | undefined>(
+    (route.params?.amountOfMoney as number) || undefined
   );
-  const editting = name || limit;
+  const editting = name || amountOfMoney;
 
-  const add = async () => {
-    try {
-      await addCategory(name, limit);
-      navigation.goBack();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const edit = async () => {
-    navigation.goBack();
-  };
+  const add = () => {};
+  const edit = () => {};
 
   return (
     <View style={{ marginTop: 30, gap: 24, flex: 1 }}>
       <OneQuestion
-        question={"Category name? For example, Food"}
+        question={"Account name? For example, Salary Card or Cash"}
         inputField={
           <FormTextInput
             value={name}
@@ -40,13 +29,11 @@ const AddCategoryForm = ({ route, navigation }) => {
         }
       />
       <OneQuestion
-        question={
-          "How much money would you like to spend on this category? (optional)"
-        }
+        question={"How much money do you have on that card?"}
         inputField={
           <FormTextInput
-            value={limit ? limit.toString() : ""}
-            onChangeText={(value) => setLimit(parseFloat(value))}
+            value={amountOfMoney ? amountOfMoney.toString() : ""}
+            onChangeText={(value) => setAmountOfMoney(parseFloat(value))}
             maxLength={25}
             style={{ marginHorizontal: 0, marginTop: GAP_IN_QUESTION }}
             keyboardType="decimal-pad"
@@ -56,11 +43,11 @@ const AddCategoryForm = ({ route, navigation }) => {
 
       <View style={{ flex: 1 }}></View>
       <CustomButton
-        title={editting ? "Edit category" : "Add category"}
+        title={editting ? "Edit account" : "Add account"}
         onPress={editting ? edit : add}
       />
     </View>
   );
 };
 
-export default AddCategoryForm;
+export default AccountForm;

@@ -1,9 +1,9 @@
 import { useTheme } from "@react-navigation/native";
 import { Pressable, Text, View } from "react-native";
 import * as Progress from "react-native-progress";
-import { base } from "../constants/Colors";
-import { FontNames, Fonts } from "../constants/Fonts";
-import WigglyEditIcon from "./icons/WigglyEditIcon";
+import { base } from "../../constants/Colors";
+import { FontNames, Fonts } from "../../constants/Fonts";
+import WigglyEditIcon from "../icons/WigglyEditIcon";
 
 type Props = {
   categoryName: string;
