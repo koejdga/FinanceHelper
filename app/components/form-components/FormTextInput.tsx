@@ -5,13 +5,12 @@ import { TextInput, TextInputProps, View } from "react-native";
 
 type Props = TextInputProps;
 
-const FormTextInput: React.FC<Props> = (props) => {
+export function FormTextInput(props: Props) {
   const { dark } = useTheme();
 
   return (
     <View style={[formStyles.textInputWrap, { marginBottom: 24 }, props.style]}>
       <TextInput
-          testID="input"
         spellCheck={false}
         placeholderTextColor={base.light.light20}
         {...props}

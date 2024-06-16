@@ -5,6 +5,7 @@ import {formContainerStyles} from "@/app/constants/Styles";
 import React, {useEffect} from "react";
 import {appAuth} from "@/firebaseConfig";
 import {sendEmailVerification} from "@firebase/auth";
+import {useIsFocused} from "@react-navigation/core";
 
 
 const EmailVerification = ({ navigation }) => {
@@ -16,6 +17,7 @@ const EmailVerification = ({ navigation }) => {
                     clearInterval(interval);
                     navigation.navigate("MainApp");
                 }
+                if(!useIsFocused()) clearInterval(interval);
             }
         )
         };
