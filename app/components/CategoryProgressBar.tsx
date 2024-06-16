@@ -31,7 +31,6 @@ const CategoryProgressBar: React.FC<Props> = ({ categoryName, progress }) => {
         flexDirection: "row",
         gap: 30,
         alignItems: "center",
-        marginLeft: 16,
       }}
     >
       <Text
@@ -52,7 +51,8 @@ const CategoryProgressBar: React.FC<Props> = ({ categoryName, progress }) => {
       />
       <Text
         style={{
-          flex: 1,
+          flex: 0.75,
+          textAlign: "right",
           color: dark ? base.light.light60 : base.dark.dark25,
         }}
       >

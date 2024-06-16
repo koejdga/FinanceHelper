@@ -17,7 +17,7 @@ const FormTextInput: React.FC<Props> = (props) => {
         style={[
           formStyles.textInput,
           { color: dark ? base.light.light80 : base.dark.dark100 },
-          props.style,
+          // props.style,
         ]}
       />
     </View>

@@ -13,6 +13,7 @@ import ChooseOneOptionButtons, {
   TransactionTabsOptions,
 } from "@/app/components/choose-one-option-buttons/ChooseOneOptionButtons";
 import AddTransactionButton from "@/app/components/buttons/AddTransactionButton";
+import { getCategories } from "@/app/utils/ServerCommunication";
 
 const TransactionTabs = ({ navigation }) => {
   const [selected, setSelected] = useState<string>(
@@ -87,14 +88,17 @@ const TransactionTabs = ({ navigation }) => {
         />
       )}
 
-      {selected === TransactionTabsOptions.LIMITS.toString() && <Limits />}
+      {selected === TransactionTabsOptions.LIMITS.toString() && (
+        <Limits navigation={navigation} />
+      )}
 
       {selected === TransactionTabsOptions.STATISTICS.toString() && (
         <Statistics />
       )}
 
       <AddTransactionButton
-        onPress={() => {
+        onPress={async () => {
+          await getCategories();
           navigation.navigate("AddFormGeneral");
         }}
       />
