@@ -6,80 +6,107 @@ import EditIcon from "@/app/components/icons/EditIcon";
 import OneCardRow from "@/app/components/one-row/OneCardRow";
 import { base } from "@/app/constants/Colors";
 import { FontNames, Fonts } from "@/app/constants/Fonts";
+import { getAllAccounts } from "@/app/utils/ServerCommunication";
 import { useTheme } from "@react-navigation/native";
-import { useState } from "react";
-import { Pressable, SafeAreaView, Text, View } from "react-native";
+import { useEffect, useState } from "react";
+import { Pressable, SafeAreaView, ScrollView, Text, View } from "react-native";
+import { useIsFocused } from "@react-navigation/native";
+
+export interface Account {
+  name: string;
+  balance: number;
+}
 
 const Accounts = ({ navigation }) => {
   const { dark } = useTheme();
   const [editMode, setEditMode] = useState(false);
+  const [accounts, setAccounts] = useState<Account[]>();
 
-  const mockData = [
-    { typeOfCard: "Card 1", amountOfMoney: 3000 },
-    { typeOfCard: "Cash", amountOfMoney: 134.5 },
-  ];
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    const init = async () => {
+      const accounts = await getAllAccounts();
+      setAccounts(accounts);
+    };
+
+    setEditMode(false);
+    init();
+  }, [isFocused]);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <Pressable style={{ flex: 1 }} onPress={() => setEditMode(false)}>
+      <Pressable
+        onPress={() => setEditMode(false)}
+        style={{
+          flexDirection: "row",
+          justifyContent: "center",
+          width: "100%",
+          alignItems: "center",
+          marginTop: 3,
+          marginBottom: 5,
+        }}
+      >
+        <Text
+          style={[
+            Fonts[FontNames.TITLE_2],
+            { color: dark ? base.light.light80 : base.dark.dark100 },
+          ]}
+        >
+          Accounts
+        </Text>
         <View
           style={{
             flexDirection: "row",
-            justifyContent: "center",
-            width: "100%",
-            alignItems: "center",
-            marginTop: 3,
-            marginBottom: 5,
+            position: "absolute",
+            right: 15,
+            gap: 5,
           }}
         >
+          <Pressable onPress={() => setEditMode(!editMode)}>
+            {editMode ? <CancelIcon /> : <EditIcon />}
+          </Pressable>
+          <Pressable
+            onPress={() => {
+              navigation.push("AddAccountForm");
+            }}
+          >
+            <AddIcon />
+          </Pressable>
+        </View>
+      </Pressable>
+      <Separator />
+
+      <IncomeExpenseTotal income={15500} expense={4878.5} />
+      <Separator />
+      <ScrollView>
+        {accounts && accounts.length <= 0 && (
           <Text
             style={[
-              Fonts[FontNames.TITLE_2],
-              { color: dark ? base.light.light80 : base.dark.dark100 },
+              Fonts[FontNames.BODY_3],
+              { textAlign: "center", marginTop: 10 },
             ]}
           >
-            Accounts
+            No accounts yet
           </Text>
-          <View
-            style={{
-              flexDirection: "row",
-              position: "absolute",
-              right: 15,
-              gap: 5,
-            }}
-          >
-            <Pressable onPress={() => setEditMode(!editMode)}>
-              {editMode ? <CancelIcon /> : <EditIcon />}
-            </Pressable>
-            <Pressable
-              onPress={() => {
-                navigation.push("AddAccountForm");
+        )}
+
+        {accounts &&
+          accounts.map((account, index) => (
+            <OneCardRow
+              typeOfCard={account.name}
+              amountOfMoney={account.balance}
+              editMode={editMode}
+              edit={() => {
+                navigation.push("EditAccountForm", {
+                  name: account.name,
+                  amountOfMoney: account.balance,
+                });
               }}
-            >
-              <AddIcon />
-            </Pressable>
-          </View>
-        </View>
-        <Separator />
-
-        <IncomeExpenseTotal income={15500} expense={4878.5} />
-        <Separator />
-
-        {mockData.map((row, index) => (
-          <OneCardRow
-            typeOfCard={row.typeOfCard}
-            amountOfMoney={row.amountOfMoney}
-            editMode={editMode}
-            edit={() => {
-              navigation.push("EditAccountForm", {
-                name: row.typeOfCard,
-                amountOfMoney: row.amountOfMoney,
-              });
-            }}
-            key={"oneCardRow" + index}
-          />
-        ))}
-      </Pressable>
+              key={"oneCardRow" + index}
+            />
+          ))}
+      </ScrollView>
     </SafeAreaView>
   );
 };

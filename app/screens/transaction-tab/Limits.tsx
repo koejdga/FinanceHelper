@@ -4,7 +4,7 @@ import { PieChart } from "react-native-chart-kit";
 import AddIcon from "@/app/components/icons/AddIcon";
 import EditIcon from "@/app/components/icons/EditIcon";
 import { base } from "@/app/constants/Colors";
-import { getCategories } from "@/app/utils/ServerCommunication";
+import { getAllCategories } from "@/app/utils/ServerCommunication";
 import { useTheme } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { Dimensions } from "react-native";
@@ -34,7 +34,7 @@ const Limits = ({ navigation }) => {
   ];
   useEffect(() => {
     const init = async () => {
-      categories = await getCategories();
+      // categories = await getAllCategories();
       categories = [
         { categoryName: "Food", progress: 0.3, limit: 4000 },
         { categoryName: "Clothes", progress: 0.6, limit: 10000 },

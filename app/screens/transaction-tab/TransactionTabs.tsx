@@ -13,7 +13,7 @@ import ChooseOneOptionButtons, {
   TransactionTabsOptions,
 } from "@/app/components/choose-one-option-buttons/ChooseOneOptionButtons";
 import AddTransactionButton from "@/app/components/buttons/AddTransactionButton";
-import { getCategories } from "@/app/utils/ServerCommunication";
+import { getAllCategories } from "@/app/utils/ServerCommunication";
 
 const TransactionTabs = ({ navigation }) => {
   const [selected, setSelected] = useState<string>(
@@ -98,7 +98,7 @@ const TransactionTabs = ({ navigation }) => {
 
       <AddTransactionButton
         onPress={async () => {
-          await getCategories();
+          await getAllCategories();
           navigation.navigate("AddFormGeneral");
         }}
       />

@@ -1,18 +1,26 @@
 import CustomButton from "@/app/components/buttons/CustomButton";
 import FormTextInput from "@/app/components/form-components/FormTextInput";
 import OneQuestion from "@/app/components/one-row/OneQuestion";
-import { useState } from "react";
+import { addAccount } from "@/app/utils/ServerCommunication";
+import { useEffect, useState } from "react";
 import { View } from "react-native";
 
-const AccountForm = ({ route }) => {
+const AccountForm = ({ route, navigation }) => {
   const GAP_IN_QUESTION = 12;
   const [name, setName] = useState((route.params?.name as string) || "");
-  const [amountOfMoney, setAmountOfMoney] = useState<number | undefined>(
+  const [balance, setBalance] = useState<number | undefined>(
     (route.params?.amountOfMoney as number) || undefined
   );
-  const editting = name || amountOfMoney;
 
-  const add = () => {};
+  let editting = false;
+  useEffect(() => {
+    editting = (name === undefined || balance === undefined) as boolean;
+  }, []);
+
+  const add = async () => {
+    await addAccount(name, balance);
+    navigation.navigate("Accounts");
+  };
   const edit = () => {};
 
   return (
@@ -29,11 +37,11 @@ const AccountForm = ({ route }) => {
         }
       />
       <OneQuestion
-        question={"How much money do you have on that card?"}
+        question={"How much money do you have on this account?"}
         inputField={
           <FormTextInput
-            value={amountOfMoney ? amountOfMoney.toString() : ""}
-            onChangeText={(value) => setAmountOfMoney(parseFloat(value))}
+            value={balance ? balance.toString() : ""}
+            onChangeText={(value) => setBalance(parseFloat(value))}
             maxLength={25}
             style={{ marginHorizontal: 0, marginTop: GAP_IN_QUESTION }}
             keyboardType="decimal-pad"
