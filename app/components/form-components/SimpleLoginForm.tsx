@@ -4,8 +4,7 @@ import {
   passwordChecker,
 } from "@/app/utils/validation-scripts/login-validation";
 import { useState } from "react";
-import { Alert, View } from "react-native";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
+import {Alert, ScrollView, View} from "react-native";
 import CustomButton from "../buttons/CustomButton";
 import FormTextInput from "@/app/components/form-components/FormTextInput";
 
@@ -29,7 +28,7 @@ export function SimpleLoginForm(props: LoginFormProps) {
   };
 
   return (
-    <GestureHandlerRootView>
+    <ScrollView>
       <View>
         <FormTextInput
           keyboardType="email-address"
@@ -44,6 +43,6 @@ export function SimpleLoginForm(props: LoginFormProps) {
           }}
         />
       </View>
-    </GestureHandlerRootView>
+    </ScrollView>
   );
 }
