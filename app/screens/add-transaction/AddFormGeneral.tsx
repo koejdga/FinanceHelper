@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useEffect, useState } from "react";
-import AddTransactionForm from "./AddTransactionForm";
+import AddTransactionForm from "./TransactionForm";
 import AddTransferForm from "./AddTransferForm";
 import EmptyScreen from "../EmptyScreen";
 import ChooseTransaction from "@/app/components/choose-one-option-buttons/ChooseTransaction";

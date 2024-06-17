@@ -13,6 +13,7 @@ import { Pressable, SafeAreaView, ScrollView, Text, View } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 
 export interface Account {
+  id: string;
   name: string;
   balance: number;
 }
