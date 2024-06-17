@@ -6,6 +6,7 @@ axios.defaults.baseURL = "https://serverfinancehelper.onrender.com/api/";
 
 axios.interceptors.request.use(async function (config) {
   const token = await appAuth.currentUser.getIdToken();
+  // console.log(token);
   config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
@@ -27,8 +28,22 @@ axios.interceptors.response.use(
 
 export const getAllCategories = async () => {
   try {
-    const res = await axios.get("users/getAllCategories");
-    return [];
+    const res = await axios.get(`expenseCategory/AllCategories/${6}/${2024}`);
+    return res.data.map(
+      (c: {
+        categoryId: string;
+        categoryName: string;
+        currentExpense: number;
+        limit: number;
+        percentageSpent: number;
+      }) => ({
+        categoryId: c.categoryId,
+        categoryName: c.categoryName,
+        currentExpense: c.currentExpense,
+        limit: c.limit,
+        percentageSpent: c.percentageSpent,
+      })
+    );
   } catch (e) {
     return [];
   }
@@ -36,7 +51,10 @@ export const getAllCategories = async () => {
 
 export const addCategory = async (name: string, limit: number | undefined) => {
   try {
-    const res = await axios.get("users/getAllCategories");
+    await axios.post("expenseCategory/createExpenseCategory", {
+      name: name,
+      limit: limit,
+    });
   } catch (e) {}
 };
 

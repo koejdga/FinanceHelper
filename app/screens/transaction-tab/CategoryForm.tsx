@@ -2,7 +2,7 @@ import CustomButton from "@/app/components/buttons/CustomButton";
 import FormTextInput from "@/app/components/form-components/FormTextInput";
 import OneQuestion from "@/app/components/one-row/OneQuestion";
 import { addCategory } from "@/app/utils/ServerCommunication";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { View } from "react-native";
 
 const AddCategoryForm = ({ route, navigation }) => {
@@ -11,7 +11,11 @@ const AddCategoryForm = ({ route, navigation }) => {
   const [limit, setLimit] = useState<number | undefined>(
     (route.params?.limit as number) || undefined
   );
-  const editting = name || limit;
+
+  let editting = false;
+  useEffect(() => {
+    editting = (name === undefined || limit === undefined) as boolean;
+  }, []);
 
   const add = async () => {
     try {
