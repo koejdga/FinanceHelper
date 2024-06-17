@@ -4,7 +4,10 @@ import EmailVerification from "@/app/screens/login-signup/EmailVerification";
 jest.mock('@/firebaseConfig', () =>
     ({ appAuth: {
         currentUser: {
-            emailVerified: true
+            emailVerified: true,
+            reload: () => {
+                return new Promise(() => {})
+            }
         }
         }}));
 jest.mock('@firebase/auth', () =>

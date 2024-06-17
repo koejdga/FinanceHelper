@@ -12,8 +12,15 @@ jest.mock('@/firebaseConfig', () => {
     }
 });
 import {sendPasswordResetEmail} from '@firebase/auth';
+import {UserEventInstance} from "@testing-library/react-native/build/user-event/setup";
 
 describe('ForgotPassword', () => {
+    let user: UserEventInstance;
+    beforeAll(() => {
+        user = userEvent.setup({ delay: null });
+        jest.useFakeTimers();
+    })
+
     it('Renders successfully', () => {
         let form = render(<ForgotPassword navigation={jest.fn()}/>);
         expect(form).toBeDefined();
@@ -24,8 +31,8 @@ describe('ForgotPassword', () => {
         const input = form.getByPlaceholderText("Email");
         const button = form.getByRole("button");
         let email = "someEmail@gmail.com";
-        await userEvent.type(input, email);
-        await userEvent.press(button);
+        await user.type(input, email);
+        await user.press(button);
         expect(sendPasswordResetEmail).toHaveBeenCalled();
         expect(sendPasswordResetEmail).toHaveBeenCalledWith(null, email);
     });
