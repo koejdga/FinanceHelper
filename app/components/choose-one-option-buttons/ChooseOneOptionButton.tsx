@@ -26,8 +26,6 @@ const ChooseOneOptionButton = <T,>({
       style={style}
       onPress={() => {
         setSelected(option);
-        console.log("option");
-        console.log(option);
       }}
       onLayout={(event) => {
         const { x, width } = event.nativeEvent.layout;

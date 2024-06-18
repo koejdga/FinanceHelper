@@ -67,9 +67,11 @@ const App = () => {
           options={{ headerShown: true, headerTitle: "Forgot Password" }}
         />
         <Stack.Screen name="EmailOnTheWay" component={EmailOnTheWay} />
-        <Stack.Screen name="EmailVerification"
-                      component={EmailVerification}
-                      options={{ headerShown: true, headerTitle: "Verify email" }}/>
+        <Stack.Screen
+          name="EmailVerification"
+          component={EmailVerification}
+          options={{ headerShown: true, headerTitle: "Verify email" }}
+        />
         <Stack.Screen name="MainApp" component={MainApp} />
       </Stack.Navigator>
     </NavigationContainer>

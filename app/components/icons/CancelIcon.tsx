@@ -5,14 +5,14 @@ type Props = {
   tintColor?: ColorValue;
 };
 
-const EditIcon: React.FC<Props> = ({ size = 30, tintColor }) => {
+const CancelIcon: React.FC<Props> = ({ size = 30, tintColor }) => {
   return (
     <Image
       tintColor={tintColor}
       style={{ width: size, height: size }}
-      source={require("@/app/assets/images/icons/edit.png")}
+      source={require("@/app/assets/images/icons/x.png")}
     ></Image>
   );
 };
 
-export default EditIcon;
+export default CancelIcon;
