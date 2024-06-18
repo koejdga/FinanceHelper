@@ -1,11 +1,11 @@
 import CustomButton from "@/app/components/buttons/CustomButton";
 import FormTextInput from "@/app/components/form-components/FormTextInput";
 import OneQuestion from "@/app/components/one-row/OneQuestion";
-import { addCategory } from "@/app/utils/ServerCommunication";
+import { addExpenseCategory } from "@/app/utils/ServerCommunication";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
 
-const AddCategoryForm = ({ route, navigation }) => {
+const ExpenseCategoryForm = ({ route, navigation }) => {
   const GAP_IN_QUESTION = 12;
   const [name, setName] = useState((route.params?.name as string) || "");
   const [limit, setLimit] = useState<number | undefined>(
@@ -19,7 +19,7 @@ const AddCategoryForm = ({ route, navigation }) => {
 
   const add = async () => {
     try {
-      await addCategory(name, limit);
+      await addExpenseCategory(name, limit);
       navigation.goBack();
     } catch (error) {
       console.log(error);
@@ -67,4 +67,4 @@ const AddCategoryForm = ({ route, navigation }) => {
   );
 };
 
-export default AddCategoryForm;
+export default ExpenseCategoryForm;

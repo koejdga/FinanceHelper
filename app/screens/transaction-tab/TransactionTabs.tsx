@@ -35,9 +35,7 @@ const TransactionTabs = ({ navigation }) => {
 
   useEffect(() => {
     const init = async () => {
-      console.log("init");
       const transactionsInfo = await getAllTransactions(monthNumber, year);
-      console.log(transactionsInfo.transactions);
       setTransactions(transactionsInfo.transactions);
       setAmountIncome(transactionsInfo.amountIncome);
       setAmountExpense(transactionsInfo.amountExpense);
@@ -78,7 +76,11 @@ const TransactionTabs = ({ navigation }) => {
 
       {selected === TransactionTabsOptions.DAILY.toString() && (
         <>
-          <IncomeExpenseTotal income={amountIncome} expense={amountExpense} />
+          <IncomeExpenseTotal
+            income={amountIncome}
+            expense={amountExpense}
+            total={total}
+          />
           <Separator />
         </>
       )}

@@ -78,7 +78,10 @@ const Accounts = ({ navigation }) => {
       </Pressable>
       <Separator />
 
-      <IncomeExpenseTotal income={15500} expense={4878.5} />
+      <IncomeExpenseTotal
+        total={accounts?.reduce((a, b) => a + b.balance, 0) || 0}
+        onlyTotal
+      />
       <Separator />
       <ScrollView>
         {accounts && accounts.length <= 0 && (

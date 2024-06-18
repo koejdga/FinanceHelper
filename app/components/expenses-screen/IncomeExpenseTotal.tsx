@@ -12,11 +12,18 @@ import { convertNumberToMoney } from "../../utils/Utils";
 import { useTheme } from "@react-navigation/native";
 
 type Props = {
-  income: number;
-  expense: number;
+  income?: number;
+  expense?: number;
+  total: number;
+  onlyTotal?: boolean;
 };
 
-const IncomeExpenseTotal: React.FC<Props> = ({ income, expense }) => {
+const IncomeExpenseTotal: React.FC<Props> = ({
+  income,
+  expense,
+  total,
+  onlyTotal = false,
+}) => {
   const { dark } = useTheme();
   const styles = StyleSheet.create({
     title: {
@@ -42,28 +49,32 @@ const IncomeExpenseTotal: React.FC<Props> = ({ income, expense }) => {
         justifyContent: "space-evenly",
       }}
     >
-      <View style={{ alignItems: "center" }}>
-        <Text style={styles.title}>Income</Text>
-        <Text
-          style={[
-            Fonts[FontNames.BODY_3],
-            { color: dark ? IncomeLight : IncomeDark },
-          ]}
-        >
-          {convertNumberToMoney(income)}
-        </Text>
-      </View>
-      <View style={{ alignItems: "center" }}>
-        <Text style={styles.title}>Expense</Text>
-        <Text
-          style={[
-            Fonts[FontNames.BODY_3],
-            { color: dark ? ExpenseLight : ExpenseDark },
-          ]}
-        >
-          {convertNumberToMoney(expense)}
-        </Text>
-      </View>
+      {!onlyTotal && (
+        <>
+          <View style={{ alignItems: "center" }}>
+            <Text style={styles.title}>Income</Text>
+            <Text
+              style={[
+                Fonts[FontNames.BODY_3],
+                { color: dark ? IncomeLight : IncomeDark },
+              ]}
+            >
+              {convertNumberToMoney(income)}
+            </Text>
+          </View>
+          <View style={{ alignItems: "center" }}>
+            <Text style={styles.title}>Expense</Text>
+            <Text
+              style={[
+                Fonts[FontNames.BODY_3],
+                { color: dark ? ExpenseLight : ExpenseDark },
+              ]}
+            >
+              {convertNumberToMoney(expense)}
+            </Text>
+          </View>
+        </>
+      )}
       <View style={{ alignItems: "center" }}>
         <Text style={styles.title}>Total</Text>
         <Text
@@ -72,7 +83,7 @@ const IncomeExpenseTotal: React.FC<Props> = ({ income, expense }) => {
             { color: dark ? base.light.light80 : base.dark.dark100 },
           ]}
         >
-          {convertNumberToMoney(income - expense)}
+          {convertNumberToMoney(total)}
         </Text>
       </View>
     </View>

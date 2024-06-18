@@ -5,7 +5,8 @@ import EditIcon from "@/app/components/icons/EditIcon";
 import { base } from "@/app/constants/Colors";
 import {
   deleteCategory,
-  getAllCategories,
+  getAllExpenseCategories,
+  getAllIncomeCategories,
 } from "@/app/utils/ServerCommunication";
 import { useIsFocused, useTheme } from "@react-navigation/native";
 import { useEffect, useState } from "react";
@@ -14,6 +15,7 @@ import CategoryProgressBar from "../../components/one-row/CategoryProgressBar";
 import { FontNames, Fonts } from "../../constants/Fonts";
 import CancelIcon from "@/app/components/icons/CancelIcon";
 import { appAuth } from "@/firebaseConfig";
+import MoneyIcon from "@/app/components/icons/MoneyIcon";
 const screenWidth = Dimensions.get("window").width;
 
 export interface Category {
@@ -28,11 +30,21 @@ const Limits = ({ navigation }) => {
   const { dark } = useTheme();
   const [editMode, setEditMode] = useState(false);
   const [categories, setCategories] = useState<Category[]>();
+  const [showIncomeCategories, setShowIncomeCategories] = useState(false);
   const isFocused = useIsFocused();
 
   useEffect(() => {
     const init = async () => {
-      const categories = await getAllCategories();
+      let categories: Category[];
+      if (showIncomeCategories) {
+        categories = await getAllIncomeCategories();
+      } else {
+        categories = await getAllExpenseCategories(
+          new Date().getMonth() + 1,
+          new Date().getFullYear()
+        );
+      }
+
       const sortedCategories = categories.sort((a: Category, b: Category) => {
         if (a.limit === undefined && b.limit !== undefined) {
           return 1;
@@ -46,7 +58,7 @@ const Limits = ({ navigation }) => {
       setCategories(sortedCategories);
     };
     init();
-  }, [isFocused]);
+  }, [isFocused, showIncomeCategories]);
 
   // TODO: remove later
   useEffect(() => {
@@ -108,6 +120,11 @@ const Limits = ({ navigation }) => {
             marginBottom: 30,
           }}
         >
+          <Text
+            style={[Fonts[FontNames.BODY_1], { color: base.light.light40 }]}
+          >
+            {showIncomeCategories ? "Income" : "Expense"}
+          </Text>
           {categories &&
             categories.map((category, index) => (
               <CategoryProgressBar
@@ -142,12 +159,16 @@ const Limits = ({ navigation }) => {
               gap: 5,
             }}
             onPress={() => {
-              navigation.navigate("AddCategoryForm");
+              if (showIncomeCategories) {
+                navigation.navigate("AddIncomeCategoryForm");
+              } else {
+                navigation.navigate("AddExpenseCategoryForm");
+              }
             }}
           >
             <AddIcon tintColor={"#007aff"} size={30} />
             <Text style={[Fonts[FontNames.BODY_3], { color: "#007aff" }]}>
-              Add category
+              Add {showIncomeCategories ? "income" : "expense"} category
             </Text>
           </Pressable>
 
@@ -168,6 +189,22 @@ const Limits = ({ navigation }) => {
             )}
             <Text style={[Fonts[FontNames.BODY_3], { color: "#007aff" }]}>
               {editMode ? "Stop editting" : "Edit category"}
+            </Text>
+          </Pressable>
+
+          <Pressable
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              gap: 5,
+            }}
+            onPress={() => {
+              setShowIncomeCategories(!showIncomeCategories);
+            }}
+          >
+            <MoneyIcon tintColor={"#007aff"} size={30} />
+            <Text style={[Fonts[FontNames.BODY_3], { color: "#007aff" }]}>
+              Show {showIncomeCategories ? "expense" : "income"} categories
             </Text>
           </Pressable>
         </View>

@@ -11,7 +11,7 @@ import { Category } from "../transaction-tab/Limits";
 import {
   addExpense,
   getAllAccounts,
-  getAllCategories,
+  getAllExpenseCategories,
 } from "@/app/utils/ServerCommunication";
 import { Account } from "../budget-tab/Accounts";
 
@@ -35,7 +35,7 @@ const AddTransactionForm = ({ route, navigation }) => {
 
   useEffect(() => {
     const init = async () => {
-      const categories = await getAllCategories(isIncome);
+      const categories = await getAllExpenseCategories(isIncome);
       const sortedCategories = categories.sort((a: Category, b: Category) => {
         if (a.limit === undefined && b.limit !== undefined) {
           return 1;

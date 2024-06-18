@@ -1,7 +1,8 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import TransactionTabs from "./TransactionTabs";
 import AddFormGeneral from "../add-transaction/AddFormGeneral";
-import CategoryForm from "./CategoryForm";
+import ExpenseCategoryForm from "./ExpenseCategoryForm";
+import IncomeCategoryForm from "./IncomeCategoryForm";
 
 const Stack = createNativeStackNavigator();
 
@@ -17,14 +18,27 @@ const Transaction = () => {
       <Stack.Screen name="AddFormGeneral" component={AddFormGeneral} />
 
       <Stack.Screen
-        name="AddCategoryForm"
-        component={CategoryForm}
+        name="AddExpenseCategoryForm"
+        component={ExpenseCategoryForm}
         options={{ headerTitle: "New Category" }}
         initialParams={{ isIncome: true }}
       />
       <Stack.Screen
-        name="EditCategoryForm"
-        component={CategoryForm}
+        name="EditExpenseCategoryForm"
+        component={ExpenseCategoryForm}
+        options={{ headerTitle: "Edit Category" }}
+        initialParams={{ isIncome: false }}
+      />
+
+      <Stack.Screen
+        name="AddIncomeCategoryForm"
+        component={IncomeCategoryForm}
+        options={{ headerTitle: "New Category" }}
+        initialParams={{ isIncome: true }}
+      />
+      <Stack.Screen
+        name="EditIncomeCategoryForm"
+        component={IncomeCategoryForm}
         options={{ headerTitle: "Edit Category" }}
         initialParams={{ isIncome: false }}
       />

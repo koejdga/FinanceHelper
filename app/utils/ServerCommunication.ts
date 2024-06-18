@@ -26,12 +26,10 @@ axios.interceptors.response.use(
   }
 );
 
-export const getAllCategories = async (incomeCategories = false) => {
+export const getAllExpenseCategories = async (month: number, year: number) => {
   try {
     const res = await axios.get(
-      `${
-        incomeCategories ? "income" : "expense"
-      }Category/AllCategories/${6}/${2024}`
+      `expenseCategory/AllCategories/${month}/${year}`
     );
     return res.data.map(
       (c: {
@@ -53,13 +51,43 @@ export const getAllCategories = async (incomeCategories = false) => {
   }
 };
 
-export const addCategory = async (name: string, limit: number | undefined) => {
+export const getAllIncomeCategories = async () => {
+  try {
+    const res = await axios.get("incomeCategory/AllCategories");
+    return res.data.data.map((c: { _id: string; name: string }) => ({
+      categoryId: c._id,
+      categoryName: c.name,
+    }));
+  } catch (e) {
+    console.log(e);
+    return [];
+  }
+};
+
+export const addExpenseCategory = async (
+  name: string,
+  limit: number | undefined
+) => {
   try {
     await axios.post("expenseCategory/createExpenseCategory", {
       name: name,
       limit: limit,
     });
   } catch (e) {}
+};
+
+export const addIncomeCategory = async (name: string): Promise<boolean> => {
+  try {
+    await axios.post("incomeCategory/createIncomeCategory", {
+      name: name,
+    });
+    return true;
+  } catch (e) {
+    const err = e as AxiosError;
+    const obj = JSON.parse(err.request._response);
+    console.log("Error response message:", obj.message);
+    return false;
+  }
 };
 
 export const getAllAccounts = async (): Promise<Account[]> => {
