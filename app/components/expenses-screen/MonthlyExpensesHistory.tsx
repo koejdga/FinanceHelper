@@ -43,6 +43,7 @@ const MonthlyExpensesHistory: React.FC<Props> = ({ year }) => {
       <IncomeExpenseTotal
         income={yearInfo?.expenseTotal || 0}
         expense={yearInfo?.incomeTotal || 0}
+        total={yearInfo?.incomeTotal - yearInfo?.expenseTotal || 0}
       />
       <Separator />
       {monthSummaries.map((monthSummary, index) => (

@@ -1,14 +1,18 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useEffect, useState } from "react";
-import AddTransactionForm from "./TransactionForm";
+import TransactionForm from "./TransactionForm";
 import AddTransferForm from "./AddTransferForm";
 import EmptyScreen from "../EmptyScreen";
 import ChooseTransaction from "@/app/components/choose-one-option-buttons/ChooseTransaction";
 import { TransactionOptions } from "@/app/components/choose-one-option-buttons/ChooseOneOptionButtons";
+import { Transaction } from "@/app/utils/ServerCommunication";
 
 const Stack = createNativeStackNavigator();
 
-const AddFormGeneral = ({ navigation }) => {
+const AddFormGeneral = ({ route, navigation }) => {
+  const month = route.params?.month as number;
+  const year = route.params?.year as number;
+
   const [selected, setSelected] = useState<string>(
     TransactionOptions.INCOME.toString()
   );
@@ -27,14 +31,19 @@ const AddFormGeneral = ({ navigation }) => {
       <Stack.Screen name="Launch" component={EmptyScreen} />
       <Stack.Screen
         name={TransactionOptions.INCOME}
-        component={AddTransactionForm}
+        component={TransactionForm}
         initialParams={{ isIncome: true }}
       />
 
       <Stack.Screen
         name={TransactionOptions.EXPENSE}
-        component={AddTransactionForm}
-        initialParams={{ isIncome: false }}
+        component={TransactionForm}
+        initialParams={{
+          isIncome: false,
+          transaction: route.params?.transaction as Transaction,
+          month: month,
+          year: year,
+        }}
       />
       <Stack.Screen
         name={TransactionOptions.TRANSFER}

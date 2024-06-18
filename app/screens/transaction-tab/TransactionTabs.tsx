@@ -86,7 +86,12 @@ const TransactionTabs = ({ navigation }) => {
       )}
 
       {selected === TransactionTabsOptions.DAILY.toString() && (
-        <DailyExpensesHistory transactions={transactions} />
+        <DailyExpensesHistory
+          transactions={transactions}
+          navigation={navigation}
+          month={monthNumber}
+          year={year}
+        />
       )}
 
       {selected === TransactionTabsOptions.MONTHLY.toString() && (
@@ -103,7 +108,7 @@ const TransactionTabs = ({ navigation }) => {
 
       <AddTransactionButton
         onPress={async () => {
-          navigation.navigate("AddFormGeneral");
+          navigation.navigate("FormGeneral");
         }}
       />
     </SafeAreaView>

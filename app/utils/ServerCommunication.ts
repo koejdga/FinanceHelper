@@ -23,6 +23,8 @@ axios.interceptors.response.use(
     const url = err.request.responseURL as string;
     const path = url.replace(axios.defaults.baseURL, "");
     console.log("ERROR: error at path", path);
+    const obj = JSON.parse(err.request._response);
+    console.log("Error response message:", obj.message);
     return Promise.reject(error);
   }
 );
@@ -75,7 +77,6 @@ export const getAllExpenseCategoriesByDate = async (
       })
     );
 
-    console.log(res.data);
     return {
       categoriesWithLimits,
       categoriesWithoutLimits,
@@ -90,27 +91,13 @@ export const getAllExpenseCategoriesByDate = async (
   }
 };
 
-export const getAllExpenseCategories = async () => {
+export const getAllExpenseCategories = async (): Promise<Category[]> => {
   try {
-    console.log("gettttt");
     const res = await axios.get("expenseCategory/AllCategories");
-    console.log(res.data);
-    return [];
-    return res.data.map(
-      (c: {
-        categoryId: string;
-        categoryName: string;
-        currentExpense: number;
-        limit: number;
-        percentageSpent: number;
-      }) => ({
-        categoryId: c.categoryId,
-        categoryName: c.categoryName,
-        currentExpense: c.currentExpense,
-        limit: c.limit,
-        percentageSpent: c.percentageSpent,
-      })
-    );
+    return res.data.data.map((c: { _id: string; name: string }) => ({
+      categoryId: c._id,
+      categoryName: c.name,
+    }));
   } catch (e) {
     return [];
   }
@@ -195,15 +182,12 @@ export const editAccount = async (
   balance: number
 ): Promise<boolean> => {
   try {
-    console.log("account id:", accountId);
     await axios.put(`accounts/updateAccount/${accountId}`, {
       name: name,
       balance: balance,
     });
     return true;
   } catch (e) {
-    const err = e as AxiosError;
-    // console.log(err.request);
     return false;
   }
 };
@@ -283,13 +267,56 @@ export const addIncome = async (
   }
 };
 
+export const addTransfer = async (
+  amount: number,
+  date: Date,
+  fromAccountId: string,
+  toAccountId: string
+): Promise<boolean> => {
+  try {
+    await axios.post("transfer/createTransfer", {
+      amount: amount,
+      date: date.toJSON(),
+      fromAccountId: fromAccountId,
+      toAccountId: toAccountId,
+    });
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
+
+export const updateTransaction = async (
+  expenseId: string,
+  categoryId: string,
+  accountId: string,
+  date: Date,
+  amount: number,
+  note: string
+): Promise<boolean> => {
+  try {
+    await axios.put(`expense/updateExpense/${expenseId}`, {
+      categoryId: categoryId,
+      date: date.toJSON(),
+      note: note,
+      amount: amount,
+      account: accountId,
+    });
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
+
 export interface Transaction {
+  id: string;
   date: number;
   dayOfWeek: number;
   category: string;
   amount: number;
   account: string;
   type: string;
+  note: string;
 }
 
 export const getAllTransactions = async (
@@ -311,12 +338,14 @@ export const getAllTransactions = async (
       amountExpense: res.data.amount_expense,
       total: res.data.total,
       transactions: res.data.transactions.map((t) => ({
+        id: t.transactionId,
         date: t.date,
         dayOfWeek: t.dayOfWeek,
         category: t.category,
         amount: t.amount,
         account: t.account,
         type: t.type,
+        note: t.note,
       })),
     };
 
@@ -377,6 +406,19 @@ export const deleteAccount = async (accountId: string): Promise<boolean> => {
     const err = e as AxiosError;
     const obj = JSON.parse(err.request._response);
     console.log("Error response message:", obj.message);
+    return false;
+  }
+};
+
+export const deleteTransaction = async (
+  transactionId: string,
+  isIncome: boolean
+): Promise<boolean> => {
+  try {
+    if (isIncome) await axios.delete(`income/deleteIncome/${transactionId}`);
+    else await axios.delete(`expense/deleteExpense/${transactionId}`);
+    return true;
+  } catch (e) {
     return false;
   }
 };

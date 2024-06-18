@@ -19,7 +19,7 @@ import MoneyIcon from "@/app/components/icons/MoneyIcon";
 const screenWidth = Dimensions.get("window").width;
 
 export interface Category {
-  categoryId: string;
+  id: string;
   categoryName: string;
   currentExpense?: number;
   limit?: number;
@@ -144,19 +144,17 @@ const Limits = ({ navigation }) => {
                       ? "EditIncomeCategoryForm"
                       : "EditExpenseCategoryForm",
                     {
-                      categoryId: category.categoryId,
+                      categoryId: category.id,
                       name: category.categoryName,
                       limit: category.limit,
                     }
                   );
                 }}
                 deleteFunction={async () => {
-                  const deleted = await deleteCategory(category.categoryId);
+                  const deleted = await deleteCategory(category.id);
                   if (deleted)
                     setCategories(
-                      categories.filter(
-                        (c) => c.categoryId !== category.categoryId
-                      )
+                      categories.filter((c) => c.id !== category.id)
                     );
                 }}
                 key={"categoryProgressBar" + index}
@@ -171,9 +169,9 @@ const Limits = ({ navigation }) => {
             }}
             onPress={() => {
               if (showIncomeCategories) {
-                navigation.navigate("AddIncomeCategoryForm");
+                navigation.navigate("IncomeCategoryForm");
               } else {
-                navigation.navigate("AddExpenseCategoryForm");
+                navigation.navigate("ExpenseCategoryForm");
               }
             }}
           >

@@ -1,8 +1,10 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import TransactionTabs from "./TransactionTabs";
-import AddFormGeneral from "../add-transaction/AddFormGeneral";
+import FormGeneral from "../add-transaction/FormGeneral";
+import TransactionForm from "../add-transaction/TransactionForm";
 import ExpenseCategoryForm from "./ExpenseCategoryForm";
+import FullScreenTransaction from "./FullScreenTransaction";
 import IncomeCategoryForm from "./IncomeCategoryForm";
+import TransactionTabs from "./TransactionTabs";
 
 const Stack = createNativeStackNavigator();
 
@@ -15,28 +17,29 @@ const Transaction = () => {
         options={{ headerShown: false, headerTitle: "Home" }}
       />
 
-      <Stack.Screen name="AddFormGeneral" component={AddFormGeneral} />
-
+      <Stack.Screen name="FormGeneral" component={FormGeneral} />
       <Stack.Screen
-        name="AddExpenseCategoryForm"
-        component={ExpenseCategoryForm}
-        options={{ headerTitle: "New Category" }}
-      />
-      <Stack.Screen
-        name="EditExpenseCategoryForm"
-        component={ExpenseCategoryForm}
-        options={{ headerTitle: "Edit Category" }}
+        name="EditExpenseForm"
+        component={TransactionForm}
+        options={{ headerTitle: "Edit Expense" }}
       />
 
       <Stack.Screen
-        name="AddIncomeCategoryForm"
+        name="ExpenseCategoryForm"
+        component={ExpenseCategoryForm}
+        options={{ headerTitle: "New Category" }}
+      />
+
+      <Stack.Screen
+        name="IncomeCategoryForm"
         component={IncomeCategoryForm}
         options={{ headerTitle: "New Category" }}
       />
+
       <Stack.Screen
-        name="EditIncomeCategoryForm"
-        component={IncomeCategoryForm}
-        options={{ headerTitle: "Edit Category" }}
+        name="FullScreenTransaction"
+        component={FullScreenTransaction}
+        options={{ headerTitle: "Full Info" }}
       />
     </Stack.Navigator>
   );
