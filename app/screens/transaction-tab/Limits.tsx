@@ -3,7 +3,10 @@ import { PieChart } from "react-native-chart-kit";
 import AddIcon from "@/app/components/icons/AddIcon";
 import EditIcon from "@/app/components/icons/EditIcon";
 import { base } from "@/app/constants/Colors";
-import { getAllCategories } from "@/app/utils/ServerCommunication";
+import {
+  deleteCategory,
+  getAllCategories,
+} from "@/app/utils/ServerCommunication";
 import { useIsFocused, useTheme } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { Dimensions } from "react-native";
@@ -112,12 +115,21 @@ const Limits = ({ navigation }) => {
                 percentageSpent={category.percentageSpent}
                 spent={category.currentExpense}
                 editMode={editMode}
-                edit={() => {
+                editFunction={() => {
                   setEditMode(false);
                   navigation.navigate("EditCategoryForm", {
                     name: category.categoryName,
                     limit: category.limit,
                   });
+                }}
+                deleteFunction={async () => {
+                  const deleted = await deleteCategory(category.categoryId);
+                  if (deleted)
+                    setCategories(
+                      categories.filter(
+                        (c) => c.categoryId !== category.categoryId
+                      )
+                    );
                 }}
                 key={"categoryProgressBar" + index}
               />

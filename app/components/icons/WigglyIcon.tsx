@@ -2,7 +2,11 @@ import { useEffect, useRef } from "react";
 import { Animated } from "react-native";
 import EditIcon from "./EditIcon";
 
-const WigglyEditIcon = () => {
+type Props = {
+  icon: JSX.Element;
+};
+
+const WigglyIcon: React.FC<Props> = ({ icon }) => {
   const rotation = useRef(new Animated.Value(0)).current;
   const DURATION = 500;
 
@@ -33,10 +37,8 @@ const WigglyEditIcon = () => {
   });
 
   return (
-    <Animated.View style={{ transform: [{ rotate }] }}>
-      <EditIcon />
-    </Animated.View>
+    <Animated.View style={{ transform: [{ rotate }] }}>{icon}</Animated.View>
   );
 };
 
-export default WigglyEditIcon;
+export default WigglyIcon;

@@ -187,3 +187,27 @@ export const getAllMonthSummaries = async (
     };
   } catch (error) {}
 };
+
+export const deleteCategory = async (categoryId: string): Promise<boolean> => {
+  try {
+    await axios.delete(`users/deleteCategory/${categoryId}`);
+    return true;
+  } catch (e) {
+    const err = e as AxiosError;
+    const obj = JSON.parse(err.request._response);
+    console.log("Error response message:", obj.message);
+    return false;
+  }
+};
+
+export const deleteAccount = async (accountId: string): Promise<boolean> => {
+  try {
+    await axios.delete(`accounts/deleteAccount/${accountId}`);
+    return true;
+  } catch (e) {
+    const err = e as AxiosError;
+    const obj = JSON.parse(err.request._response);
+    console.log("Error response message:", obj.message);
+    return false;
+  }
+};

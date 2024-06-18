@@ -4,21 +4,25 @@ import { convertNumberToMoney } from "@/app/utils/Utils";
 import { Pressable, Text, View } from "react-native";
 import Separator from "../Separator";
 import { useTheme } from "@react-navigation/native";
-import WigglyEditIcon from "../icons/WigglyEditIcon";
+import WigglyIcon from "../icons/WigglyIcon";
+import EditIcon from "../icons/EditIcon";
+import DeleteIcon from "../icons/DeleteIcon";
 
 type Props = {
   typeOfCard: string;
   amountOfMoney: number;
   isIncome?: boolean;
   editMode?: boolean;
-  edit: () => void;
+  editFunction: () => void;
+  deleteFunction: () => void;
 };
 
 const OneCardRow: React.FC<Props> = ({
   typeOfCard,
   amountOfMoney,
   editMode = false,
-  edit,
+  editFunction,
+  deleteFunction,
 }) => {
   const { dark } = useTheme();
 
@@ -59,8 +63,11 @@ const OneCardRow: React.FC<Props> = ({
         {editMode && (
           <>
             <View style={{ flex: 1 }}></View>
-            <Pressable onPress={edit}>
-              <WigglyEditIcon />
+            <Pressable onPress={editFunction} style={{ marginRight: 5 }}>
+              <WigglyIcon icon={<EditIcon />} />
+            </Pressable>
+            <Pressable onPress={deleteFunction}>
+              <WigglyIcon icon={<DeleteIcon tintColor={"red"} />} />
             </Pressable>
           </>
         )}

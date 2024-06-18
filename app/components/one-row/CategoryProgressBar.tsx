@@ -3,15 +3,18 @@ import { Pressable, Text, View } from "react-native";
 import * as Progress from "react-native-progress";
 import { base } from "../../constants/Colors";
 import { FontNames, Fonts } from "../../constants/Fonts";
-import WigglyEditIcon from "../icons/WigglyEditIcon";
+import WigglyIcon from "../icons/WigglyIcon";
 import { convertNumberToMoney } from "@/app/utils/Utils";
+import EditIcon from "../icons/EditIcon";
+import DeleteIcon from "../icons/DeleteIcon";
 
 type Props = {
   categoryName: string;
   percentageSpent?: number;
   spent: number;
   editMode?: boolean;
-  edit: () => void;
+  editFunction: () => void;
+  deleteFunction: () => void;
 };
 
 const CategoryProgressBar: React.FC<Props> = ({
@@ -19,7 +22,8 @@ const CategoryProgressBar: React.FC<Props> = ({
   percentageSpent,
   spent,
   editMode = false,
-  edit,
+  editFunction,
+  deleteFunction,
 }) => {
   const { dark } = useTheme();
 
@@ -81,9 +85,14 @@ const CategoryProgressBar: React.FC<Props> = ({
           <View style={{ flex: 1 }}></View>
         )}
         {editMode ? (
-          <Pressable onPress={edit}>
-            <WigglyEditIcon />
-          </Pressable>
+          <>
+            <Pressable onPress={editFunction}>
+              <WigglyIcon icon={<EditIcon />} />
+            </Pressable>
+            <Pressable onPress={deleteFunction}>
+              <WigglyIcon icon={<DeleteIcon tintColor={"red"} />} />
+            </Pressable>
+          </>
         ) : (
           percentageSpent !== undefined && (
             <Text

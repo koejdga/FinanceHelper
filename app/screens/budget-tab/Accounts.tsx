@@ -6,7 +6,7 @@ import EditIcon from "@/app/components/icons/EditIcon";
 import OneCardRow from "@/app/components/one-row/OneCardRow";
 import { base } from "@/app/constants/Colors";
 import { FontNames, Fonts } from "@/app/constants/Fonts";
-import { getAllAccounts } from "@/app/utils/ServerCommunication";
+import { deleteAccount, getAllAccounts } from "@/app/utils/ServerCommunication";
 import { useTheme } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { Pressable, SafeAreaView, ScrollView, Text, View } from "react-native";
@@ -98,11 +98,16 @@ const Accounts = ({ navigation }) => {
               typeOfCard={account.name}
               amountOfMoney={account.balance}
               editMode={editMode}
-              edit={() => {
+              editFunction={() => {
                 navigation.push("EditAccountForm", {
                   name: account.name,
                   amountOfMoney: account.balance,
                 });
+              }}
+              deleteFunction={async () => {
+                const deleted = await deleteAccount(account.id);
+                if (deleted)
+                  setAccounts(accounts.filter((a) => a.id !== account.id));
               }}
               key={"oneCardRow" + index}
             />
