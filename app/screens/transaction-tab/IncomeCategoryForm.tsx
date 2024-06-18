@@ -1,17 +1,21 @@
 import CustomButton from "@/app/components/buttons/CustomButton";
 import FormTextInput from "@/app/components/form-components/FormTextInput";
 import OneQuestion from "@/app/components/one-row/OneQuestion";
-import { addIncomeCategory } from "@/app/utils/ServerCommunication";
+import {
+  addIncomeCategory,
+  editIncomeCategory,
+} from "@/app/utils/ServerCommunication";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
 
 const IncomeCategoryForm = ({ route, navigation }) => {
   const GAP_IN_QUESTION = 12;
+  const [categoryId, _] = useState((route.params?.categoryId as string) || "");
   const [name, setName] = useState((route.params?.name as string) || "");
+  const [editting, setEditting] = useState(false);
 
-  let editting = false;
   useEffect(() => {
-    editting = (name === undefined) as boolean;
+    setEditting((categoryId !== undefined && categoryId !== "") as boolean);
   }, []);
 
   const add = async () => {
@@ -24,7 +28,8 @@ const IncomeCategoryForm = ({ route, navigation }) => {
   };
 
   const edit = async () => {
-    navigation.goBack();
+    const edited = await editIncomeCategory(categoryId, name);
+    if (edited) navigation.goBack();
   };
 
   return (

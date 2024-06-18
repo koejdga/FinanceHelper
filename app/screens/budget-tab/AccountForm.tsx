@@ -1,27 +1,31 @@
 import CustomButton from "@/app/components/buttons/CustomButton";
 import FormTextInput from "@/app/components/form-components/FormTextInput";
 import OneQuestion from "@/app/components/one-row/OneQuestion";
-import { addAccount } from "@/app/utils/ServerCommunication";
+import { addAccount, editAccount } from "@/app/utils/ServerCommunication";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
 
 const AccountForm = ({ route, navigation }) => {
   const GAP_IN_QUESTION = 12;
+  const [accountId, _] = useState((route.params?.accountId as string) || "");
   const [name, setName] = useState((route.params?.name as string) || "");
   const [balance, setBalance] = useState<number | undefined>(
     (route.params?.amountOfMoney as number) || undefined
   );
+  const [editting, setEditting] = useState(false);
 
-  let editting = false;
   useEffect(() => {
-    editting = (name === undefined || balance === undefined) as boolean;
+    setEditting((accountId !== undefined || accountId !== "") as boolean);
   }, []);
 
   const add = async () => {
     await addAccount(name, balance);
     navigation.navigate("Accounts");
   };
-  const edit = () => {};
+  const edit = async () => {
+    const edited = await editAccount(accountId, name, balance);
+    if (edited) navigation.goBack();
+  };
 
   return (
     <View style={{ marginTop: 30, gap: 24, flex: 1 }}>

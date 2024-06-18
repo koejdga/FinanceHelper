@@ -5,7 +5,7 @@ import EditIcon from "@/app/components/icons/EditIcon";
 import { base } from "@/app/constants/Colors";
 import {
   deleteCategory,
-  getAllExpenseCategories,
+  getAllExpenseCategoriesByDate,
   getAllIncomeCategories,
 } from "@/app/utils/ServerCommunication";
 import { useIsFocused, useTheme } from "@react-navigation/native";
@@ -39,10 +39,15 @@ const Limits = ({ navigation }) => {
       if (showIncomeCategories) {
         categories = await getAllIncomeCategories();
       } else {
-        categories = await getAllExpenseCategories(
+        const res = await getAllExpenseCategoriesByDate(
           new Date().getMonth() + 1,
           new Date().getFullYear()
         );
+        categories = [
+          ...res.categoriesWithLimits,
+          ...res.categoriesWithoutLimits,
+          ...res.categoriesWithNoExpenses,
+        ];
       }
 
       const sortedCategories = categories.sort((a: Category, b: Category) => {
@@ -134,10 +139,16 @@ const Limits = ({ navigation }) => {
                 editMode={editMode}
                 editFunction={() => {
                   setEditMode(false);
-                  navigation.navigate("EditCategoryForm", {
-                    name: category.categoryName,
-                    limit: category.limit,
-                  });
+                  navigation.navigate(
+                    showIncomeCategories
+                      ? "EditIncomeCategoryForm"
+                      : "EditExpenseCategoryForm",
+                    {
+                      categoryId: category.categoryId,
+                      name: category.categoryName,
+                      limit: category.limit,
+                    }
+                  );
                 }}
                 deleteFunction={async () => {
                   const deleted = await deleteCategory(category.categoryId);

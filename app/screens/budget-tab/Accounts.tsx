@@ -103,6 +103,7 @@ const Accounts = ({ navigation }) => {
               editMode={editMode}
               editFunction={() => {
                 navigation.push("EditAccountForm", {
+                  accountId: account.id,
                   name: account.name,
                   amountOfMoney: account.balance,
                 });

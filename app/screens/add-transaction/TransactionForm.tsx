@@ -3,17 +3,19 @@ import ChooseTransaction from "@/app/components/choose-one-option-buttons/Choose
 import CustomDropdown from "@/app/components/form-components/CustomDropdown";
 import FormTextInput from "@/app/components/form-components/FormTextInput";
 import RowInAddTransactionForm from "@/app/components/one-row/RowInAddTransactionForm";
+import {
+  addExpense,
+  addIncome,
+  getAllAccounts,
+  getAllExpenseCategories,
+  getAllIncomeCategories,
+} from "@/app/utils/ServerCommunication";
 import { useIsFocused } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { SafeAreaView, View } from "react-native";
 import DatePicker from "react-native-date-picker";
-import { Category } from "../transaction-tab/Limits";
-import {
-  addExpense,
-  getAllAccounts,
-  getAllExpenseCategories,
-} from "@/app/utils/ServerCommunication";
 import { Account } from "../budget-tab/Accounts";
+import { Category } from "../transaction-tab/Limits";
 
 const AddTransactionForm = ({ route, navigation }) => {
   const isIncome = route.params?.isIncome as boolean;
@@ -35,7 +37,13 @@ const AddTransactionForm = ({ route, navigation }) => {
 
   useEffect(() => {
     const init = async () => {
-      const categories = await getAllExpenseCategories(isIncome);
+      let categories: Category[];
+      if (isIncome) {
+        categories = await getAllIncomeCategories();
+      } else {
+        categories = await getAllExpenseCategories();
+      }
+
       const sortedCategories = categories.sort((a: Category, b: Category) => {
         if (a.limit === undefined && b.limit !== undefined) {
           return 1;
@@ -61,6 +69,7 @@ const AddTransactionForm = ({ route, navigation }) => {
     } else {
       if (!isIncome)
         await addExpense(category.categoryId, account.id, amount, date, note);
+      else await addIncome(category.categoryId, account.id, amount, date, note);
       navigation.navigate("TransactionTabs");
     }
   };

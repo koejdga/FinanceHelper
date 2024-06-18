@@ -21,26 +21,22 @@ const Transaction = () => {
         name="AddExpenseCategoryForm"
         component={ExpenseCategoryForm}
         options={{ headerTitle: "New Category" }}
-        initialParams={{ isIncome: true }}
       />
       <Stack.Screen
         name="EditExpenseCategoryForm"
         component={ExpenseCategoryForm}
         options={{ headerTitle: "Edit Category" }}
-        initialParams={{ isIncome: false }}
       />
 
       <Stack.Screen
         name="AddIncomeCategoryForm"
         component={IncomeCategoryForm}
         options={{ headerTitle: "New Category" }}
-        initialParams={{ isIncome: true }}
       />
       <Stack.Screen
         name="EditIncomeCategoryForm"
         component={IncomeCategoryForm}
         options={{ headerTitle: "Edit Category" }}
-        initialParams={{ isIncome: false }}
       />
     </Stack.Navigator>
   );

@@ -2,6 +2,7 @@ import { appAuth } from "@/firebaseConfig";
 import axios, { AxiosError } from "axios";
 import { Account } from "../screens/budget-tab/Accounts";
 import { MonthSummary } from "../components/expenses-screen/MonthlyExpensesHistory";
+import { Category } from "../screens/transaction-tab/Limits";
 
 axios.defaults.baseURL = "https://serverfinancehelper.onrender.com/api/";
 
@@ -26,11 +27,75 @@ axios.interceptors.response.use(
   }
 );
 
-export const getAllExpenseCategories = async (month: number, year: number) => {
+export const getAllExpenseCategoriesByDate = async (
+  month: number,
+  year: number
+): Promise<{
+  categoriesWithLimits: Category[];
+  categoriesWithoutLimits: Category[];
+  categoriesWithNoExpenses: Category[];
+}> => {
   try {
     const res = await axios.get(
       `expenseCategory/AllCategories/${month}/${year}`
     );
+
+    const categoriesWithLimits = res.data.categoriesWithLimits.map(
+      (c: {
+        categoryId: string;
+        categoryName: string;
+        currentExpense: number;
+        limit: number;
+        percentageSpent: number;
+      }) => ({
+        categoryId: c.categoryId,
+        categoryName: c.categoryName,
+        currentExpense: c.currentExpense,
+        limit: c.limit,
+        percentageSpent: c.percentageSpent,
+      })
+    );
+
+    const categoriesWithoutLimits = res.data.categoriesWithoutLimits.map(
+      (c: {
+        categoryId: string;
+        categoryName: string;
+        currentExpense: number;
+      }) => ({
+        categoryId: c.categoryId,
+        categoryName: c.categoryName,
+        currentExpense: c.currentExpense,
+      })
+    );
+
+    const categoriesWithNoExpenses = res.data.categoriesWithNoExpenses.map(
+      (c: { categoryId: string; categoryName: string }) => ({
+        categoryId: c.categoryId,
+        categoryName: c.categoryName,
+      })
+    );
+
+    console.log(res.data);
+    return {
+      categoriesWithLimits,
+      categoriesWithoutLimits,
+      categoriesWithNoExpenses,
+    };
+  } catch (e) {
+    return {
+      categoriesWithLimits: [],
+      categoriesWithoutLimits: [],
+      categoriesWithNoExpenses: [],
+    };
+  }
+};
+
+export const getAllExpenseCategories = async () => {
+  try {
+    console.log("gettttt");
+    const res = await axios.get("expenseCategory/AllCategories");
+    console.log(res.data);
+    return [];
     return res.data.map(
       (c: {
         categoryId: string;
@@ -90,6 +155,59 @@ export const addIncomeCategory = async (name: string): Promise<boolean> => {
   }
 };
 
+export const editIncomeCategory = async (
+  categoryId: string,
+  name: string
+): Promise<boolean> => {
+  try {
+    await axios.put(`incomeCategory/update/${categoryId}`, {
+      name: name,
+    });
+    return true;
+  } catch (e) {
+    const err = e as AxiosError;
+    console.log(err.request);
+    return false;
+  }
+};
+
+export const editExpenseCategory = async (
+  categoryId: string,
+  name: string,
+  limit: number
+): Promise<boolean> => {
+  try {
+    await axios.put(`expenseCategory/updateExpenseCategory/${categoryId}`, {
+      name: name,
+      limit: limit,
+    });
+    return true;
+  } catch (e) {
+    const err = e as AxiosError;
+    console.log(err.request);
+    return false;
+  }
+};
+
+export const editAccount = async (
+  accountId: string,
+  name: string,
+  balance: number
+): Promise<boolean> => {
+  try {
+    console.log("account id:", accountId);
+    await axios.put(`accounts/updateAccount/${accountId}`, {
+      name: name,
+      balance: balance,
+    });
+    return true;
+  } catch (e) {
+    const err = e as AxiosError;
+    // console.log(err.request);
+    return false;
+  }
+};
+
 export const getAllAccounts = async (): Promise<Account[]> => {
   try {
     const res = await axios.get("accounts/balances");
@@ -139,6 +257,29 @@ export const addExpense = async (
     const err = e as AxiosError;
     const obj = JSON.parse(err.request._response);
     console.log("Error response message:", obj.message);
+  }
+};
+
+export const addIncome = async (
+  categoryId: string,
+  accountId: string,
+  amount: number,
+  date: Date,
+  note: string | undefined
+): Promise<boolean> => {
+  try {
+    await axios.post("income/createIncome", {
+      categoryId: categoryId,
+      accountId: accountId,
+      amount: amount,
+      date: date.toJSON(),
+    });
+    return true;
+  } catch (e) {
+    const err = e as AxiosError;
+    const obj = JSON.parse(err.request._response);
+    console.log("Error response message:", obj.message);
+    return false;
   }
 };
 
