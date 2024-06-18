@@ -5,6 +5,7 @@ import AddTransferForm from "./AddTransferForm";
 import EmptyScreen from "../EmptyScreen";
 import ChooseTransaction from "@/app/components/choose-one-option-buttons/ChooseTransaction";
 import { TransactionOptions } from "@/app/components/choose-one-option-buttons/ChooseOneOptionButtons";
+import {NavigationContainer} from "@react-navigation/native";
 
 const Stack = createNativeStackNavigator();
 
@@ -23,24 +24,26 @@ const AddFormGeneral = ({ navigation }) => {
   }, [selected]);
 
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false, animation: "none" }}>
-      <Stack.Screen name="Launch" component={EmptyScreen} />
-      <Stack.Screen
-        name={TransactionOptions.INCOME}
-        component={AddTransactionForm}
-        initialParams={{ isIncome: true }}
-      />
+      <NavigationContainer>
+          <Stack.Navigator screenOptions={{ headerShown: false, animation: "none" }}>
+              <Stack.Screen name="Launch" component={EmptyScreen} />
+              <Stack.Screen
+                  name={TransactionOptions.INCOME}
+                  component={AddTransactionForm}
+                  initialParams={{ isIncome: true }}
+              />
 
-      <Stack.Screen
-        name={TransactionOptions.EXPENSE}
-        component={AddTransactionForm}
-        initialParams={{ isIncome: false }}
-      />
-      <Stack.Screen
-        name={TransactionOptions.TRANSFER}
-        component={AddTransferForm}
-      />
-    </Stack.Navigator>
+              <Stack.Screen
+                  name={TransactionOptions.EXPENSE}
+                  component={AddTransactionForm}
+                  initialParams={{ isIncome: false }}
+              />
+              <Stack.Screen
+                  name={TransactionOptions.TRANSFER}
+                  component={AddTransferForm}
+              />
+          </Stack.Navigator>
+      </NavigationContainer>
   );
 };
 

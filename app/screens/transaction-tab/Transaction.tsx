@@ -2,11 +2,13 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import TransactionTabs from "./TransactionTabs";
 import AddFormGeneral from "../add-transaction/AddFormGeneral";
 import CategoryForm from "./CategoryForm";
+import {NavigationContainer} from "@react-navigation/native";
 
 const Stack = createNativeStackNavigator();
 
 const Transaction = () => {
   return (
+      <NavigationContainer>
     <Stack.Navigator>
       <Stack.Screen
         name="TransactionTabs"
@@ -29,6 +31,7 @@ const Transaction = () => {
         initialParams={{ isIncome: false }}
       />
     </Stack.Navigator>
+      </NavigationContainer>
   );
 };
 

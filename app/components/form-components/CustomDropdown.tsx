@@ -8,7 +8,7 @@ type Props = {
   variants: { label: string; value: string }[];
   style?: StyleProp<ViewStyle>;
   onChange?: (item: { label: string; value: string }) => void;
-  value: { label: string; value: string };
+  value?: { label: string; value: string };
 };
 
 const CustomDropdown: React.FC<Props> = ({
@@ -40,7 +40,7 @@ const CustomDropdown: React.FC<Props> = ({
       valueField="value"
       placeholder={!isFocus ? "Select item" : "..."}
       searchPlaceholder="Search..."
-      value={value}
+      value={value?value:""}
       onFocus={() => setIsFocus(true)}
       onBlur={() => setIsFocus(false)}
       onChange={onChange}
