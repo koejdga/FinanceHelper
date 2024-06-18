@@ -50,7 +50,7 @@ export const getAllExpenseCategoriesByDate = async (
         limit: number;
         percentageSpent: number;
       }) => ({
-        categoryId: c.categoryId,
+        id: c.categoryId,
         categoryName: c.categoryName,
         currentExpense: c.currentExpense,
         limit: c.limit,
@@ -64,7 +64,7 @@ export const getAllExpenseCategoriesByDate = async (
         categoryName: string;
         currentExpense: number;
       }) => ({
-        categoryId: c.categoryId,
+        id: c.categoryId,
         categoryName: c.categoryName,
         currentExpense: c.currentExpense,
       })
@@ -72,7 +72,7 @@ export const getAllExpenseCategoriesByDate = async (
 
     const categoriesWithNoExpenses = res.data.categoriesWithNoExpenses.map(
       (c: { categoryId: string; categoryName: string }) => ({
-        categoryId: c.categoryId,
+        id: c.categoryId,
         categoryName: c.categoryName,
       })
     );
@@ -107,7 +107,7 @@ export const getAllIncomeCategories = async () => {
   try {
     const res = await axios.get("incomeCategory/AllCategories");
     return res.data.data.map((c: { _id: string; name: string }) => ({
-      categoryId: c._id,
+      id: c._id,
       categoryName: c.name,
     }));
   } catch (e) {

@@ -1,5 +1,5 @@
 import { View, Text, Pressable } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ArrowLeftMainIcon from "../icons/ArrowLeftMainIcon";
 import ArrowRightMainIcon from "../icons/ArrowRightMainIcon";
 import { FontNames, Fonts } from "../../constants/Fonts";
@@ -43,6 +43,12 @@ const HeaderWithMonthOrYear: React.FC<Props> = ({
     return <Text>Sorry, maybe you forgot to provide setMonth function</Text>;
   }
 
+  useEffect(() => {
+    setCanGoRight(
+      !(monthNumber === new Date().getMonth() && year === MAX_YEAR)
+    );
+  });
+
   const goLeft = () => {
     setCanGoRight(true);
     if (!showOnlyYear) {
@@ -69,7 +75,7 @@ const HeaderWithMonthOrYear: React.FC<Props> = ({
   const goRight = () => {
     setCanGoLeft(true);
     if (!showOnlyYear) {
-      if (monthNumber === 11 && year === MAX_YEAR) {
+      if (monthNumber === new Date().getMonth() && year === MAX_YEAR) {
         setCanGoRight(false);
         return;
       }

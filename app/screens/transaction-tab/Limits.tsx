@@ -1,4 +1,4 @@
-import { Pressable, ScrollView, Text, View } from "react-native";
+import { Alert, Pressable, ScrollView, Text, View } from "react-native";
 import { PieChart } from "react-native-chart-kit";
 import AddIcon from "@/app/components/icons/AddIcon";
 import EditIcon from "@/app/components/icons/EditIcon";
@@ -88,6 +88,12 @@ const Limits = ({ navigation }) => {
     },
   ];
 
+  const deleteCategoryFunction = async (category: Category) => {
+    console.log(category);
+    const deleted = await deleteCategory(category.id);
+    if (deleted) setCategories(categories.filter((c) => c.id !== category.id));
+  };
+
   return (
     <View style={{ flex: 1 }}>
       <Pressable onPress={() => setEditMode(false)}>
@@ -141,8 +147,8 @@ const Limits = ({ navigation }) => {
                   setEditMode(false);
                   navigation.navigate(
                     showIncomeCategories
-                      ? "EditIncomeCategoryForm"
-                      : "EditExpenseCategoryForm",
+                      ? "IncomeCategoryForm"
+                      : "ExpenseCategoryForm",
                     {
                       categoryId: category.id,
                       name: category.categoryName,
@@ -151,11 +157,18 @@ const Limits = ({ navigation }) => {
                   );
                 }}
                 deleteFunction={async () => {
-                  const deleted = await deleteCategory(category.id);
-                  if (deleted)
-                    setCategories(
-                      categories.filter((c) => c.id !== category.id)
-                    );
+                  Alert.alert(
+                    `Delete ${category.categoryName}`,
+                    `Are you sure you want to delete ${category.categoryName}`,
+                    [
+                      {
+                        text: "Yes",
+                        onPress: async () =>
+                          await deleteCategoryFunction(category),
+                      },
+                      { text: "No", style: "cancel" },
+                    ]
+                  );
                 }}
                 key={"categoryProgressBar" + index}
               />
@@ -208,6 +221,7 @@ const Limits = ({ navigation }) => {
               gap: 5,
             }}
             onPress={() => {
+              setEditMode(false);
               setShowIncomeCategories(!showIncomeCategories);
             }}
           >

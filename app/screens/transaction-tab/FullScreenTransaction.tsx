@@ -7,7 +7,7 @@ import {
   deleteTransaction,
 } from "@/app/utils/ServerCommunication";
 import { convertNumberToMoney } from "@/app/utils/Utils";
-import { Pressable, Text, View } from "react-native";
+import { Alert, Pressable, Text, View } from "react-native";
 
 const FullScreenTransaction = ({ route, navigation }) => {
   const transaction = route.params?.transaction as Transaction;
@@ -89,7 +89,19 @@ const FullScreenTransaction = ({ route, navigation }) => {
         </Text>
       </Pressable>
       <Pressable
-        onPress={deleteFunction}
+        onPress={() => {
+          Alert.alert(
+            "Delete Transaction",
+            "Are you sure you want to delete this transaction",
+            [
+              {
+                text: "Yes",
+                onPress: deleteFunction,
+              },
+              { text: "No", style: "cancel" },
+            ]
+          );
+        }}
         style={{
           flexDirection: "row",
           gap: 10,
