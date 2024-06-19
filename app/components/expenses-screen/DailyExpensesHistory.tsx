@@ -20,7 +20,7 @@ const DailyExpensesHistory: React.FC<Props> = ({
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   useEffect(() => {
     const transactions = transactionsInput.sort((a, b) =>
-      new Date(a.fullDate) > new Date(b.fullDate) ? 1 : -1
+      new Date(a.fullDate) < new Date(b.fullDate) ? 1 : -1
     );
 
     setTransactions(transactions);
@@ -38,7 +38,9 @@ const DailyExpensesHistory: React.FC<Props> = ({
               <OneSummaryRow
                 periodName={`${new Date(
                   transaction.fullDate
-                ).getDate()} ${convertNumberToWeekDay(transaction.dayOfWeek)}`}
+                ).getDate()} ${convertNumberToWeekDay(
+                  new Date(transaction.fullDate).getDay()
+                )}`}
                 totalIncome={transactions
                   .filter(
                     (t) =>
