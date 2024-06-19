@@ -53,9 +53,6 @@ export const deleteAccount = async (accountId: string): Promise<boolean> => {
     await axios.delete(`accounts/deleteAccount/${accountId}`);
     return true;
   } catch (e) {
-    const err = e as AxiosError;
-    const obj = JSON.parse(err.request._response);
-    console.log("Error response message:", obj.message);
     return false;
   }
 };

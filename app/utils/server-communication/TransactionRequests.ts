@@ -54,6 +54,7 @@ export const addExpense = async (
   note: string | undefined
 ) => {
   try {
+    console.log("categoryId:", categoryId);
     await axios.post("expense/createExpense", {
       categoryId: categoryId,
       account: accountId,
@@ -61,11 +62,7 @@ export const addExpense = async (
       date: date.toJSON(),
       note: note,
     });
-  } catch (e) {
-    const err = e as AxiosError;
-    const obj = JSON.parse(err.request._response);
-    console.log("Error response message:", obj.message);
-  }
+  } catch (e) {}
 };
 
 export const addIncome = async (
@@ -85,9 +82,6 @@ export const addIncome = async (
     });
     return true;
   } catch (e) {
-    const err = e as AxiosError;
-    const obj = JSON.parse(err.request._response);
-    console.log("Error response message:", obj.message);
     return false;
   }
 };
