@@ -1,4 +1,5 @@
-import axios, { AxiosError } from "axios";
+import axios from "./General";
+import { AxiosError } from "axios";
 import { Account } from "../Interfaces";
 
 export const getAllAccounts = async (): Promise<Account[]> => {

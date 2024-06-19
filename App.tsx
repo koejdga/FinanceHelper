@@ -14,6 +14,8 @@ import MainApp from "./app/screens/MainApp";
 import OnboardingScreen from "./app/screens/login-signup/OnboardingScreen";
 import { useColorScheme } from "react-native";
 import EmailVerification from "@/app/screens/login-signup/EmailVerification";
+import { createContext, useEffect, useState } from "react";
+import { ThemeContext, ThemeEnum } from "./app/enums/ThemeEnum";
 
 const Stack = createNativeStackNavigator();
 
@@ -43,38 +45,49 @@ const CustomDarkTheme: Theme = {
 
 const App = () => {
   const scheme = useColorScheme();
+  const [theme, setTheme] = useState(ThemeEnum.SYSTEM);
 
   return (
-    <NavigationContainer
-      theme={scheme === "dark" ? CustomDarkTheme : CustomLightTheme}
-    >
-      <Stack.Navigator
-        screenOptions={{ headerShown: false }}
-        initialRouteName="OnboardingScreen"
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      <NavigationContainer
+        theme={
+          theme === ThemeEnum.SYSTEM
+            ? scheme === "dark"
+              ? CustomDarkTheme
+              : CustomLightTheme
+            : theme === ThemeEnum.DARK
+            ? CustomDarkTheme
+            : CustomLightTheme
+        }
       >
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Signup" component={Signup} />
+        <Stack.Navigator
+          screenOptions={{ headerShown: false }}
+          initialRouteName="OnboardingScreen"
+        >
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Signup" component={Signup} />
 
-        <Stack.Screen
-          name="OnboardingScreen"
-          component={OnboardingScreen}
-          initialParams={{ screenNumber: 1 }}
-        />
-        <Stack.Screen name="Launch" component={Launch} />
-        <Stack.Screen
-          name="ForgotPassword"
-          component={ForgotPassword}
-          options={{ headerShown: true, headerTitle: "Forgot Password" }}
-        />
-        <Stack.Screen name="EmailOnTheWay" component={EmailOnTheWay} />
-        <Stack.Screen
-          name="EmailVerification"
-          component={EmailVerification}
-          options={{ headerShown: true, headerTitle: "Verify email" }}
-        />
-        <Stack.Screen name="MainApp" component={MainApp} />
-      </Stack.Navigator>
-    </NavigationContainer>
+          <Stack.Screen
+            name="OnboardingScreen"
+            component={OnboardingScreen}
+            initialParams={{ screenNumber: 1 }}
+          />
+          <Stack.Screen name="Launch" component={Launch} />
+          <Stack.Screen
+            name="ForgotPassword"
+            component={ForgotPassword}
+            options={{ headerShown: true, headerTitle: "Forgot Password" }}
+          />
+          <Stack.Screen name="EmailOnTheWay" component={EmailOnTheWay} />
+          <Stack.Screen
+            name="EmailVerification"
+            component={EmailVerification}
+            options={{ headerShown: true, headerTitle: "Verify email" }}
+          />
+          <Stack.Screen name="MainApp" component={MainApp} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </ThemeContext.Provider>
   );
 };
 

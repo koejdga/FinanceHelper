@@ -1,5 +1,7 @@
 import SettingsRow from "@/app/components/one-row/SettingsRow";
 import { SafeAreaView, View } from "react-native";
+import { Choises } from "./ListWithChoices";
+import { ThemeEnum } from "@/app/enums/ThemeEnum";
 
 const Settings = ({ navigation }) => {
   return (
@@ -35,7 +37,9 @@ const Settings = ({ navigation }) => {
         additionalText="Light"
         onPress={() => {
           navigation.push("ListWithChoices", {
-            options: ["Light", "Dark", "Use device theme"],
+            theme: Choises.Theme,
+            options: Object.values(ThemeEnum),
+            defaultSelected: 2,
             title: "Theme",
           });
         }}

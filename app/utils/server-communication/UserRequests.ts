@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "./General";
 import { MonthSummary } from "../Interfaces";
 
 export const createUser = async (uid: string) => {

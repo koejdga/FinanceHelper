@@ -1,4 +1,5 @@
-import axios, { AxiosError } from "axios";
+import axios from "./General";
+import { AxiosError } from "axios";
 import { Transaction } from "../Interfaces";
 
 export const getAllTransactions = async (
@@ -34,6 +35,12 @@ export const getAllTransactions = async (
     return result;
   } catch (e) {
     const err = e as AxiosError;
+    console.log("Response error:", err);
+    console.log(err.request);
+    const url = err.request.responseURL as string;
+    // const path = url.replace(axios.defaults.baseURL, "");
+    console.log("ERROR: error at path", url);
+    console.log();
     console.log("err request:", err);
     return { amountIncome: 0, amountExpense: 0, total: 0, transactions: [] };
   }
