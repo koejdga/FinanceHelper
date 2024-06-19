@@ -2,8 +2,23 @@ import SettingsRow from "@/app/components/one-row/SettingsRow";
 import { SafeAreaView, View } from "react-native";
 import { Choises } from "./ListWithChoices";
 import { ThemeEnum } from "@/app/enums/ThemeEnum";
+import { loadData } from "@/app/utils/SaveLocally";
+import { useEffect, useState } from "react";
+import { useIsFocused } from "@react-navigation/native";
 
 const Settings = ({ navigation }) => {
+  const isFocused = useIsFocused();
+  const [currentTheme, setCurrentTheme] = useState(ThemeEnum.SYSTEM);
+  useEffect(() => {
+    const init = async () => {
+      const loadedTheme = await loadData("theme");
+      const currentTheme = loadedTheme || ThemeEnum.SYSTEM;
+      setCurrentTheme(currentTheme);
+    };
+
+    if (isFocused) init();
+  }, [isFocused]);
+
   return (
     <SafeAreaView>
       <SettingsRow
@@ -34,12 +49,16 @@ const Settings = ({ navigation }) => {
       />
       <SettingsRow
         title="Theme"
-        additionalText="Light"
+        additionalText={
+          currentTheme === ThemeEnum.SYSTEM ? "System" : currentTheme
+        }
         onPress={() => {
           navigation.push("ListWithChoices", {
             theme: Choises.Theme,
             options: Object.values(ThemeEnum),
-            defaultSelected: 2,
+            defaultSelected: Object.values(ThemeEnum).findIndex(
+              (element) => element === currentTheme
+            ),
             title: "Theme",
           });
         }}

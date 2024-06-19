@@ -1,5 +1,6 @@
 import ListItem from "@/app/components/one-row/ListItem";
 import { ThemeContext, ThemeEnum } from "@/app/enums/ThemeEnum";
+import { saveData } from "@/app/utils/SaveLocally";
 import { useContext, useEffect, useState } from "react";
 import { Text, Pressable, SafeAreaView } from "react-native";
 
@@ -23,7 +24,8 @@ const ListWithChoices = ({ route, navigation }) => {
   }
 
   const onChangeFunctions = {
-    [Choises.Theme]: () => {
+    [Choises.Theme]: async (checked: number) => {
+      await saveData("theme", options[checked]);
       setTheme(options[checked] as ThemeEnum);
     },
   };
@@ -37,7 +39,7 @@ const ListWithChoices = ({ route, navigation }) => {
       {options.map((option, index) => (
         <Pressable
           onPress={() => {
-            onChangeFunctions[theme]();
+            onChangeFunctions[theme](index);
             setChecked(index);
           }}
           key={"option" + index}

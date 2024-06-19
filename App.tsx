@@ -16,6 +16,7 @@ import { useColorScheme } from "react-native";
 import EmailVerification from "@/app/screens/login-signup/EmailVerification";
 import { createContext, useEffect, useState } from "react";
 import { ThemeContext, ThemeEnum } from "./app/enums/ThemeEnum";
+import { loadData } from "./app/utils/SaveLocally";
 
 const Stack = createNativeStackNavigator();
 
@@ -46,6 +47,15 @@ const CustomDarkTheme: Theme = {
 const App = () => {
   const scheme = useColorScheme();
   const [theme, setTheme] = useState(ThemeEnum.SYSTEM);
+
+  useEffect(() => {
+    const init = async () => {
+      const loadedTheme = await loadData("theme");
+      setTheme(loadedTheme || ThemeEnum.SYSTEM);
+    };
+
+    init();
+  }, []);
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
