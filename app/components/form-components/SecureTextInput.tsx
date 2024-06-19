@@ -1,8 +1,8 @@
-import { TextInput, View } from "react-native";
+import { base } from "@/app/constants/Colors";
+import { formStyles } from "@/app/constants/Styles";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useState } from "react";
-import { formStyles } from "@/app/constants/Styles";
-import { base } from "@/app/constants/Colors";
+import { TextInput, View } from "react-native";
 
 type SecureTextProps = {
   onChangeText?: (text: string) => void;

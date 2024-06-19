@@ -1,8 +1,8 @@
-import { View, Text, Dimensions } from "react-native";
-import React from "react";
-import { BarChart } from "react-native-chart-kit";
-import { hexToRgb } from "@/app/utils/Utils";
 import { Accent } from "@/app/constants/Colors";
+import { hexToRgb } from "@/app/utils/Utils";
+import React from "react";
+import { Dimensions, Text } from "react-native";
+import { BarChart } from "react-native-chart-kit";
 
 const screenWidth = Dimensions.get("window").width;
 

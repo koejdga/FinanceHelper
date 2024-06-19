@@ -1,6 +1,6 @@
-import { View, Text, StyleSheet } from "react-native";
+import { useTheme } from "@react-navigation/native";
 import React from "react";
-import { FontNames, Fonts } from "../../constants/Fonts";
+import { StyleSheet, Text, View } from "react-native";
 import {
   ExpenseDark,
   ExpenseLight,
@@ -8,8 +8,8 @@ import {
   IncomeLight,
   base,
 } from "../../constants/Colors";
+import { FontNames, Fonts } from "../../constants/Fonts";
 import { convertNumberToMoney } from "../../utils/Utils";
-import { useTheme } from "@react-navigation/native";
 
 type Props = {
   income?: number;

@@ -4,7 +4,7 @@ import OneQuestion from "@/app/components/one-row/OneQuestion";
 import {
   addIncomeCategory,
   editIncomeCategory,
-} from "@/app/utils/ServerCommunication";
+} from "@/app/utils/server-communication/CategoryRequests";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
 

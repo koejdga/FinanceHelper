@@ -2,12 +2,10 @@ import DeleteIcon from "@/app/components/icons/DeleteIcon";
 import EditIcon from "@/app/components/icons/EditIcon";
 import { ExpenseDark, IncomeDark, base } from "@/app/constants/Colors";
 import { FontNames, Fonts } from "@/app/constants/Fonts";
-import {
-  Transaction,
-  deleteTransaction,
-} from "@/app/utils/ServerCommunication";
 import { convertNumberToMoney } from "@/app/utils/Utils";
 import { Alert, Pressable, Text, View } from "react-native";
+import { deleteTransaction } from "@/app/utils/server-communication/TransactionRequests";
+import { Transaction } from "@/app/utils/Interfaces";
 
 const FullScreenTransaction = ({ route, navigation }) => {
   const transaction = route.params?.transaction as Transaction;

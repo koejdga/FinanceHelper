@@ -6,8 +6,12 @@ import EditIcon from "@/app/components/icons/EditIcon";
 import OneCardRow from "@/app/components/one-row/OneCardRow";
 import { base } from "@/app/constants/Colors";
 import { FontNames, Fonts } from "@/app/constants/Fonts";
-import { deleteAccount, getAllAccounts } from "@/app/utils/ServerCommunication";
-import { useTheme } from "@react-navigation/native";
+import { Account } from "@/app/utils/Interfaces";
+import {
+  deleteAccount,
+  getAllAccounts,
+} from "@/app/utils/server-communication/AccountRequests";
+import { useIsFocused, useTheme } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import {
   Alert,
@@ -17,13 +21,6 @@ import {
   Text,
   View,
 } from "react-native";
-import { useIsFocused } from "@react-navigation/native";
-
-export interface Account {
-  id: string;
-  name: string;
-  balance: number;
-}
 
 const Accounts = ({ navigation }) => {
   const { dark } = useTheme();

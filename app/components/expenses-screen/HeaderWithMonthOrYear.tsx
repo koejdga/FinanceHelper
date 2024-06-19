@@ -1,11 +1,11 @@
-import { View, Text, Pressable } from "react-native";
+import { base } from "@/app/constants/Colors";
+import { useTheme } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import ArrowLeftMainIcon from "../icons/ArrowLeftMainIcon";
-import ArrowRightMainIcon from "../icons/ArrowRightMainIcon";
+import { Pressable, Text, View } from "react-native";
 import { FontNames, Fonts } from "../../constants/Fonts";
 import { convertNumberToMonthName } from "../../utils/Utils";
-import { useTheme } from "@react-navigation/native";
-import { base } from "@/app/constants/Colors";
+import ArrowLeftMainIcon from "../icons/ArrowLeftMainIcon";
+import ArrowRightMainIcon from "../icons/ArrowRightMainIcon";
 
 type Props = {
   monthNumber?: number;

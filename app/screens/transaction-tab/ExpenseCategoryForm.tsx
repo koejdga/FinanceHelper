@@ -4,7 +4,7 @@ import OneQuestion from "@/app/components/one-row/OneQuestion";
 import {
   addExpenseCategory,
   editExpenseCategory,
-} from "@/app/utils/ServerCommunication";
+} from "@/app/utils/server-communication/CategoryRequests";
 import { useEffect, useState } from "react";
 import { Keyboard, TouchableWithoutFeedback, View } from "react-native";
 

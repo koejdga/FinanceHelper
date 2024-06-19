@@ -10,7 +10,7 @@ import {
   Text,
 } from "react-native";
 import { FontNames, Fonts } from "../../constants/Fonts";
-import { createUser } from "@/app/utils/ServerCommunication";
+import { createUser } from "@/app/utils/server-communication/UserRequests";
 
 const EmailVerification = ({ navigation }) => {
   useEffect(() => {

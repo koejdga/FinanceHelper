@@ -1,11 +1,11 @@
+import { TransactionOptions } from "@/app/components/choose-one-option-buttons/ChooseOneOptionButtons";
+import ChooseTransaction from "@/app/components/choose-one-option-buttons/ChooseTransaction";
+import { Transaction } from "@/app/utils/Interfaces";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useEffect, useState } from "react";
-import TransactionForm from "./TransactionForm";
-import AddTransferForm from "./AddTransferForm";
 import EmptyScreen from "../EmptyScreen";
-import ChooseTransaction from "@/app/components/choose-one-option-buttons/ChooseTransaction";
-import { TransactionOptions } from "@/app/components/choose-one-option-buttons/ChooseOneOptionButtons";
-import { Transaction } from "@/app/utils/ServerCommunication";
+import AddTransferForm from "./AddTransferForm";
+import TransactionForm from "./TransactionForm";
 
 const Stack = createNativeStackNavigator();
 

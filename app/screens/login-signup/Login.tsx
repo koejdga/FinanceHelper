@@ -22,7 +22,9 @@ export default function Login({ navigation }) {
         const user = userCredential.user;
         if (user) {
           console.log("user is logged in");
-          navigation.replace(user.emailVerified?"MainApp":"EmailVerification");
+          navigation.replace(
+            user.emailVerified ? "MainApp" : "EmailVerification"
+          );
         }
       })
       .catch(() => {

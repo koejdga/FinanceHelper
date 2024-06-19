@@ -1,7 +1,10 @@
 import CustomButton from "@/app/components/buttons/CustomButton";
 import FormTextInput from "@/app/components/form-components/FormTextInput";
 import OneQuestion from "@/app/components/one-row/OneQuestion";
-import { addAccount, editAccount } from "@/app/utils/ServerCommunication";
+import {
+  addAccount,
+  editAccount,
+} from "@/app/utils/server-communication/AccountRequests";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
 
@@ -15,7 +18,7 @@ const AccountForm = ({ route, navigation }) => {
   const [editting, setEditting] = useState(false);
 
   useEffect(() => {
-    setEditting((accountId !== undefined || accountId !== "") as boolean);
+    setEditting((accountId !== undefined && accountId !== "") as boolean);
   }, []);
 
   const add = async () => {

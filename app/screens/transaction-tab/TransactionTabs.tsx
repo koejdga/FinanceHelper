@@ -9,15 +9,13 @@ import IncomeExpenseTotal from "@/app/components/expenses-screen/IncomeExpenseTo
 import MonthlyExpensesHistory from "@/app/components/expenses-screen/MonthlyExpensesHistory";
 import { Accent } from "@/app/constants/Colors";
 import { FontNames, Fonts } from "@/app/constants/Fonts";
+import { Transaction } from "@/app/utils/Interfaces";
+import { getAllTransactions } from "@/app/utils/server-communication/TransactionRequests";
+import { useIsFocused } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native";
 import Limits from "./Limits";
 import Statistics from "./Statistics";
-import { useIsFocused } from "@react-navigation/native";
-import {
-  Transaction,
-  getAllTransactions,
-} from "@/app/utils/ServerCommunication";
 
 const TransactionTabs = ({ navigation }) => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
@@ -99,7 +97,7 @@ const TransactionTabs = ({ navigation }) => {
       )}
 
       {selected === TransactionTabsOptions.LIMITS.toString() && (
-        <Limits navigation={navigation} />
+        <Limits navigation={navigation} month={monthNumber} year={year} />
       )}
 
       {selected === TransactionTabsOptions.STATISTICS.toString() && (

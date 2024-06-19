@@ -1,32 +1,31 @@
-import { Alert, Pressable, ScrollView, Text, View } from "react-native";
-import { PieChart } from "react-native-chart-kit";
 import AddIcon from "@/app/components/icons/AddIcon";
+import CancelIcon from "@/app/components/icons/CancelIcon";
 import EditIcon from "@/app/components/icons/EditIcon";
+import MoneyIcon from "@/app/components/icons/MoneyIcon";
 import { base } from "@/app/constants/Colors";
+import { Category } from "@/app/utils/Interfaces";
 import {
   deleteCategory,
   getAllExpenseCategoriesByDate,
   getAllIncomeCategories,
-} from "@/app/utils/ServerCommunication";
+} from "@/app/utils/server-communication/CategoryRequests";
+import { appAuth } from "@/firebaseConfig";
 import { useIsFocused, useTheme } from "@react-navigation/native";
 import { useEffect, useState } from "react";
-import { Dimensions } from "react-native";
+import {
+  Alert,
+  Dimensions,
+  Pressable,
+  ScrollView,
+  Text,
+  View,
+} from "react-native";
+import { PieChart } from "react-native-chart-kit";
 import CategoryProgressBar from "../../components/one-row/CategoryProgressBar";
 import { FontNames, Fonts } from "../../constants/Fonts";
-import CancelIcon from "@/app/components/icons/CancelIcon";
-import { appAuth } from "@/firebaseConfig";
-import MoneyIcon from "@/app/components/icons/MoneyIcon";
 const screenWidth = Dimensions.get("window").width;
 
-export interface Category {
-  id: string;
-  categoryName: string;
-  currentExpense?: number;
-  limit?: number;
-  percentageSpent?: number;
-}
-
-const Limits = ({ navigation }) => {
+const Limits = ({ navigation, month, year }) => {
   const { dark } = useTheme();
   const [editMode, setEditMode] = useState(false);
   const [categories, setCategories] = useState<Category[]>();
@@ -39,10 +38,7 @@ const Limits = ({ navigation }) => {
       if (showIncomeCategories) {
         categories = await getAllIncomeCategories();
       } else {
-        const res = await getAllExpenseCategoriesByDate(
-          new Date().getMonth() + 1,
-          new Date().getFullYear()
-        );
+        const res = await getAllExpenseCategoriesByDate(month + 1, year);
         categories = [
           ...res.categoriesWithLimits,
           ...res.categoriesWithoutLimits,
@@ -63,7 +59,7 @@ const Limits = ({ navigation }) => {
       setCategories(sortedCategories);
     };
     init();
-  }, [isFocused, showIncomeCategories]);
+  }, [isFocused, showIncomeCategories, month, year]);
 
   // TODO: remove later
   useEffect(() => {

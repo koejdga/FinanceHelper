@@ -1,7 +1,6 @@
-import { View, Text } from "react-native";
+import { useTheme } from "@react-navigation/native";
 import React from "react";
-import { convertNumberToMoney } from "../../utils/Utils";
-import { FontNames, Fonts } from "../../constants/Fonts";
+import { Text, View } from "react-native";
 import {
   ExpenseDark,
   ExpenseLight,
@@ -9,7 +8,8 @@ import {
   IncomeLight,
   base,
 } from "../../constants/Colors";
-import { useTheme } from "@react-navigation/native";
+import { FontNames, Fonts } from "../../constants/Fonts";
+import { convertNumberToMoney } from "../../utils/Utils";
 
 type Props = {
   periodName: string; // either date ("24 Fri") or month ("May")

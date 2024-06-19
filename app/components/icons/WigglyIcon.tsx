@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
 import { Animated } from "react-native";
-import EditIcon from "./EditIcon";
 
 type Props = {
   icon: JSX.Element;

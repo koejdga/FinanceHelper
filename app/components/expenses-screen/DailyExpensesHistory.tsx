@@ -1,4 +1,4 @@
-import { Transaction } from "@/app/utils/ServerCommunication";
+import { Transaction } from "@/app/utils/Interfaces";
 import { convertNumberToWeekDay } from "@/app/utils/Utils";
 import { useEffect, useState } from "react";
 import { Pressable, ScrollView, View } from "react-native";

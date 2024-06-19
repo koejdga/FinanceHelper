@@ -2,7 +2,9 @@ import CustomButton from "@/app/components/buttons/CustomButton";
 import CustomDropdown from "@/app/components/form-components/CustomDropdown";
 import FormTextInput from "@/app/components/form-components/FormTextInput";
 import RowInAddTransactionForm from "@/app/components/one-row/RowInAddTransactionForm";
-import { addTransfer, getAllAccounts } from "@/app/utils/ServerCommunication";
+import { Account } from "@/app/utils/Interfaces";
+import { getAllAccounts } from "@/app/utils/server-communication/AccountRequests";
+import { addTransfer } from "@/app/utils/server-communication/TransactionRequests";
 import { useEffect, useState } from "react";
 import {
   Keyboard,
@@ -11,7 +13,6 @@ import {
   View,
 } from "react-native";
 import DatePicker from "react-native-date-picker";
-import { Account } from "../budget-tab/Accounts";
 
 const AddTransferForm = ({ navigation }) => {
   const [date, setDate] = useState<Date | undefined>(new Date());

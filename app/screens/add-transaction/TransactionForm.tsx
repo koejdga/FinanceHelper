@@ -1,17 +1,18 @@
 import CustomButton from "@/app/components/buttons/CustomButton";
-import ChooseTransaction from "@/app/components/choose-one-option-buttons/ChooseTransaction";
 import CustomDropdown from "@/app/components/form-components/CustomDropdown";
 import FormTextInput from "@/app/components/form-components/FormTextInput";
 import RowInAddTransactionForm from "@/app/components/one-row/RowInAddTransactionForm";
+import { Account, Category, Transaction } from "@/app/utils/Interfaces";
+import { getAllAccounts } from "@/app/utils/server-communication/AccountRequests";
 import {
-  Transaction,
-  addExpense,
-  addIncome,
-  getAllAccounts,
   getAllExpenseCategories,
   getAllIncomeCategories,
-  updateTransaction,
-} from "@/app/utils/ServerCommunication";
+} from "@/app/utils/server-communication/CategoryRequests";
+import {
+  addExpense,
+  addIncome,
+  editTransaction,
+} from "@/app/utils/server-communication/TransactionRequests";
 import { useIsFocused } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import {
@@ -21,8 +22,6 @@ import {
   View,
 } from "react-native";
 import DatePicker from "react-native-date-picker";
-import { Account } from "../budget-tab/Accounts";
-import { Category } from "../transaction-tab/Limits";
 
 const TransactionForm = ({ route, navigation }) => {
   const isIncome = route.params?.isIncome as boolean;
@@ -112,7 +111,7 @@ const TransactionForm = ({ route, navigation }) => {
   };
 
   const edit = async () => {
-    const edited = await updateTransaction(
+    const edited = await editTransaction(
       transaction.id,
       category.id,
       account.id,
