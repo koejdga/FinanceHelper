@@ -1,4 +1,5 @@
-import axios, { AxiosError } from "axios";
+import axios from "./General";
+import { AxiosError } from "axios";
 import { Transaction } from "../Interfaces";
 
 export const getAllTransactions = async (
@@ -34,6 +35,12 @@ export const getAllTransactions = async (
     return result;
   } catch (e) {
     const err = e as AxiosError;
+    console.log("Response error:", err);
+    console.log(err.request);
+    const url = err.request.responseURL as string;
+    // const path = url.replace(axios.defaults.baseURL, "");
+    console.log("ERROR: error at path", url);
+    console.log();
     console.log("err request:", err);
     return { amountIncome: 0, amountExpense: 0, total: 0, transactions: [] };
   }
@@ -47,6 +54,7 @@ export const addExpense = async (
   note: string | undefined
 ) => {
   try {
+    console.log("categoryId:", categoryId);
     await axios.post("expense/createExpense", {
       categoryId: categoryId,
       account: accountId,
@@ -54,11 +62,7 @@ export const addExpense = async (
       date: date.toJSON(),
       note: note,
     });
-  } catch (e) {
-    const err = e as AxiosError;
-    const obj = JSON.parse(err.request._response);
-    console.log("Error response message:", obj.message);
-  }
+  } catch (e) {}
 };
 
 export const addIncome = async (
@@ -78,9 +82,6 @@ export const addIncome = async (
     });
     return true;
   } catch (e) {
-    const err = e as AxiosError;
-    const obj = JSON.parse(err.request._response);
-    console.log("Error response message:", obj.message);
     return false;
   }
 };
@@ -105,21 +106,31 @@ export const addTransfer = async (
 };
 
 export const editTransaction = async (
-  expenseId: string,
+  transactionId: string,
   categoryId: string,
   accountId: string,
   date: Date,
   amount: number,
-  note: string
+  note: string,
+  type: string
 ): Promise<boolean> => {
   try {
-    await axios.put(`expense/updateExpense/${expenseId}`, {
-      categoryId: categoryId,
-      date: date.toJSON(),
-      note: note,
-      amount: amount,
-      account: accountId,
-    });
+    if (type === "expense")
+      await axios.put(`expense/updateExpense/${transactionId}`, {
+        categoryId: categoryId,
+        date: date.toJSON(),
+        note: note,
+        amount: amount,
+        account: accountId,
+      });
+    else
+      await axios.put(`income/updateIncome/${transactionId}`, {
+        categoryId: categoryId,
+        date: date.toJSON(),
+        note: note,
+        amount: amount,
+        account: accountId,
+      });
     return true;
   } catch (e) {
     return false;

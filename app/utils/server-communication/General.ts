@@ -5,7 +5,6 @@ axios.defaults.baseURL = "https://serverfinancehelper.onrender.com/api/";
 
 axios.interceptors.request.use(async function (config) {
   const token = await appAuth.currentUser.getIdToken();
-  // console.log(token);
   config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
@@ -25,3 +24,5 @@ axios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+export default axios;

@@ -60,25 +60,17 @@ const TransactionForm = ({ route, navigation }) => {
         categories = await getAllExpenseCategories();
       }
 
-      const sortedCategories = categories.sort((a: Category, b: Category) => {
-        if (a.limit === undefined && b.limit !== undefined) {
-          return 1;
-        } else if (a.limit !== undefined && b.limit === undefined) {
-          return -1;
-        } else {
-          return 0;
-        }
-      });
+      const accounts = await getAllAccounts();
 
-      setCategories(sortedCategories);
-      if (editting)
+      setCategories(categories);
+      setAccounts(accounts);
+
+      if (editting) {
         setCategory(
           categories.find((c) => c.categoryName === transaction?.category)
         );
-      const accounts = await getAllAccounts();
-      setAccounts(accounts);
-      if (editting)
         setAccount(accounts.find((a) => a.name === transaction?.account));
+      }
     };
 
     init();
@@ -117,7 +109,8 @@ const TransactionForm = ({ route, navigation }) => {
       account.id,
       date,
       amount !== "" ? amount : 0,
-      note
+      note,
+      transaction.type
     );
     if (edited)
       navigation.navigate("FullScreenTransaction", {

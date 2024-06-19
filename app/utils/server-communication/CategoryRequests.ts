@@ -1,4 +1,5 @@
-import axios, { AxiosError } from "axios";
+import axios from "./General";
+import { AxiosError } from "axios";
 import { Category } from "../Interfaces";
 
 export const getAllExpenseCategoriesByDate = async (
@@ -67,7 +68,7 @@ export const getAllExpenseCategories = async (): Promise<Category[]> => {
   try {
     const res = await axios.get("expenseCategory/AllCategories");
     return res.data.data.map((c: { _id: string; name: string }) => ({
-      categoryId: c._id,
+      id: c._id,
       categoryName: c.name,
     }));
   } catch (e) {
@@ -75,7 +76,7 @@ export const getAllExpenseCategories = async (): Promise<Category[]> => {
   }
 };
 
-export const getAllIncomeCategories = async () => {
+export const getAllIncomeCategories = async (): Promise<Category[]> => {
   try {
     const res = await axios.get("incomeCategory/AllCategories");
     return res.data.data.map((c: { _id: string; name: string }) => ({
@@ -107,9 +108,6 @@ export const addIncomeCategory = async (name: string): Promise<boolean> => {
     });
     return true;
   } catch (e) {
-    const err = e as AxiosError;
-    const obj = JSON.parse(err.request._response);
-    console.log("Error response message:", obj.message);
     return false;
   }
 };
@@ -153,9 +151,6 @@ export const deleteCategory = async (categoryId: string): Promise<boolean> => {
     await axios.delete(`users/deleteCategory/${categoryId}`);
     return true;
   } catch (e) {
-    const err = e as AxiosError;
-    const obj = JSON.parse(err.request._response);
-    console.log("Error response message:", obj.message);
     return false;
   }
 };
