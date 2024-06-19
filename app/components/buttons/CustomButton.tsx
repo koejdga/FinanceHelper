@@ -28,7 +28,7 @@ const CustomButton: React.FC<Props> = ({
   style,
 }) => {
   return (
-    <Pressable style={[styles.button, style]} onPress={onPress}>
+    <Pressable role={"button"} style={[styles.button, style]} onPress={onPress}>
       <Text
         style={[
           Fonts[FontNames.TITLE_3],

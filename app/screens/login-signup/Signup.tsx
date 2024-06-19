@@ -1,5 +1,8 @@
 import { SimpleSignUpForm } from "@/app/components/form-components/SimpleSignUpForm";
 import { formContainerStyles } from "@/app/constants/Styles";
+import { Pressable, SafeAreaView, Text, View, Alert } from "react-native";
+import { FontNames, Fonts } from "../../constants/Fonts";
+import {createUserWithEmailAndPassword, updateProfile} from "@firebase/auth";
 import { appAuth } from "@/firebaseConfig";
 import { createUserWithEmailAndPassword, updateProfile } from "@firebase/auth";
 import { Alert, Pressable, SafeAreaView, Text, View } from "react-native";

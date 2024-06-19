@@ -1,12 +1,11 @@
 import { base } from "@/app/constants/Colors";
 import { formStyles } from "@/app/constants/Styles";
+import {TextInput, TextInputProps, View} from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useState } from "react";
 import { TextInput, View } from "react-native";
 
-type SecureTextProps = {
-  onChangeText?: (text: string) => void;
-};
+type SecureTextProps = TextInputProps;
 
 export function SecureTextInput(props: SecureTextProps) {
   const [showPassword, setShowPassword] = useState(false);
@@ -24,9 +23,7 @@ export function SecureTextInput(props: SecureTextProps) {
         secureTextEntry={!showPassword}
         placeholder="Password"
         placeholderTextColor={base.light.light20}
-        onChangeText={(value) =>
-          props.onChangeText ? props.onChangeText(value) : null
-        }
+        {...props}
         style={[formStyles.textInput]}
       />
       <Ionicons
