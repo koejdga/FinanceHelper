@@ -47,11 +47,9 @@ export const getAllExpenseCategoriesByDate = async (
   categoriesWithNoExpenses: Category[];
 }> => {
   try {
-    console.log("getAllExpenseCategoriesByDate");
     const res = await axios.get(
       `expenseCategory/AllCategories/${month}/${year}`
     );
-    console.log("res:", res);
 
     const categoriesWithLimits = res.data.categoriesWithLimits.map(
       (c: {

@@ -18,10 +18,10 @@ const EmailVerification = ({ navigation }) => {
       appAuth.currentUser.reload().then(async () => {
         if (appAuth.currentUser && appAuth.currentUser.emailVerified) {
           console.log("creating user");
+          clearInterval(interval);
           const created = await createUser(appAuth.currentUser.uid);
           if (created) {
             navigation.navigate("MainApp");
-            clearInterval(interval);
           }
         }
       });
