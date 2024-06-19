@@ -18,11 +18,13 @@ import { base, red } from "../../constants/Colors";
 import { FontNames, Fonts } from "../../constants/Fonts";
 import { useTheme } from "@react-navigation/native";
 import { appAuth } from "@/firebaseConfig";
+import {nameChecker} from "@/app/utils/validation-scripts/login-validation";
+import {updateProfile} from "@firebase/auth";
 
 const Profile = ({ navigation }) => {
   const { dark } = useTheme();
   const [editMode, setEditMode] = useState(false);
-  const [username, setUsername] = useState("Kate Johnson");
+  const [username, setUsername] = useState(appAuth.currentUser.displayName);
 
   const logoutProcedure = () => {
     Alert.alert("Logout", "Are you sure you want to logout?", [
@@ -40,6 +42,16 @@ const Profile = ({ navigation }) => {
       },
     ]);
   };
+
+  const changeUsername = (username: string) => {
+      const nameCheck = nameChecker(username);
+      if(!nameCheck.isValid) setUsername(appAuth.currentUser.displayName);
+      else {
+          updateProfile(appAuth.currentUser, {
+              displayName: username
+          }).then()
+      }
+  }
 
   return (
     <SafeAreaView>
@@ -83,7 +95,12 @@ const Profile = ({ navigation }) => {
               onChangeText={(value) => setUsername(value)}
               style={{ flex: 1, marginHorizontal: 0, marginBottom: 0 }}
             />
-            <Pressable onPress={() => setEditMode(false)}>
+            <Pressable onPress={() => {
+                setEditMode(false);
+                changeUsername(username);
+            }
+            }
+            >
               <CheckIcon color={base.light.light20} size={30} />
             </Pressable>
           </>
