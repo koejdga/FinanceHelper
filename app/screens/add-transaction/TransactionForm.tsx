@@ -41,10 +41,6 @@ const TransactionForm = ({ route, navigation }) => {
   const [note, setNote] = useState<string>(transaction?.note);
 
   useEffect(() => {
-    console.log("account:", account);
-  }, [account]);
-
-  useEffect(() => {
     setEditting(transaction !== undefined);
     if (transaction !== undefined) {
       setDate(new Date(year, month, transaction?.date));

@@ -5,13 +5,11 @@ import ExpenseCategoryForm from "./ExpenseCategoryForm";
 import FullScreenTransaction from "./FullScreenTransaction";
 import IncomeCategoryForm from "./IncomeCategoryForm";
 import TransactionTabs from "./TransactionTabs";
-import {NavigationContainer} from "@react-navigation/native";
 
 const Stack = createNativeStackNavigator();
 
 const Transaction = () => {
   return (
-      <NavigationContainer>
     <Stack.Navigator>
       <Stack.Screen
         name="TransactionTabs"
@@ -51,7 +49,6 @@ const Transaction = () => {
         options={{ headerTitle: "Full Info" }}
       />
     </Stack.Navigator>
-      </NavigationContainer>
   );
 };
 

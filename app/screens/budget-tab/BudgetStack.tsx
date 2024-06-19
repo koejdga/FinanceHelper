@@ -1,13 +1,11 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Accounts from "./Accounts";
 import AccountForm from "./AccountForm";
-import { NavigationContainer } from "@react-navigation/native";
+import Accounts from "./Accounts";
 
 const Stack = createNativeStackNavigator();
 
 const BudgetStack = () => {
   return (
-      <NavigationContainer>
     <Stack.Navigator>
       <Stack.Screen
         name="Accounts"
@@ -26,7 +24,6 @@ const BudgetStack = () => {
         options={{ headerTitle: "Edit Account" }}
       />
     </Stack.Navigator>
-      </NavigationContainer>
   );
 };
 
