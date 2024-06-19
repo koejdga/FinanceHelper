@@ -16,6 +16,7 @@ jest.mock('@firebase/auth', () =>
             return Promise.resolve()
         })
     }));
+jest.mock("@/app/utils/server-communication/UserRequests")
 describe('EmailVerification', () => {
     it('Renders successfully', () => {
         let screen = render(<EmailVerification navigation={jest.fn()}/>);

@@ -3,10 +3,6 @@ import {mockNavigation} from "@/app/utils/test-utils";
 import Accounts from "@/app/screens/budget-tab/Accounts";
 import React from "react";
 
-jest.mock("@/app/utils/ServerCommunication", () => ({
-    deleteAccount: jest.fn(),
-    getAllAccounts: jest.fn(() => {return []})
-}))
 jest.mock("@react-navigation/native", () => (
     {
         ...jest.requireActual("@react-navigation/native"),
@@ -18,7 +14,8 @@ jest.mock("@react-navigation/native", () => (
         )
     }
 ))
-jest.spyOn(React, 'useEffect').mockImplementation();
+
+jest.mock("@/app/utils/server-communication/AccountRequests")
 describe('Accounts', () => {
     it('Renders successfully', () => {
         let accounts = render(<Accounts navigation={mockNavigation.navigation}/>);

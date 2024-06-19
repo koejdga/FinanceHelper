@@ -1,11 +1,11 @@
 import {render} from '@testing-library/react-native';
 import {mockNavigation} from "@/app/utils/test-utils";
-import AddTransferForm from "@/app/screens/add-transaction/AddTransferForm";
+import AddFormGeneral from "@/app/screens/add-transaction/FormGeneral";
 
 jest.mock("react-native-date-picker")
-describe('AddTransferForm', () => {
+describe('AddFormGeneral', () => {
     it('Renders successfully', () => {
-        let form = render(<AddTransferForm navigation={mockNavigation.navigation}/>);
+        let form = render(<AddFormGeneral {...mockNavigation}/>);
         expect(form).toBeDefined();
     });
 })

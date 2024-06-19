@@ -3,14 +3,24 @@ import React from "react";
 import TransactionTabs from "@/app/screens/transaction-tab/TransactionTabs";
 import {mockNavigation} from "@/app/utils/test-utils";
 
-jest.mock("@/app/utils/ServerCommunication", () => (
-    {
-        deleteCategory: jest.fn(),
-        getAllMonthSummaries: jest.fn(() => {return []}),
-        getAllCategories: jest.fn(() => {return []}),
-        getAllTransactions: jest.fn(() => {return []})
-    }
-))
+jest.mock("@/app/utils/server-communication/CategoryRequests", () => ({
+    getAllExpenseCategoriesByDate: jest.fn(() => {return Promise.resolve({
+        categoriesWithLimits: [],
+        categoriesWithoutLimits: [],
+        categoriesWithNoExpenses: []
+    })}),
+    getAllIncomeCategories: jest.fn(() => {return Promise.resolve([])})
+}))
+jest.mock("@/app/utils/server-communication/TransactionRequests", () => ({
+    getAllTransactions: jest.fn(() => {
+        return Promise.resolve({
+            transactions: [],
+            amountIncome: 1,
+            amountExpense: 1,
+            total: 0
+        })
+    })
+}))
 jest.mock("@react-navigation/native", () => (
     {
         ...jest.requireActual("@react-navigation/native"),

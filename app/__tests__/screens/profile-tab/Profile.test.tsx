@@ -5,9 +5,16 @@ import Profile from "@/app/screens/profile-tab/Profile";
 
 jest.mock('@/firebaseConfig', () => ({
     appAuth: {
-        signOut: jest.fn(() => {return Promise.resolve()})
+        signOut: jest.fn(() => {return Promise.resolve()}),
+        currentUser: {
+            displayName: "test"
+        }
     }
 }));
+
+jest.mock("@firebase/auth", () => ({
+    updateProfile: jest.fn(() => {return Promise.resolve()})
+}))
 
 describe('Profile', () => {
     it('Renders successfully', () => {

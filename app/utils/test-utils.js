@@ -3,7 +3,17 @@ export const mockNavigation = {
         params: {
             screenNumber: 1,
             isIncome: true,
-            options: []
+            options: [],
+            transaction: {
+                id: "test",
+                date: 1234,
+                dayOfWeek: 3,
+                category: "test",
+                amount: 5,
+                account: "test",
+                type: "test",
+                note: "test"
+            }
         }
     },
     navigation: {

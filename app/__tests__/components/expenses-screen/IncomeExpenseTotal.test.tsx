@@ -3,7 +3,7 @@ import IncomeExpenseTotal from "@/app/components/expenses-screen/IncomeExpenseTo
 
 describe('IncomeExpenseTotal', () => {
     it('Renders successfully', () => {
-        let total = render(<IncomeExpenseTotal expense={5} income={5}/>);
+        let total = render(<IncomeExpenseTotal expense={5} income={5} total={5}/>);
         expect(total).toBeDefined();
     });
 })
