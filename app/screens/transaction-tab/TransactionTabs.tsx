@@ -1,26 +1,47 @@
 import Separator from "@/app/components/Separator";
+import AddTransactionButton from "@/app/components/buttons/AddTransactionButton";
+import ChooseOneOptionButtons, {
+  TransactionTabsOptions,
+} from "@/app/components/choose-one-option-buttons/ChooseOneOptionButtons";
 import DailyExpensesHistory from "@/app/components/expenses-screen/DailyExpensesHistory";
 import HeaderWithMonthOrYear from "@/app/components/expenses-screen/HeaderWithMonthOrYear";
 import IncomeExpenseTotal from "@/app/components/expenses-screen/IncomeExpenseTotal";
 import MonthlyExpensesHistory from "@/app/components/expenses-screen/MonthlyExpensesHistory";
 import { Accent } from "@/app/constants/Colors";
 import { FontNames, Fonts } from "@/app/constants/Fonts";
-import { useState } from "react";
+import { Transaction } from "@/app/utils/Interfaces";
+import { getAllTransactions } from "@/app/utils/server-communication/TransactionRequests";
+import { useIsFocused } from "@react-navigation/native";
+import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native";
 import Limits from "./Limits";
 import Statistics from "./Statistics";
-import ChooseOneOptionButtons, {
-  TransactionTabsOptions,
-} from "@/app/components/choose-one-option-buttons/ChooseOneOptionButtons";
-import AddTransactionButton from "@/app/components/buttons/AddTransactionButton";
 
 const TransactionTabs = ({ navigation }) => {
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [amountIncome, setAmountIncome] = useState<number>(0);
+  const [amountExpense, setAmountExpense] = useState<number>(0);
+  const [total, setTotal] = useState<number>(0);
+  const isFocused = useIsFocused();
+
+  const [monthNumber, setMonthNumber] = useState(5);
+  const [year, setYear] = useState(2024);
+
   const [selected, setSelected] = useState<string>(
     TransactionTabsOptions.LIMITS.toString()
   );
 
-  const [monthNumber, setMonthNumber] = useState(4);
-  const [year, setYear] = useState(2024);
+  useEffect(() => {
+    const init = async () => {
+      const transactionsInfo = await getAllTransactions(monthNumber, year);
+      setTransactions(transactionsInfo.transactions);
+      setAmountIncome(transactionsInfo.amountIncome);
+      setAmountExpense(transactionsInfo.amountExpense);
+      setTotal(transactionsInfo.total);
+    };
+
+    if (isFocused) init();
+  }, [isFocused, monthNumber]);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -51,51 +72,41 @@ const TransactionTabs = ({ navigation }) => {
 
       <Separator />
 
-      {(selected === TransactionTabsOptions.DAILY.toString() ||
-        selected === TransactionTabsOptions.MONTHLY.toString()) && (
+      {selected === TransactionTabsOptions.DAILY.toString() && (
         <>
-          <IncomeExpenseTotal income={15500} expense={4878.5} />
+          <IncomeExpenseTotal
+            income={amountIncome}
+            expense={amountExpense}
+            total={total}
+          />
           <Separator />
         </>
       )}
 
       {selected === TransactionTabsOptions.DAILY.toString() && (
         <DailyExpensesHistory
-          date={new Date()}
-          expenses={[
-            {
-              name: "Food",
-              typeOfCard: "Cash",
-              amountOfMoneyUAH: 113,
-              isIncome: false,
-            },
-            {
-              name: "Food",
-              typeOfCard: "Cash",
-              amountOfMoneyUAH: 112,
-              isIncome: false,
-            },
-          ]}
+          transactions={transactions}
+          navigation={navigation}
+          month={monthNumber}
+          year={year}
         />
       )}
 
       {selected === TransactionTabsOptions.MONTHLY.toString() && (
-        <MonthlyExpensesHistory
-          monthNumber={4}
-          income={15500}
-          expense={4878.5}
-        />
+        <MonthlyExpensesHistory year={2024} />
       )}
 
-      {selected === TransactionTabsOptions.LIMITS.toString() && <Limits />}
+      {selected === TransactionTabsOptions.LIMITS.toString() && (
+        <Limits navigation={navigation} month={monthNumber} year={year} />
+      )}
 
       {selected === TransactionTabsOptions.STATISTICS.toString() && (
         <Statistics />
       )}
 
       <AddTransactionButton
-        onPress={() => {
-          navigation.navigate("AddFormGeneral");
+        onPress={async () => {
+          navigation.navigate("FormGeneral");
         }}
       />
     </SafeAreaView>

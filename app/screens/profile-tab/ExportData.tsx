@@ -1,5 +1,5 @@
 import CustomButton from "@/app/components/buttons/CustomButton";
-import OneQuestionExportData from "@/app/components/one-row/OneQuestionExportData";
+import OneQuestionDropdown from "@/app/components/one-row/OneQuestionDropdown";
 import { SafeAreaView, View } from "react-native";
 
 const dataType = [
@@ -24,15 +24,12 @@ const ExportData = ({ navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={{ marginTop: 40, gap: 24 }}>
-        <OneQuestionExportData
+        <OneQuestionDropdown
           question="What data do your want to export?"
           variants={dataType}
         />
-        <OneQuestionExportData
-          question="What date range?"
-          variants={dateRange}
-        />
-        <OneQuestionExportData
+        <OneQuestionDropdown question="What date range?" variants={dateRange} />
+        <OneQuestionDropdown
           question="What format do you want to export?"
           variants={dataFormat}
         />

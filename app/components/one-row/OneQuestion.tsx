@@ -1,16 +1,15 @@
-import { Fonts, FontNames } from "@/app/constants/Fonts";
+import { base } from "@/app/constants/Colors";
+import { FontNames, Fonts } from "@/app/constants/Fonts";
+import { useTheme } from "@react-navigation/native";
 import React from "react";
 import { Text, View } from "react-native";
-import CustomDropdown from "../form-components/CustomDropdown";
-import { base } from "@/app/constants/Colors";
-import { useTheme } from "@react-navigation/native";
 
 type Props = {
   question: string;
-  variants: { label: string; value: string }[];
+  inputField: JSX.Element;
 };
 
-const OneQuestionExportData: React.FC<Props> = ({ question, variants }) => {
+const OneQuestion: React.FC<Props> = ({ question, inputField }) => {
   const { dark } = useTheme();
 
   return (
@@ -23,9 +22,9 @@ const OneQuestionExportData: React.FC<Props> = ({ question, variants }) => {
       >
         {question}
       </Text>
-      <CustomDropdown variants={variants} style={{ marginTop: 12 }} />
+      {inputField}
     </View>
   );
 };
 
-export default OneQuestionExportData;
+export default OneQuestion;

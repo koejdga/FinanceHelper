@@ -1,8 +1,8 @@
-import { StyleSheet, Text, View, ViewStyle } from "react-native";
 import React from "react";
+import { StyleSheet, View, ViewStyle } from "react-native";
+import { ScreenNumber } from "../../screens/login-signup/OnboardingScreen";
 import BigDot from "./BigDot";
 import SmallDot from "./SmallDot";
-import { ScreenNumber } from "../../screens/login-signup/OnboardingScreen";
 
 type Props = {
   style?: ViewStyle;

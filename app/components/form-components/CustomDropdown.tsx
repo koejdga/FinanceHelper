@@ -7,11 +7,18 @@ import { Dropdown } from "react-native-element-dropdown";
 type Props = {
   variants: { label: string; value: string }[];
   style?: StyleProp<ViewStyle>;
+  onChange?: (item: { label: string; value: string }) => void;
+  value: { label: string; value: string };
 };
 
-const CustomDropdown: React.FC<Props> = ({ variants, style }) => {
+const CustomDropdown: React.FC<Props> = ({
+  variants,
+  style,
+  onChange,
+  value,
+}) => {
   const { dark } = useTheme();
-  const [value, setValue] = useState(variants[0]);
+  // const [value, setValue] = useState(variants[0]);
   const [isFocus, setIsFocus] = useState(false);
 
   return (
@@ -36,10 +43,7 @@ const CustomDropdown: React.FC<Props> = ({ variants, style }) => {
       value={value}
       onFocus={() => setIsFocus(true)}
       onBlur={() => setIsFocus(false)}
-      onChange={(item) => {
-        setValue(item);
-        setIsFocus(false);
-      }}
+      onChange={onChange}
     />
   );
 };

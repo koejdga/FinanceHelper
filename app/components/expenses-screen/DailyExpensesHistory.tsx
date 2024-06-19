@@ -1,52 +1,75 @@
-import { ScrollView, Text, View } from "react-native";
-import { ExpenseDark, IncomeDark } from "../../constants/Colors";
-import { FontNames, Fonts } from "../../constants/Fonts";
+import { Transaction } from "@/app/utils/Interfaces";
+import { convertNumberToWeekDay } from "@/app/utils/Utils";
+import { useEffect, useState } from "react";
+import { Pressable, ScrollView, View } from "react-native";
 import Separator from "../Separator";
 import OneExpenseRow from "./OneExpenseRow";
-import { convertNumberToMoney } from "../../utils/Utils";
 import OneSummaryRow from "./OneSummaryRow";
 
-type Expense = {
-  name: string;
-  typeOfCard: string;
-  amountOfMoneyUAH: number;
-  isIncome: boolean;
-};
-
 type Props = {
-  date: Date;
-  expenses: Expense[];
+  transactions: Transaction[];
+  month: number;
+  year: number;
+  navigation: any;
 };
 
-const DailyExpensesHistory: React.FC<Props> = ({ date, expenses }) => {
-  const totalIncome = expenses.reduce(
-    (a, b) => a + (b.isIncome ? b.amountOfMoneyUAH : 0),
-    0
-  );
-
-  const totalExpense = expenses.reduce(
-    (a, b) => a + (!b.isIncome ? b.amountOfMoneyUAH : 0),
-    0
-  );
+const DailyExpensesHistory: React.FC<Props> = ({
+  transactions: transactionsInput,
+  month,
+  year,
+  navigation,
+}) => {
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  useEffect(() => {
+    const transactions = transactionsInput.sort((a, b) =>
+      a.date < b.date ? 1 : -1
+    );
+    setTransactions(transactions);
+  }, [transactionsInput]);
 
   return (
     <ScrollView>
-      <OneSummaryRow
-        periodName={`${date.getDate()} ${date.toLocaleDateString("en-US", {
-          weekday: "short",
-        })}`}
-        totalIncome={totalIncome}
-        totalExpense={totalExpense}
-      />
-      <Separator />
-      {expenses.map((expense, index) => (
-        <OneExpenseRow
-          name={expense.name}
-          typeOfCard={expense.typeOfCard}
-          amountOfMoney={expense.amountOfMoneyUAH}
-          isIncome={expense.isIncome}
-          key={"dailyExpense" + index}
-        />
+      {transactions.map((transaction, index) => (
+        <View key={"dailyExpense" + index}>
+          {(index === 0 ||
+            transaction.date != transactions[index - 1].date) && (
+            <View>
+              {index !== 0 && <Separator />}
+              <OneSummaryRow
+                periodName={`${transaction.date} ${convertNumberToWeekDay(
+                  transaction.dayOfWeek
+                )}`}
+                totalIncome={transactions
+                  .filter(
+                    (t) => t.date === transaction.date && t.type === "income"
+                  )
+                  .reduce((a, b) => a + b.amount, 0)}
+                totalExpense={transactions
+                  .filter(
+                    (t) => t.date === transaction.date && t.type === "expense"
+                  )
+                  .reduce((a, b) => a + b.amount, 0)}
+              />
+              <Separator />
+            </View>
+          )}
+          <Pressable
+            onPress={() => {
+              navigation.navigate("FullScreenTransaction", {
+                transaction: transaction,
+                month: month,
+                year: year,
+              });
+            }}
+          >
+            <OneExpenseRow
+              name={transaction.category}
+              typeOfCard={transaction.account}
+              amountOfMoney={transaction.amount}
+              isIncome={transaction.type === "income"}
+            />
+          </Pressable>
+        </View>
       ))}
       <Separator />
     </ScrollView>

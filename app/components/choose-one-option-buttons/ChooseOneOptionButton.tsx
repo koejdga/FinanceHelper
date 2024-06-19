@@ -1,6 +1,6 @@
 import { base } from "@/app/constants/Colors";
-import { Pressable, StyleProp, Text, TextStyle, ViewStyle } from "react-native";
 import { useTheme } from "@react-navigation/native";
+import { Pressable, StyleProp, Text, TextStyle, ViewStyle } from "react-native";
 
 interface Props<T> {
   dictOfPositions: object;
@@ -26,8 +26,6 @@ const ChooseOneOptionButton = <T,>({
       style={style}
       onPress={() => {
         setSelected(option);
-        console.log("option");
-        console.log(option);
       }}
       onLayout={(event) => {
         const { x, width } = event.nativeEvent.layout;

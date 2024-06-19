@@ -1,3 +1,4 @@
+import { useTheme } from "@react-navigation/native";
 import { Text, View } from "react-native";
 import {
   ExpenseDark,
@@ -8,7 +9,6 @@ import {
 } from "../../constants/Colors";
 import { FontNames, Fonts } from "../../constants/Fonts";
 import { convertNumberToMoney } from "../../utils/Utils";
-import { useTheme } from "@react-navigation/native";
 
 type Props = {
   name: string;
