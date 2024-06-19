@@ -14,11 +14,19 @@ const FullScreenTransaction = ({ route, navigation }) => {
   const date = new Date(year, month, transaction.date);
 
   const edit = () => {
-    navigation.navigate("EditExpenseForm", {
-      transaction: transaction,
-      month: month,
-      year: year,
-    });
+    if (transaction.type === "expense") {
+      navigation.navigate("EditExpenseForm", {
+        transaction: transaction,
+        month: month,
+        year: year,
+      });
+    } else {
+      navigation.navigate("EditIncomeForm", {
+        transaction: transaction,
+        month: month,
+        year: year,
+      });
+    }
   };
 
   const deleteFunction = async () => {

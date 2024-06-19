@@ -109,7 +109,8 @@ const TransactionForm = ({ route, navigation }) => {
       account.id,
       date,
       amount !== "" ? amount : 0,
-      note
+      note,
+      transaction.type
     );
     if (edited)
       navigation.navigate("FullScreenTransaction", {

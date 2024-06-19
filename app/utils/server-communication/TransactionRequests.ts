@@ -106,21 +106,31 @@ export const addTransfer = async (
 };
 
 export const editTransaction = async (
-  expenseId: string,
+  transactionId: string,
   categoryId: string,
   accountId: string,
   date: Date,
   amount: number,
-  note: string
+  note: string,
+  type: string
 ): Promise<boolean> => {
   try {
-    await axios.put(`expense/updateExpense/${expenseId}`, {
-      categoryId: categoryId,
-      date: date.toJSON(),
-      note: note,
-      amount: amount,
-      account: accountId,
-    });
+    if (type === "expense")
+      await axios.put(`expense/updateExpense/${transactionId}`, {
+        categoryId: categoryId,
+        date: date.toJSON(),
+        note: note,
+        amount: amount,
+        account: accountId,
+      });
+    else
+      await axios.put(`income/updateIncome/${transactionId}`, {
+        categoryId: categoryId,
+        date: date.toJSON(),
+        note: note,
+        amount: amount,
+        account: accountId,
+      });
     return true;
   } catch (e) {
     return false;
