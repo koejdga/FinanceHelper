@@ -20,10 +20,9 @@ const DailyExpensesHistory: React.FC<Props> = ({
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   useEffect(() => {
     const transactions = transactionsInput.sort((a, b) =>
-      a.date < b.date ? 1 : -1
+      new Date(a.fullDate) > new Date(b.fullDate) ? 1 : -1
     );
 
-    console.log(transactions);
     setTransactions(transactions);
   }, [transactionsInput]);
 

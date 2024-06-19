@@ -41,10 +41,6 @@ const TransactionForm = ({ route, navigation }) => {
   const [note, setNote] = useState<string>(transaction?.note);
 
   useEffect(() => {
-    console.log("account:", account);
-  }, [account]);
-
-  useEffect(() => {
     setEditting(transaction !== undefined);
     if (transaction !== undefined) {
       setDate(new Date(transaction.fullDate));
@@ -65,7 +61,7 @@ const TransactionForm = ({ route, navigation }) => {
       setCategories(categories);
       setAccounts(accounts);
 
-      if (editting) {
+      if (transaction !== undefined) {
         setCategory(
           categories.find((c) => c.categoryName === transaction?.category)
         );
