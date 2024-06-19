@@ -6,19 +6,20 @@ jest.mock('@/firebaseConfig', () =>
         currentUser: {
             emailVerified: true,
             reload: () => {
-                return new Promise(() => {})
+                return Promise.resolve()
             }
         }
         }}));
 jest.mock('@firebase/auth', () =>
     ({
-        sendEmailVerification: () => {
-            return new Promise(() => {});
-        }
+        sendEmailVerification: jest.fn(() => {
+            return Promise.resolve()
+        })
     }));
+jest.mock("@/app/utils/server-communication/UserRequests")
 describe('EmailVerification', () => {
     it('Renders successfully', () => {
-        let form = render(<EmailVerification navigation={jest.fn()}/>);
-        expect(form).toBeDefined();
+        let screen = render(<EmailVerification navigation={jest.fn()}/>);
+        expect(screen).toBeDefined();
     });
 })

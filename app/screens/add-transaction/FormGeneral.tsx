@@ -4,6 +4,7 @@ import { Transaction } from "@/app/utils/Interfaces";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useEffect, useState } from "react";
 import EmptyScreen from "../EmptyScreen";
+import {NavigationContainer} from "@react-navigation/native";
 import AddTransferForm from "./AddTransferForm";
 import TransactionForm from "./TransactionForm";
 
@@ -27,6 +28,7 @@ const AddFormGeneral = ({ route, navigation }) => {
   }, [selected]);
 
   return (
+<NavigationContainer>
     <Stack.Navigator screenOptions={{ headerShown: false, animation: "none" }}>
       <Stack.Screen name="Launch" component={EmptyScreen} />
       <Stack.Screen
@@ -50,6 +52,7 @@ const AddFormGeneral = ({ route, navigation }) => {
         component={AddTransferForm}
       />
     </Stack.Navigator>
+</NavigationContainer>
   );
 };
 

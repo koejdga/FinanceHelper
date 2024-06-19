@@ -1,18 +1,15 @@
 import {render, userEvent} from '@testing-library/react-native';
 import Signup from "@/app/screens/login-signup/Signup";
-jest.mock('@firebase/auth', () => {
-    return {
+jest.mock('@firebase/auth', () => ( {
         createUserWithEmailAndPassword: jest.fn(() => {
-            return new Promise(() => {return {userCredential: {user: ""}}})
+            return Promise.resolve({userCredential: {user: ""}})
         }),
         updateProfile: jest.fn()
     }
-});
-jest.mock('@/firebaseConfig', () => {
-    return {
+));
+jest.mock('@/firebaseConfig', () => ({
         appAuth: null
-    }
-});
+}));
 import {createUserWithEmailAndPassword} from '@firebase/auth';
 import {UserEventInstance} from "@testing-library/react-native/build/user-event/setup";
 
@@ -24,16 +21,16 @@ describe('Signup', () => {
     })
 
     it('Renders successfully', () => {
-        let form = render(<Signup navigation={jest.fn()}/>);
-        expect(form).toBeDefined();
+        let screen = render(<Signup navigation={jest.fn()}/>);
+        expect(screen).toBeDefined();
     });
 
     it('Rejects invalid submit', async () => {
-        let form = render(<Signup navigation={jest.fn()}/>);
-        const nameInput = form.getByPlaceholderText("Name");
-        const emailInput = form.getByPlaceholderText("Email");
-        const passwordInput = form.getByPlaceholderText("Password");
-        const button = form.getByRole("button");
+        let screen = render(<Signup navigation={jest.fn()}/>);
+        const nameInput = screen.getByPlaceholderText("Name");
+        const emailInput = screen.getByPlaceholderText("Email");
+        const passwordInput = screen.getByPlaceholderText("Password");
+        const button = screen.getByRole("button");
         let name = "";
         let email = "someEmail@gmail.com";
         let password = "password";
@@ -46,11 +43,11 @@ describe('Signup', () => {
     })
 
     it('Successfully handles valid submit', async () => {
-        let form = render(<Signup navigation={jest.fn()}/>);
-        const nameInput = form.getByPlaceholderText("Name");
-        const emailInput = form.getByPlaceholderText("Email");
-        const passwordInput = form.getByPlaceholderText("Password");
-        const button = form.getByRole("button");
+        let screen = render(<Signup navigation={jest.fn()}/>);
+        const nameInput = screen.getByPlaceholderText("Name");
+        const emailInput = screen.getByPlaceholderText("Email");
+        const passwordInput = screen.getByPlaceholderText("Password");
+        const button = screen.getByRole("button");
         let name = "Name";
         let email = "someEmail@gmail.com";
         let password = "password";

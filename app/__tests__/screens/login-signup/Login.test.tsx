@@ -1,10 +1,13 @@
 import {render, userEvent} from '@testing-library/react-native';
 import Login from "@/app/screens/login-signup/Login";
+import {signInWithEmailAndPassword} from '@firebase/auth';
+import {UserEventInstance} from "@testing-library/react-native/build/user-event/setup";
+import {Alert} from "react-native";
 
 jest.mock('@firebase/auth', () => {
     return {
         signInWithEmailAndPassword: jest.fn(() => {
-            return new Promise(() => {})
+            return Promise.resolve()
         })
     }
 });
@@ -13,8 +16,7 @@ jest.mock('@/firebaseConfig', () => {
         appAuth: null
     }
 });
-import {signInWithEmailAndPassword} from '@firebase/auth';
-import {UserEventInstance} from "@testing-library/react-native/build/user-event/setup";
+jest.spyOn(Alert, "alert");
 
 describe('Login', () => {
     let user: UserEventInstance;
@@ -24,15 +26,15 @@ describe('Login', () => {
     })
 
     it('Renders successfully', () => {
-        let form = render(<Login navigation={jest.fn()}/>);
-        expect(form).toBeDefined();
+        let screen = render(<Login navigation={jest.fn()}/>);
+        expect(screen).toBeDefined();
     });
 
     it('Rejects invalid submit', async () => {
-        let form = render(<Login navigation={jest.fn()}/>);
-        const emailInput = form.getByPlaceholderText("Email");
-        const passwordInput = form.getByPlaceholderText("Password");
-        const button = form.getByRole("button");
+        let screen = render(<Login navigation={jest.fn()}/>);
+        const emailInput = screen.getByPlaceholderText("Email");
+        const passwordInput = screen.getByPlaceholderText("Password");
+        const button = screen.getByRole("button");
         let email = "someEmail@";
         let password = "password";
 
@@ -42,13 +44,14 @@ describe('Login', () => {
         await user.press(button);
         jest.runAllTimers();
         expect(signInWithEmailAndPassword).toHaveBeenCalledTimes(0);
+        expect(Alert.alert).toHaveBeenCalled();
     })
 
     it('Successfully handles valid submit', async () => {
-        let form = render(<Login navigation={jest.fn()}/>);
-        const emailInput = form.getByPlaceholderText("Email");
-        const passwordInput = form.getByPlaceholderText("Password");
-        const button = form.getByRole("button");
+        let screen = render(<Login navigation={jest.fn()}/>);
+        const emailInput = screen.getByPlaceholderText("Email");
+        const passwordInput = screen.getByPlaceholderText("Password");
+        const button = screen.getByRole("button");
         let email = "someEmail@gmail.com";
         let password = "password";
 
