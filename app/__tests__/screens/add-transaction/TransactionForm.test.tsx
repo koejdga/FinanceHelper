@@ -9,6 +9,16 @@ jest.mock("@react-navigation/native", () => (
         useTheme: jest.fn(() => {return true})
     }
 ))
+
+jest.mock("@/app/utils/server-communication/CategoryRequests", () => ({
+    getAllExpenseCategoriesByDate: jest.fn(() => {return Promise.resolve({
+        categoriesWithLimits: [],
+        categoriesWithoutLimits: [],
+        categoriesWithNoExpenses: []
+    })}),
+    getAllIncomeCategories: jest.fn(() => {return Promise.resolve([])})
+}))
+
 describe('AddTransactionForm', () => {
     it('Renders successfully', () => {
         let form = render(<AddTransactionForm route={mockNavigation.route} navigation={mockNavigation.navigation}/>);

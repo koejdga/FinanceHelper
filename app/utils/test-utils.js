@@ -20,6 +20,7 @@ export const mockNavigation = {
         push: jest.fn(),
         replace: jest.fn(),
         setOptions: jest.fn(),
+        goBack: jest.fn(),
         navigate: jest.fn()
     }
 }
