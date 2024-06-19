@@ -1,8 +1,8 @@
-import {TextInput, TextInputProps, View} from "react-native";
+import { base } from "@/app/constants/Colors";
+import { formStyles } from "@/app/constants/Styles";
+import { TextInput, TextInputProps, View } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useState } from "react";
-import { formStyles } from "@/app/constants/Styles";
-import { base } from "@/app/constants/Colors";
 
 type SecureTextProps = TextInputProps;
 

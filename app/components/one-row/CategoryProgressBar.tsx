@@ -1,12 +1,12 @@
+import { convertNumberToMoney } from "@/app/utils/Utils";
 import { useTheme } from "@react-navigation/native";
 import { Pressable, Text, View } from "react-native";
 import * as Progress from "react-native-progress";
 import { base } from "../../constants/Colors";
 import { FontNames, Fonts } from "../../constants/Fonts";
-import WigglyIcon from "../icons/WigglyIcon";
-import { convertNumberToMoney } from "@/app/utils/Utils";
-import EditIcon from "../icons/EditIcon";
 import DeleteIcon from "../icons/DeleteIcon";
+import EditIcon from "../icons/EditIcon";
+import WigglyIcon from "../icons/WigglyIcon";
 
 type Props = {
   categoryName: string;

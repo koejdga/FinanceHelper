@@ -1,106 +1,146 @@
 import CustomButton from "@/app/components/buttons/CustomButton";
-import ChooseTransaction from "@/app/components/choose-one-option-buttons/ChooseTransaction";
 import CustomDropdown from "@/app/components/form-components/CustomDropdown";
 import FormTextInput from "@/app/components/form-components/FormTextInput";
 import RowInAddTransactionForm from "@/app/components/one-row/RowInAddTransactionForm";
+import { Account } from "@/app/utils/Interfaces";
+import { getAllAccounts } from "@/app/utils/server-communication/AccountRequests";
+import { addTransfer } from "@/app/utils/server-communication/TransactionRequests";
 import { useEffect, useState } from "react";
-import { SafeAreaView, View } from "react-native";
+import {
+  Keyboard,
+  SafeAreaView,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 import DatePicker from "react-native-date-picker";
 
 const AddTransferForm = ({ navigation }) => {
-  useEffect(() => {
-    navigation.setOptions({
-      headerTitle: (props: any) => <ChooseTransaction {...props} />,
-    });
-  }, []);
-
   const [date, setDate] = useState<Date | undefined>(new Date());
-  const [name, setName] = useState("");
+  const [amount, setAmount] = useState<number>();
+  const [fromCard, setFromCard] = useState<Account>();
+  const [toCard, setToCard] = useState<Account>();
 
   const [openDatepicker, setOpenDatepicker] = useState(false);
+  const [accounts, setAccounts] = useState<Account[]>([]);
 
-  const categories = [
-    { label: "Food", value: "1" },
-    { label: "Household", value: "2" },
-    { label: "Hobby", value: "3" },
-  ];
+  useEffect(() => {
+    const init = async () => {
+      const accounts = await getAllAccounts();
+      setAccounts(accounts);
+    };
 
-  const accounts = [
-    { label: "Card 1", value: "1" },
-    { label: "Card 2", value: "2" },
-    { label: "Cash", value: "3" },
-  ];
+    init();
+  }, []);
+
+  const add = async () => {
+    const added = await addTransfer(amount, date, fromCard.id, toCard.id);
+    if (added) navigation.navigate("TransactionTabs");
+  };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={{ gap: 24, marginTop: 24, marginHorizontal: 16, flex: 1 }}>
-        <RowInAddTransactionForm
-          title={"Date"}
-          inputField={
-            <FormTextInput
-              value={date.toLocaleDateString("en-GB")}
-              placeholder={"Date"}
-              onChangeText={(value) => setName(value)}
-              onPress={() => setOpenDatepicker(true)}
-              style={{ marginBottom: 0, marginHorizontal: 0 }}
-              editable={false}
-            />
-          }
-        />
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <SafeAreaView style={{ flex: 1 }}>
+        <View style={{ gap: 24, marginTop: 24, marginHorizontal: 16, flex: 1 }}>
+          <RowInAddTransactionForm
+            title={"Date"}
+            inputField={
+              <FormTextInput
+                value={date.toLocaleDateString("en-GB")}
+                placeholder={"Date"}
+                onPress={() => setOpenDatepicker(true)}
+                style={{ marginBottom: 0, marginHorizontal: 0 }}
+                editable={false}
+              />
+            }
+          />
 
-        <RowInAddTransactionForm
-          title={"Amount"}
-          inputField={
-            <FormTextInput
-              keyboardType="decimal-pad"
-              placeholder={"Write an amount..."}
-              onChangeText={(value) => setName(value)}
-              style={{ marginBottom: 0, marginHorizontal: 0 }}
-              editable={true}
-            />
-          }
-        />
+          <RowInAddTransactionForm
+            title={"Amount"}
+            inputField={
+              <FormTextInput
+                keyboardType="decimal-pad"
+                placeholder={"Write an amount..."}
+                onChangeText={(value) => setAmount(parseFloat(value))}
+                style={{ marginBottom: 0, marginHorizontal: 0 }}
+                editable={true}
+              />
+            }
+          />
 
-        <RowInAddTransactionForm
-          title={"From"}
-          inputField={<CustomDropdown variants={accounts} />}
-        />
+          <RowInAddTransactionForm
+            title={"From"}
+            inputField={
+              <CustomDropdown
+                variants={accounts
+                  .map((a) => ({
+                    label: `${a.name} ${a.balance}`,
+                    value: a.id,
+                  }))
+                  .filter((a) => a.value != toCard?.id)}
+                value={
+                  fromCard
+                    ? {
+                        label: `${fromCard.name} ${fromCard.balance}`,
+                        value: fromCard.id,
+                      }
+                    : undefined
+                }
+                onChange={(item) =>
+                  setFromCard(accounts.find((a) => a.id === item.value))
+                }
+              />
+            }
+          />
 
-        <RowInAddTransactionForm
-          title={"To"}
-          inputField={<CustomDropdown variants={accounts} />}
-        />
+          <RowInAddTransactionForm
+            title={"To"}
+            inputField={
+              <CustomDropdown
+                variants={accounts
+                  .map((a) => ({
+                    label: `${a.name} ${a.balance}`,
+                    value: a.id,
+                  }))
+                  .filter((a) => a.value != fromCard?.id)}
+                value={
+                  toCard
+                    ? {
+                        label: `${toCard.name} ${toCard.balance}`,
+                        value: toCard.id,
+                      }
+                    : undefined
+                }
+                onChange={(item) =>
+                  setToCard(accounts.find((a) => a.id === item.value))
+                }
+              />
+            }
+          />
 
-        <RowInAddTransactionForm
-          title={"Note"}
-          inputField={
-            <FormTextInput
-              placeholder={"Write a decription..."}
-              onChangeText={(value) => setName(value)}
-              style={{ marginBottom: 0, marginHorizontal: 0 }}
-              editable={true}
-            />
-          }
-        />
-        <View style={{ flex: 1 }}></View>
+          <View style={{ flex: 1 }}></View>
 
-        <CustomButton title="Save" style={{ paddingHorizontal: 0 }} />
+          <CustomButton
+            title="Save"
+            style={{ paddingHorizontal: 0 }}
+            onPress={add}
+          />
 
-        <DatePicker
-          modal
-          open={openDatepicker}
-          date={date}
-          mode="date"
-          onConfirm={(date) => {
-            setOpenDatepicker(false);
-            setDate(date);
-          }}
-          onCancel={() => {
-            setOpenDatepicker(false);
-          }}
-        />
-      </View>
-    </SafeAreaView>
+          <DatePicker
+            modal
+            open={openDatepicker}
+            date={date}
+            mode="date"
+            onConfirm={(date) => {
+              setOpenDatepicker(false);
+              setDate(date);
+            }}
+            onCancel={() => {
+              setOpenDatepicker(false);
+            }}
+          />
+        </View>
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 };
 

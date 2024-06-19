@@ -3,8 +3,6 @@
  * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
  */
 
-import { useTheme } from "@react-navigation/native";
-
 export const base = {
   light: {
     light20: "#91919F",

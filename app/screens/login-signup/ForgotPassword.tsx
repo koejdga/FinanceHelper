@@ -1,30 +1,30 @@
-import {Alert, SafeAreaView, Text} from "react-native";
+import { Alert, SafeAreaView, Text } from "react-native";
 import CustomButton from "../../components/buttons/CustomButton";
 import { FontNames, Fonts } from "../../constants/Fonts";
 import FormTextInput from "@/app/components/form-components/FormTextInput";
-import {emailChecker} from "@/app/utils/validation-scripts/login-validation";
-import {sendPasswordResetEmail} from "@firebase/auth";
-import {appAuth} from "@/firebaseConfig";
-import {useState} from "react";
+import { emailChecker } from "@/app/utils/validation-scripts/login-validation";
+import { sendPasswordResetEmail } from "@firebase/auth";
+import { appAuth } from "@/firebaseConfig";
+import { useState } from "react";
 
 const ForgotPassword = ({ navigation }) => {
-    const [email, setEmail] = useState("");
-    const sendResetPasswordEmail = () => {
-        let emailCorrectness = emailChecker(email);
-        if (!emailCorrectness.isValid) {
-            let message = emailCorrectness.message;
-            Alert.alert("", message, [{ text: "OK" }]);
-        } else {
-            sendPasswordResetEmail(appAuth, email)
-                .then(() => {
-                    navigation.navigate("EmailOnTheWay");
-                })
-                .catch(() => {
-                    let message = "Something's wrong!";
-                    Alert.alert("", message, [{ text: "OK" }]);
-                });
-        }
-    };
+  const [email, setEmail] = useState("");
+  const sendResetPasswordEmail = () => {
+    let emailCorrectness = emailChecker(email);
+    if (!emailCorrectness.isValid) {
+      let message = emailCorrectness.message;
+      Alert.alert("", message, [{ text: "OK" }]);
+    } else {
+      sendPasswordResetEmail(appAuth, email)
+        .then(() => {
+          navigation.navigate("EmailOnTheWay");
+        })
+        .catch(() => {
+          let message = "Something's wrong!";
+          Alert.alert("", message, [{ text: "OK" }]);
+        });
+    }
+  };
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Text
@@ -48,13 +48,11 @@ const ForgotPassword = ({ navigation }) => {
       </Text>
 
       <FormTextInput
-          onChangeText={(text) => setEmail(text)}
-          placeholder="Email"
-          style={{ marginBottom: 32 }} />
-      <CustomButton
-        title="Continue"
-        onPress={sendResetPasswordEmail}
+        onChangeText={(text) => setEmail(text)}
+        placeholder="Email"
+        style={{ marginBottom: 32 }}
       />
+      <CustomButton title="Continue" onPress={sendResetPasswordEmail} />
     </SafeAreaView>
   );
 };

@@ -1,20 +1,15 @@
-import { View, Text } from "react-native";
+import { MonthSummary } from "@/app/utils/Interfaces";
+import { getAllMonthSummaries } from "@/app/utils/server-communication/UserRequests";
 import React, { useEffect, useState } from "react";
-import OneSummaryRow from "./OneSummaryRow";
+import { Text, View } from "react-native";
 import { convertNumberToMonthName } from "../../utils/Utils";
 import Separator from "../Separator";
-import { getAllMonthSummaries } from "@/app/utils/ServerCommunication";
 import IncomeExpenseTotal from "./IncomeExpenseTotal";
+import OneSummaryRow from "./OneSummaryRow";
 
 type Props = {
   year: number;
 };
-
-export interface MonthSummary {
-  expenseTotal: number;
-  incomeTotal: number;
-  month: number;
-}
 
 const MonthlyExpensesHistory: React.FC<Props> = ({ year }) => {
   const [yearInfo, setYearInfo] = useState<{
@@ -43,6 +38,7 @@ const MonthlyExpensesHistory: React.FC<Props> = ({ year }) => {
       <IncomeExpenseTotal
         income={yearInfo?.expenseTotal || 0}
         expense={yearInfo?.incomeTotal || 0}
+        total={yearInfo?.incomeTotal - yearInfo?.expenseTotal || 0}
       />
       <Separator />
       {monthSummaries.map((monthSummary, index) => (

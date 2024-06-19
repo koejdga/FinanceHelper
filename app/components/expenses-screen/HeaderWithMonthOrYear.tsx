@@ -1,11 +1,11 @@
-import { View, Text, Pressable } from "react-native";
-import React, { useState } from "react";
-import ArrowLeftMainIcon from "../icons/ArrowLeftMainIcon";
-import ArrowRightMainIcon from "../icons/ArrowRightMainIcon";
+import { base } from "@/app/constants/Colors";
+import { useTheme } from "@react-navigation/native";
+import React, { useEffect, useState } from "react";
+import { Pressable, Text, View } from "react-native";
 import { FontNames, Fonts } from "../../constants/Fonts";
 import { convertNumberToMonthName } from "../../utils/Utils";
-import { useTheme } from "@react-navigation/native";
-import { base } from "@/app/constants/Colors";
+import ArrowLeftMainIcon from "../icons/ArrowLeftMainIcon";
+import ArrowRightMainIcon from "../icons/ArrowRightMainIcon";
 
 type Props = {
   monthNumber?: number;
@@ -43,6 +43,12 @@ const HeaderWithMonthOrYear: React.FC<Props> = ({
     return <Text>Sorry, maybe you forgot to provide setMonth function</Text>;
   }
 
+  useEffect(() => {
+    setCanGoRight(
+      !(monthNumber === new Date().getMonth() && year === MAX_YEAR)
+    );
+  });
+
   const goLeft = () => {
     setCanGoRight(true);
     if (!showOnlyYear) {
@@ -69,7 +75,7 @@ const HeaderWithMonthOrYear: React.FC<Props> = ({
   const goRight = () => {
     setCanGoLeft(true);
     if (!showOnlyYear) {
-      if (monthNumber === 11 && year === MAX_YEAR) {
+      if (monthNumber === new Date().getMonth() && year === MAX_YEAR) {
         setCanGoRight(false);
         return;
       }

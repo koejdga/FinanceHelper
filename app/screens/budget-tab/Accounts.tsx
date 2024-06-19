@@ -6,17 +6,21 @@ import EditIcon from "@/app/components/icons/EditIcon";
 import OneCardRow from "@/app/components/one-row/OneCardRow";
 import { base } from "@/app/constants/Colors";
 import { FontNames, Fonts } from "@/app/constants/Fonts";
-import { deleteAccount, getAllAccounts } from "@/app/utils/ServerCommunication";
-import { useTheme } from "@react-navigation/native";
+import { Account } from "@/app/utils/Interfaces";
+import {
+  deleteAccount,
+  getAllAccounts,
+} from "@/app/utils/server-communication/AccountRequests";
+import { useIsFocused, useTheme } from "@react-navigation/native";
 import { useEffect, useState } from "react";
-import { Pressable, SafeAreaView, ScrollView, Text, View } from "react-native";
-import { useIsFocused } from "@react-navigation/native";
-
-export interface Account {
-  id: string;
-  name: string;
-  balance: number;
-}
+import {
+  Alert,
+  Pressable,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  View,
+} from "react-native";
 
 const Accounts = ({ navigation }) => {
   const { dark } = useTheme();
@@ -34,6 +38,14 @@ const Accounts = ({ navigation }) => {
     setEditMode(false);
     init();
   }, [isFocused]);
+
+  const deleteFunction = async (account: Account) => {
+    const deleted = await deleteAccount(account.id);
+    if (deleted) {
+      setAccounts(accounts.filter((a) => a.id !== account.id));
+      setEditMode(false);
+    }
+  };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -78,7 +90,10 @@ const Accounts = ({ navigation }) => {
       </Pressable>
       <Separator />
 
-      <IncomeExpenseTotal income={15500} expense={4878.5} />
+      <IncomeExpenseTotal
+        total={accounts?.reduce((a, b) => a + b.balance, 0) || 0}
+        onlyTotal
+      />
       <Separator />
       <ScrollView>
         {accounts && accounts.length <= 0 && (
@@ -100,14 +115,23 @@ const Accounts = ({ navigation }) => {
               editMode={editMode}
               editFunction={() => {
                 navigation.push("EditAccountForm", {
+                  accountId: account.id,
                   name: account.name,
                   amountOfMoney: account.balance,
                 });
               }}
               deleteFunction={async () => {
-                const deleted = await deleteAccount(account.id);
-                if (deleted)
-                  setAccounts(accounts.filter((a) => a.id !== account.id));
+                Alert.alert(
+                  `Delete ${account.name}`,
+                  `Are you sure you want to delete ${account.name}`,
+                  [
+                    {
+                      text: "Yes",
+                      onPress: async () => await deleteFunction(account),
+                    },
+                    { text: "No", style: "cancel" },
+                  ]
+                );
               }}
               key={"oneCardRow" + index}
             />

@@ -1,6 +1,6 @@
 import { base } from "@/app/constants/Colors";
-import { Pressable, StyleProp, Text, TextStyle, ViewStyle } from "react-native";
 import { useTheme } from "@react-navigation/native";
+import { Pressable, StyleProp, Text, TextStyle, ViewStyle } from "react-native";
 
 interface Props<T> {
   dictOfPositions: object;

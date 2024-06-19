@@ -1,12 +1,12 @@
 import { IncomeDark, IncomeLight, base } from "@/app/constants/Colors";
 import { FontNames, Fonts } from "@/app/constants/Fonts";
 import { convertNumberToMoney } from "@/app/utils/Utils";
+import { useTheme } from "@react-navigation/native";
 import { Pressable, Text, View } from "react-native";
 import Separator from "../Separator";
-import { useTheme } from "@react-navigation/native";
-import WigglyIcon from "../icons/WigglyIcon";
-import EditIcon from "../icons/EditIcon";
 import DeleteIcon from "../icons/DeleteIcon";
+import EditIcon from "../icons/EditIcon";
+import WigglyIcon from "../icons/WigglyIcon";
 
 type Props = {
   typeOfCard: string;

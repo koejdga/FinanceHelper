@@ -1,33 +1,35 @@
 import CustomButton from "@/app/components/buttons/CustomButton";
 import FormTextInput from "@/app/components/form-components/FormTextInput";
 import OneQuestion from "@/app/components/one-row/OneQuestion";
-import { addCategory } from "@/app/utils/ServerCommunication";
+import {
+  addIncomeCategory,
+  editIncomeCategory,
+} from "@/app/utils/server-communication/CategoryRequests";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
 
-const AddCategoryForm = ({ route, navigation }) => {
+const IncomeCategoryForm = ({ route, navigation }) => {
   const GAP_IN_QUESTION = 12;
+  const [categoryId, _] = useState((route.params?.categoryId as string) || "");
   const [name, setName] = useState((route.params?.name as string) || "");
-  const [limit, setLimit] = useState<number | undefined>(
-    (route.params?.limit as number) || undefined
-  );
+  const [editting, setEditting] = useState(false);
 
-  let editting = false;
   useEffect(() => {
-    editting = (name === undefined || limit === undefined) as boolean;
+    setEditting((categoryId !== undefined && categoryId !== "") as boolean);
   }, []);
 
   const add = async () => {
     try {
-      await addCategory(name, limit);
-      navigation.goBack();
+      const added = await addIncomeCategory(name);
+      if (added) navigation.goBack();
     } catch (error) {
       console.log(error);
     }
   };
 
   const edit = async () => {
-    navigation.goBack();
+    const edited = await editIncomeCategory(categoryId, name);
+    if (edited) navigation.goBack();
   };
 
   return (
@@ -43,20 +45,6 @@ const AddCategoryForm = ({ route, navigation }) => {
           />
         }
       />
-      <OneQuestion
-        question={
-          "How much money would you like to spend on this category? (optional)"
-        }
-        inputField={
-          <FormTextInput
-            value={limit ? limit.toString() : ""}
-            onChangeText={(value) => setLimit(parseFloat(value))}
-            maxLength={25}
-            style={{ marginHorizontal: 0, marginTop: GAP_IN_QUESTION }}
-            keyboardType="decimal-pad"
-          />
-        }
-      />
 
       <View style={{ flex: 1 }}></View>
       <CustomButton
@@ -67,4 +55,4 @@ const AddCategoryForm = ({ route, navigation }) => {
   );
 };
 
-export default AddCategoryForm;
+export default IncomeCategoryForm;

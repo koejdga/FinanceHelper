@@ -1,9 +1,8 @@
-import { Fonts, FontNames } from "@/app/constants/Fonts";
+import { base } from "@/app/constants/Colors";
+import { FontNames, Fonts } from "@/app/constants/Fonts";
+import { useTheme } from "@react-navigation/native";
 import React from "react";
 import { Text, View } from "react-native";
-import CustomDropdown from "../form-components/CustomDropdown";
-import { base } from "@/app/constants/Colors";
-import { useTheme } from "@react-navigation/native";
 
 type Props = {
   question: string;
