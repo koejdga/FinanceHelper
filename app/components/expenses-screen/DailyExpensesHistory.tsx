@@ -15,8 +15,6 @@ type Props = {
 
 const DailyExpensesHistory: React.FC<Props> = ({
   transactions: transactionsInput,
-  month,
-  year,
   navigation,
 }) => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
@@ -24,6 +22,8 @@ const DailyExpensesHistory: React.FC<Props> = ({
     const transactions = transactionsInput.sort((a, b) =>
       a.date < b.date ? 1 : -1
     );
+
+    console.log(transactions);
     setTransactions(transactions);
   }, [transactionsInput]);
 
@@ -32,21 +32,28 @@ const DailyExpensesHistory: React.FC<Props> = ({
       {transactions.map((transaction, index) => (
         <View key={"dailyExpense" + index}>
           {(index === 0 ||
-            transaction.date != transactions[index - 1].date) && (
+            new Date(transaction.fullDate).getDate() !=
+              new Date(transactions[index - 1].fullDate).getDate()) && (
             <View>
               {index !== 0 && <Separator />}
               <OneSummaryRow
-                periodName={`${transaction.date} ${convertNumberToWeekDay(
-                  transaction.dayOfWeek
-                )}`}
+                periodName={`${new Date(
+                  transaction.fullDate
+                ).getDate()} ${convertNumberToWeekDay(transaction.dayOfWeek)}`}
                 totalIncome={transactions
                   .filter(
-                    (t) => t.date === transaction.date && t.type === "income"
+                    (t) =>
+                      new Date(t.fullDate).getDate() ===
+                        new Date(transaction.fullDate).getDate() &&
+                      t.type === "income"
                   )
                   .reduce((a, b) => a + b.amount, 0)}
                 totalExpense={transactions
                   .filter(
-                    (t) => t.date === transaction.date && t.type === "expense"
+                    (t) =>
+                      new Date(t.fullDate).getDate() ===
+                        new Date(transaction.fullDate).getDate() &&
+                      t.type === "expense"
                   )
                   .reduce((a, b) => a + b.amount, 0)}
               />
@@ -57,8 +64,6 @@ const DailyExpensesHistory: React.FC<Props> = ({
             onPress={() => {
               navigation.navigate("FullScreenTransaction", {
                 transaction: transaction,
-                month: month,
-                year: year,
               });
             }}
           >

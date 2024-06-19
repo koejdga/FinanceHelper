@@ -6,8 +6,7 @@ export interface Account {
 
 export interface Transaction {
   id: string;
-  date: number;
-  dayOfWeek: number;
+  fullDate: Date;
   category: string;
   amount: number;
   account: string;

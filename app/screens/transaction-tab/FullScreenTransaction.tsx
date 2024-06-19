@@ -9,22 +9,15 @@ import { Transaction } from "@/app/utils/Interfaces";
 
 const FullScreenTransaction = ({ route, navigation }) => {
   const transaction = route.params?.transaction as Transaction;
-  const month = route.params?.month as number;
-  const year = route.params?.year as number;
-  const date = new Date(year, month, transaction.date);
 
   const edit = () => {
     if (transaction.type === "expense") {
       navigation.navigate("EditExpenseForm", {
         transaction: transaction,
-        month: month,
-        year: year,
       });
     } else {
       navigation.navigate("EditIncomeForm", {
         transaction: transaction,
-        month: month,
-        year: year,
       });
     }
   };
@@ -45,7 +38,7 @@ const FullScreenTransaction = ({ route, navigation }) => {
       <View style={{ flexDirection: "row" }}>
         <Text style={[Fonts[FontNames.TITLE_3], { flex: 1 }]}>Date</Text>
         <Text style={[Fonts[FontNames.BODY_3], { flex: 1 }]}>
-          {date.toLocaleDateString("uk-UA")}
+          {new Date(transaction.fullDate).toLocaleDateString("uk-UA")}
         </Text>
       </View>
 
