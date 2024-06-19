@@ -24,7 +24,7 @@ import {updateProfile} from "@firebase/auth";
 const Profile = ({ navigation }) => {
   const { dark } = useTheme();
   const [editMode, setEditMode] = useState(false);
-  const [username, setUsername] = useState("Kate Johnson");
+  const [username, setUsername] = useState(appAuth.currentUser.displayName);
 
   const logoutProcedure = () => {
     Alert.alert("Logout", "Are you sure you want to logout?", [
@@ -45,17 +45,11 @@ const Profile = ({ navigation }) => {
 
   const changeUsername = (username: string) => {
       const nameCheck = nameChecker(username);
-      if(!nameCheck.isValid) Alert.alert("", nameCheck.message, [{
-          text: "OK",
-      }])
+      if(!nameCheck.isValid) setUsername(appAuth.currentUser.displayName);
       else {
           updateProfile(appAuth.currentUser, {
               displayName: username
-          }).catch(() => {
-              Alert.alert("", "Something's wrong!", [{
-                  text: "OK",
-              }])
-          })
+          }).then()
       }
   }
 
