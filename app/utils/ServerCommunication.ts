@@ -29,6 +29,15 @@ axios.interceptors.response.use(
   }
 );
 
+export const createUser = async (uid: string) => {
+  try {
+    await axios.post("users/createUser", { firebaseId: uid });
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
+
 export const getAllExpenseCategoriesByDate = async (
   month: number,
   year: number
@@ -38,9 +47,11 @@ export const getAllExpenseCategoriesByDate = async (
   categoriesWithNoExpenses: Category[];
 }> => {
   try {
+    console.log("getAllExpenseCategoriesByDate");
     const res = await axios.get(
       `expenseCategory/AllCategories/${month}/${year}`
     );
+    console.log("res:", res);
 
     const categoriesWithLimits = res.data.categoriesWithLimits.map(
       (c: {
@@ -257,6 +268,7 @@ export const addIncome = async (
       accountId: accountId,
       amount: amount,
       date: date.toJSON(),
+      note: note,
     });
     return true;
   } catch (e) {
