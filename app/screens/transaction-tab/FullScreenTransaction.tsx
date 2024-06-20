@@ -11,9 +11,6 @@ import { SettingsContext } from "@/app/enums_and_contexts/EnumsAndContexts";
 
 const FullScreenTransaction = ({ route, navigation }) => {
   const transaction = route.params?.transaction as Transaction;
-  const month = route.params?.month as number;
-  const year = route.params?.year as number;
-  const date = new Date(year, month, transaction.date);
   const { currency, allCurrencies } = useContext(SettingsContext);
 
   const edit = () => {

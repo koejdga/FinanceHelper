@@ -102,7 +102,7 @@ export const convertNumberToMonthName = (num: number) => {
 };
 
 export const convertNumberToWeekDay = (num: number, short: boolean = true) => {
-  if (num < 0 || num > 6) {
+  if (num < 0 || num > 7) {
     console.log("ERROR: wrong number to convert to week day");
     return "";
   }
