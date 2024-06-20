@@ -1,24 +1,20 @@
 import CustomButton from "@/app/components/buttons/CustomButton";
 import OneQuestionDropdown from "@/app/components/one-row/OneQuestionDropdown";
+import { shareReport } from "@/app/utils/InteractionsWithFiles";
+import { ReportFormats } from "@/app/utils/Interfaces";
 import { useState } from "react";
 import { SafeAreaView, View } from "react-native";
 
 enum DataType {
   ALL = "All",
-  ONLY_INCOME = "Only income",
-  ONLY_EXPENSES = "Only expense",
+  // ONLY_INCOME = "Only income",
+  // ONLY_EXPENSES = "Only expense",
 }
 
 enum DateRange {
   LAST_MONTH = "Last month",
-  LAST_3_MONTHS = "Last 3 months",
-  ALL = "All",
-}
-
-enum DataFormat {
-  CSV = "CSV",
-  XLSX = "XLSX",
-  PDF = "PDF",
+  // LAST_3_MONTHS = "Last 3 months",
+  // ALL = "All",
 }
 
 const dataTypes = Object.values(DataType).map((dt) => ({
@@ -29,7 +25,7 @@ const dateRanges = Object.values(DateRange).map((dt) => ({
   label: dt,
   value: dt,
 }));
-const dataFormats = Object.values(DataFormat).map((dt) => ({
+const dataFormats = Object.values(ReportFormats).map((dt) => ({
   label: dt,
   value: dt,
 }));
@@ -70,8 +66,8 @@ const ExportData = ({ navigation }) => {
           value={dataFormat}
           setValue={(value) =>
             setDataFormat({
-              value: value.value as DataFormat,
-              label: value.label as DataFormat,
+              value: value.value as ReportFormats,
+              label: value.label as ReportFormats,
             })
           }
         />
@@ -79,8 +75,12 @@ const ExportData = ({ navigation }) => {
       <View style={{ flex: 1 }}></View>
       <CustomButton
         title="Export"
-        onPress={() => {
-          navigation.navigate("CheckEmailExportData");
+        onPress={async () => {
+          await shareReport(
+            dataFormat.label as ReportFormats,
+            new Date().getMonth(),
+            new Date().getFullYear()
+          );
         }}
       />
     </SafeAreaView>

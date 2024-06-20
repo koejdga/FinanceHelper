@@ -4,7 +4,8 @@ import CancelIcon from "@/app/components/icons/CancelIcon";
 import EditIcon from "@/app/components/icons/EditIcon";
 import MoneyIcon from "@/app/components/icons/MoneyIcon";
 import { base } from "@/app/constants/Colors";
-import { Category } from "@/app/utils/Interfaces";
+import { shareReport } from "@/app/utils/InteractionsWithFiles";
+import { Category, ReportFormats } from "@/app/utils/Interfaces";
 import {
   deleteCategory,
   getAllExpenseCategoriesByDate,
@@ -15,6 +16,7 @@ import { useIsFocused, useTheme } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import {
   Alert,
+  Button,
   Dimensions,
   Pressable,
   ScrollView,
