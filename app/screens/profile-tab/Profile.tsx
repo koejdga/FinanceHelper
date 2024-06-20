@@ -25,6 +25,7 @@ const Profile = ({ navigation }) => {
   const { dark } = useTheme();
   const [editMode, setEditMode] = useState(false);
   const [username, setUsername] = useState(appAuth.currentUser.displayName);
+  const [email, setEmail] = useState(appAuth.currentUser.email);
 
   const logoutProcedure = () => {
     Alert.alert("Logout", "Are you sure you want to logout?", [
@@ -112,7 +113,7 @@ const Profile = ({ navigation }) => {
           <Text
             style={[Fonts[FontNames.BODY_1], { color: base.light.light20 }]}
           >
-            avolidub@gmail.com
+            {email}
           </Text>
         </View>
       </View>
