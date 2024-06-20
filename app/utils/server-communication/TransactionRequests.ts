@@ -1,6 +1,5 @@
-import axios from "./General";
-import { AxiosError } from "axios";
 import { Transaction } from "../Interfaces";
+import axios from "./General";
 
 export const getAllTransactions = async (
   month: number,
@@ -35,14 +34,6 @@ export const getAllTransactions = async (
 
     return result;
   } catch (e) {
-    const err = e as AxiosError;
-    console.log("Response error:", err);
-    console.log(err.request);
-    const url = err.request.responseURL as string;
-    // const path = url.replace(axios.defaults.baseURL, "");
-    console.log("ERROR: error at path", url);
-    console.log();
-    console.log("err request:", err);
     return { amountIncome: 0, amountExpense: 0, total: 0, transactions: [] };
   }
 };
@@ -53,9 +44,8 @@ export const addExpense = async (
   amount: number,
   date: Date,
   note: string | undefined
-) => {
+): Promise<boolean | string> => {
   try {
-    console.log("categoryId:", categoryId);
     await axios.post("expense/createExpense", {
       categoryId: categoryId,
       account: accountId,
@@ -63,7 +53,10 @@ export const addExpense = async (
       date: date.toJSON(),
       note: note,
     });
-  } catch (e) {}
+    return true;
+  } catch (e) {
+    return e.message;
+  }
 };
 
 export const addIncome = async (
@@ -72,7 +65,7 @@ export const addIncome = async (
   amount: number,
   date: Date,
   note: string | undefined
-): Promise<boolean> => {
+): Promise<boolean | string> => {
   try {
     await axios.post("income/createIncome", {
       categoryId: categoryId,
@@ -83,7 +76,7 @@ export const addIncome = async (
     });
     return true;
   } catch (e) {
-    return false;
+    return e.message;
   }
 };
 
@@ -92,7 +85,7 @@ export const addTransfer = async (
   date: Date,
   fromAccountId: string,
   toAccountId: string
-): Promise<boolean> => {
+): Promise<boolean | string> => {
   try {
     await axios.post("transfer/createTransfer", {
       amount: amount,
@@ -102,7 +95,7 @@ export const addTransfer = async (
     });
     return true;
   } catch (e) {
-    return false;
+    return e.message;
   }
 };
 
@@ -114,7 +107,7 @@ export const editTransaction = async (
   amount: number,
   note: string,
   type: string
-): Promise<boolean> => {
+): Promise<boolean | string> => {
   try {
     if (type === "expense")
       await axios.put(`expense/updateExpense/${transactionId}`, {
@@ -134,19 +127,19 @@ export const editTransaction = async (
       });
     return true;
   } catch (e) {
-    return false;
+    return e.message;
   }
 };
 
 export const deleteTransaction = async (
   transactionId: string,
   isIncome: boolean
-): Promise<boolean> => {
+): Promise<boolean | string> => {
   try {
     if (isIncome) await axios.delete(`income/deleteIncome/${transactionId}`);
     else await axios.delete(`expense/deleteExpense/${transactionId}`);
     return true;
   } catch (e) {
-    return false;
+    return e.message;
   }
 };

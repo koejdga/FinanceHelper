@@ -6,7 +6,7 @@ import {
   editIncomeCategory,
 } from "@/app/utils/server-communication/CategoryRequests";
 import { useEffect, useState } from "react";
-import { View } from "react-native";
+import { Alert, View } from "react-native";
 
 const IncomeCategoryForm = ({ route, navigation }) => {
   const GAP_IN_QUESTION = 12;
@@ -19,17 +19,23 @@ const IncomeCategoryForm = ({ route, navigation }) => {
   }, []);
 
   const add = async () => {
-    try {
-      const added = await addIncomeCategory(name);
-      if (added) navigation.goBack();
-    } catch (error) {
-      console.log(error);
+    const added = await addIncomeCategory(name);
+    if (added === true) {
+      navigation.goBack();
+    } else {
+      const errorMessage = added as string;
+      Alert.alert("Error", errorMessage, [{ text: "OK" }]);
     }
   };
 
   const edit = async () => {
     const edited = await editIncomeCategory(categoryId, name);
-    if (edited) navigation.goBack();
+    if (edited === true) {
+      navigation.goBack();
+    } else {
+      const errorMessage = edited as string;
+      Alert.alert("Error", errorMessage, [{ text: "OK" }]);
+    }
   };
 
   return (

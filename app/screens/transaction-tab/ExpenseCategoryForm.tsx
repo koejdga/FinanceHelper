@@ -6,7 +6,7 @@ import {
   editExpenseCategory,
 } from "@/app/utils/server-communication/CategoryRequests";
 import { useEffect, useState } from "react";
-import { Keyboard, TouchableWithoutFeedback, View } from "react-native";
+import { Alert, Keyboard, TouchableWithoutFeedback, View } from "react-native";
 
 const ExpenseCategoryForm = ({ route, navigation }) => {
   const GAP_IN_QUESTION = 12;
@@ -18,22 +18,27 @@ const ExpenseCategoryForm = ({ route, navigation }) => {
   const [editting, setEditting] = useState(false);
 
   useEffect(() => {
-    console.log("Category id:", route.params);
     setEditting((categoryId !== undefined && categoryId !== "") as boolean);
   }, []);
 
   const add = async () => {
-    try {
-      await addExpenseCategory(name, limit);
+    const added = await addExpenseCategory(name, limit);
+    if (added === true) {
       navigation.goBack();
-    } catch (error) {
-      console.log(error);
+    } else {
+      const errorMessage = added as string;
+      Alert.alert("Error", errorMessage, [{ text: "OK" }]);
     }
   };
 
   const edit = async () => {
     const edited = await editExpenseCategory(categoryId, name, limit);
-    if (edited) navigation.goBack();
+    if (edited === true) {
+      navigation.goBack();
+    } else {
+      const errorMessage = edited as string;
+      Alert.alert("Error", errorMessage, [{ text: "OK" }]);
+    }
   };
 
   return (

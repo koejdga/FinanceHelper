@@ -19,8 +19,6 @@ const ListsWithChoices = ({ route, navigation }) => {
   const defaultSelected = (route.params?.defaultSelected as number) || 0;
   const topic = (route.params?.topic as Choises) || 0;
   const [checked, setChecked] = useState(defaultSelected);
-
-  console.log(mainOptions);
   const { setTheme, setCurrency } = useContext(SettingsContext);
 
   if (

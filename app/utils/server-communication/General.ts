@@ -25,7 +25,7 @@ axios.interceptors.response.use(
     console.log("ERROR: error at path", path);
     const obj = JSON.parse(err.request._response);
     console.log("Error response message:", obj.message);
-    return Promise.reject(error);
+    return Promise.reject({ ...error, message: obj.message });
   }
 );
 

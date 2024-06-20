@@ -41,9 +41,12 @@ const Accounts = ({ navigation }) => {
 
   const deleteFunction = async (account: Account) => {
     const deleted = await deleteAccount(account.id);
-    if (deleted) {
+    if (deleted === true) {
       setAccounts(accounts.filter((a) => a.id !== account.id));
       setEditMode(false);
+    } else {
+      const errorMessage = deleted as string;
+      Alert.alert("Error", errorMessage, [{ text: "OK" }]);
     }
   };
 
