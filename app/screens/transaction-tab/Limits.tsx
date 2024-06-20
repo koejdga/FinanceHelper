@@ -1,3 +1,4 @@
+import CategoriesProgresses from "@/app/components/expenses-screen/CategoriesProgresses";
 import AddIcon from "@/app/components/icons/AddIcon";
 import CancelIcon from "@/app/components/icons/CancelIcon";
 import EditIcon from "@/app/components/icons/EditIcon";
@@ -12,16 +13,8 @@ import {
 import { appAuth } from "@/firebaseConfig";
 import { useIsFocused, useTheme } from "@react-navigation/native";
 import { useEffect, useState } from "react";
-import {
-  Alert,
-  Dimensions,
-  Pressable,
-  ScrollView,
-  Text,
-  View,
-} from "react-native";
+import { Dimensions, Pressable, ScrollView, Text, View } from "react-native";
 import { PieChart } from "react-native-chart-kit";
-import CategoryProgressBar from "../../components/one-row/CategoryProgressBar";
 import { FontNames, Fonts } from "../../constants/Fonts";
 const screenWidth = Dimensions.get("window").width;
 
@@ -132,43 +125,14 @@ const Limits = ({ navigation, month, year }) => {
           >
             {showIncomeCategories ? "Income" : "Expense"}
           </Text>
-          {categories &&
-            categories.map((category, index) => (
-              <CategoryProgressBar
-                categoryName={category.categoryName}
-                percentageSpent={category.percentageSpent}
-                spent={category.currentExpense}
-                editMode={editMode}
-                editFunction={() => {
-                  setEditMode(false);
-                  navigation.navigate(
-                    showIncomeCategories
-                      ? "IncomeCategoryForm"
-                      : "ExpenseCategoryForm",
-                    {
-                      categoryId: category.id,
-                      name: category.categoryName,
-                      limit: category.limit,
-                    }
-                  );
-                }}
-                deleteFunction={async () => {
-                  Alert.alert(
-                    `Delete ${category.categoryName}`,
-                    `Are you sure you want to delete ${category.categoryName}`,
-                    [
-                      {
-                        text: "Yes",
-                        onPress: async () =>
-                          await deleteCategoryFunction(category),
-                      },
-                      { text: "No", style: "cancel" },
-                    ]
-                  );
-                }}
-                key={"categoryProgressBar" + index}
-              />
-            ))}
+          <CategoriesProgresses
+            categories={categories}
+            navigation={navigation}
+            showIncomeCategories={showIncomeCategories}
+            editMode={editMode}
+            setEditMode={setEditMode}
+            deleteCategoryFunction={deleteCategoryFunction}
+          />
 
           <Pressable
             style={{
