@@ -43,7 +43,7 @@ const TransactionForm = ({ route, navigation }) => {
   useEffect(() => {
     setEditting(transaction !== undefined);
     if (transaction !== undefined) {
-      setDate(new Date(year, month, transaction?.date));
+      setDate(new Date(transaction.fullDate));
     }
   }, []);
 
@@ -61,7 +61,7 @@ const TransactionForm = ({ route, navigation }) => {
       setCategories(categories);
       setAccounts(accounts);
 
-      if (editting) {
+      if (transaction !== undefined) {
         setCategory(
           categories.find((c) => c.categoryName === transaction?.category)
         );
@@ -108,9 +108,18 @@ const TransactionForm = ({ route, navigation }) => {
       note,
       transaction.type
     );
+
     if (edited)
       navigation.navigate("FullScreenTransaction", {
-        transaction,
+        transaction: {
+          id: transaction.id,
+          fullDate: date.toJSON(),
+          category: category.categoryName,
+          amount: amount !== "" ? amount : 0,
+          account: account.name,
+          type: transaction.type,
+          note: note,
+        },
         month,
         year,
       });
