@@ -22,6 +22,7 @@ export const getAllTransactions = async (
       total: res.data.total,
       transactions: res.data.transactions.map((t) => ({
         id: t.transactionId,
+        fullDate: t.fullDate,
         date: t.date,
         dayOfWeek: t.dayOfWeek,
         category: t.category,

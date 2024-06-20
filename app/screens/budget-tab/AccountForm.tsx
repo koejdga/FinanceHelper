@@ -6,7 +6,7 @@ import {
   editAccount,
 } from "@/app/utils/server-communication/AccountRequests";
 import { useEffect, useState } from "react";
-import { View } from "react-native";
+import { Keyboard, TouchableWithoutFeedback, View } from "react-native";
 
 const AccountForm = ({ route, navigation }) => {
   const GAP_IN_QUESTION = 12;
@@ -31,37 +31,39 @@ const AccountForm = ({ route, navigation }) => {
   };
 
   return (
-    <View style={{ marginTop: 30, gap: 24, flex: 1 }}>
-      <OneQuestion
-        question={"Account name? For example, Salary Card or Cash"}
-        inputField={
-          <FormTextInput
-            value={name}
-            onChangeText={(value) => setName(value)}
-            maxLength={25}
-            style={{ marginHorizontal: 0, marginTop: GAP_IN_QUESTION }}
-          />
-        }
-      />
-      <OneQuestion
-        question={"How much money do you have on this account?"}
-        inputField={
-          <FormTextInput
-            value={balance ? balance.toString() : ""}
-            onChangeText={(value) => setBalance(parseFloat(value))}
-            maxLength={25}
-            style={{ marginHorizontal: 0, marginTop: GAP_IN_QUESTION }}
-            keyboardType="decimal-pad"
-          />
-        }
-      />
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <View style={{ marginTop: 30, gap: 24, flex: 1 }}>
+        <OneQuestion
+          question={"Account name? For example, Salary Card or Cash"}
+          inputField={
+            <FormTextInput
+              value={name}
+              onChangeText={(value) => setName(value)}
+              maxLength={25}
+              style={{ marginHorizontal: 0, marginTop: GAP_IN_QUESTION }}
+            />
+          }
+        />
+        <OneQuestion
+          question={"How much money do you have on this account?"}
+          inputField={
+            <FormTextInput
+              value={balance ? balance.toString() : ""}
+              onChangeText={(value) => setBalance(parseFloat(value))}
+              maxLength={25}
+              style={{ marginHorizontal: 0, marginTop: GAP_IN_QUESTION }}
+              keyboardType="decimal-pad"
+            />
+          }
+        />
 
-      <View style={{ flex: 1 }}></View>
-      <CustomButton
-        title={editting ? "Edit account" : "Add account"}
-        onPress={editting ? edit : add}
-      />
-    </View>
+        <View style={{ flex: 1 }}></View>
+        <CustomButton
+          title={editting ? "Edit account" : "Add account"}
+          onPress={editting ? edit : add}
+        />
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 

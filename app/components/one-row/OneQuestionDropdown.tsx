@@ -5,9 +5,16 @@ import OneQuestion from "./OneQuestion";
 type Props = {
   question: string;
   variants: { label: string; value: string }[];
+  value: { label: string; value: string };
+  setValue: (value: { label: string; value: string }) => void;
 };
 
-const OneQuestionDropdown: React.FC<Props> = ({ question, variants }) => {
+const OneQuestionDropdown: React.FC<Props> = ({
+  question,
+  variants,
+  value,
+  setValue,
+}) => {
   return (
     <OneQuestion
       question={question}
@@ -15,10 +22,8 @@ const OneQuestionDropdown: React.FC<Props> = ({ question, variants }) => {
         <CustomDropdown
           variants={variants}
           style={{ marginTop: 12 }}
-          value={{
-            label: "",
-            value: "",
-          }}
+          value={value}
+          onChange={setValue}
         />
       }
     />
