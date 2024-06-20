@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-export const ThemeContext = createContext(null);
+export const SettingsContext = createContext(null);
 
 export enum ThemeEnum {
   LIGHT = "Light",

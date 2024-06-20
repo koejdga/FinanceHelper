@@ -8,6 +8,8 @@ import DeleteIcon from "../icons/DeleteIcon";
 import EditIcon from "../icons/EditIcon";
 import WigglyIcon from "../icons/WigglyIcon";
 import ProgressBar from "./ProgressBar";
+import { useContext } from "react";
+import { SettingsContext } from "@/app/enums_and_contexts/EnumsAndContexts";
 
 type Props = {
   categories: Category[];
@@ -27,6 +29,7 @@ const CategoriesProgresses: React.FC<Props> = ({
   deleteCategoryFunction,
 }) => {
   const { dark } = useTheme();
+  const { currency, allCurrencies } = useContext(SettingsContext);
   const GAP = 15;
 
   if (!categories) return;
@@ -88,7 +91,11 @@ const CategoriesProgresses: React.FC<Props> = ({
               ]}
             >
               {category.currentExpense !== undefined &&
-                convertNumberToMoney(category.currentExpense)}
+                convertNumberToMoney(
+                  category.currentExpense,
+                  currency,
+                  allCurrencies
+                )}
             </Text>
           </View>
         ))}

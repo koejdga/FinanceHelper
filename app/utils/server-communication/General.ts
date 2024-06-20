@@ -4,9 +4,13 @@ import axios, { AxiosError } from "axios";
 axios.defaults.baseURL = "https://serverfinancehelper.onrender.com/api/";
 
 axios.interceptors.request.use(async function (config) {
-  const token = await appAuth.currentUser.getIdToken();
-  config.headers.Authorization = `Bearer ${token}`;
-  return config;
+  try {
+    const token = await appAuth.currentUser.getIdToken();
+    config.headers.Authorization = `Bearer ${token}`;
+    return config;
+  } catch (error) {
+    return config;
+  }
 });
 
 axios.interceptors.response.use(

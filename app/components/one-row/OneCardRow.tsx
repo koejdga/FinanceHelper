@@ -7,6 +7,8 @@ import Separator from "../Separator";
 import DeleteIcon from "../icons/DeleteIcon";
 import EditIcon from "../icons/EditIcon";
 import WigglyIcon from "../icons/WigglyIcon";
+import { useContext } from "react";
+import { SettingsContext } from "@/app/enums_and_contexts/EnumsAndContexts";
 
 type Props = {
   typeOfCard: string;
@@ -25,6 +27,7 @@ const OneCardRow: React.FC<Props> = ({
   deleteFunction,
 }) => {
   const { dark } = useTheme();
+  const { currency, allCurrencies } = useContext(SettingsContext);
 
   return (
     <>
@@ -58,7 +61,7 @@ const OneCardRow: React.FC<Props> = ({
             },
           ]}
         >
-          {convertNumberToMoney(amountOfMoney)}
+          {convertNumberToMoney(amountOfMoney, currency, allCurrencies)}
         </Text>
         {editMode && (
           <>
