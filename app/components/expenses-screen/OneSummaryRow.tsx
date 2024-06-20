@@ -1,5 +1,5 @@
 import { useTheme } from "@react-navigation/native";
-import React from "react";
+import React, { useContext } from "react";
 import { Text, View } from "react-native";
 import {
   ExpenseDark,
@@ -10,6 +10,7 @@ import {
 } from "../../constants/Colors";
 import { FontNames, Fonts } from "../../constants/Fonts";
 import { convertNumberToMoney } from "../../utils/Utils";
+import { SettingsContext } from "@/app/enums_and_contexts/EnumsAndContexts";
 
 type Props = {
   periodName: string; // either date ("24 Fri") or month ("May")
@@ -23,6 +24,8 @@ const OneSummaryRow: React.FC<Props> = ({
   totalExpense,
 }) => {
   const { dark } = useTheme();
+  const { currency, allCurrencies } = useContext(SettingsContext);
+
   return (
     <View style={{ flexDirection: "row", marginTop: 3 }}>
       <Text
@@ -40,7 +43,7 @@ const OneSummaryRow: React.FC<Props> = ({
           { color: dark ? IncomeLight : IncomeDark, flex: 2 },
         ]}
       >
-        {convertNumberToMoney(totalIncome)}
+        {convertNumberToMoney(totalIncome, currency, allCurrencies)}
       </Text>
       <Text
         style={[
@@ -48,7 +51,7 @@ const OneSummaryRow: React.FC<Props> = ({
           { color: dark ? ExpenseLight : ExpenseDark, flex: 2 },
         ]}
       >
-        {convertNumberToMoney(totalExpense)}
+        {convertNumberToMoney(totalExpense, currency, allCurrencies)}
       </Text>
     </View>
   );

@@ -4,6 +4,7 @@ import ExportData from "./ExportData";
 import ListWithChoices from "./ListWithChoices";
 import Profile from "./Profile";
 import Settings from "./Settings";
+import ListsWithChoices from "./ListsWithChoices";
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +22,12 @@ const ProfileStack = () => {
         name="ListWithChoices"
         component={ListWithChoices}
         initialParams={{ options: [] }}
+      />
+
+      <Stack.Screen
+        name="ListsWithChoices"
+        component={ListsWithChoices}
+        initialParams={{ mainOptions: [], otherOptions: [] }}
       />
 
       <Stack.Screen

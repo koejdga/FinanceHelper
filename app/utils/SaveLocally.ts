@@ -2,6 +2,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const saveData = async (key: string, value: string) => {
   try {
+    if (value === undefined || value === null) {
+      console.log(
+        "ERROR: value for saving in AsyncStorage is undefined or null"
+      );
+      return;
+    }
     await AsyncStorage.setItem(key, JSON.stringify(value));
     console.log(`${key} saved successfully!`);
   } catch (e) {

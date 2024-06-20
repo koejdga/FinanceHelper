@@ -6,9 +6,12 @@ import { convertNumberToMoney } from "@/app/utils/Utils";
 import { Alert, Pressable, Text, View } from "react-native";
 import { deleteTransaction } from "@/app/utils/server-communication/TransactionRequests";
 import { Transaction } from "@/app/utils/Interfaces";
+import { useContext } from "react";
+import { SettingsContext } from "@/app/enums_and_contexts/EnumsAndContexts";
 
 const FullScreenTransaction = ({ route, navigation }) => {
   const transaction = route.params?.transaction as Transaction;
+  const { currency, allCurrencies } = useContext(SettingsContext);
 
   const edit = () => {
     if (transaction.type === "expense") {
@@ -54,7 +57,9 @@ const FullScreenTransaction = ({ route, navigation }) => {
           ]}
         >
           {convertNumberToMoney(
-            transaction.amount * (transaction.type === "expense" ? -1 : 1)
+            transaction.amount * (transaction.type === "expense" ? -1 : 1),
+            currency,
+            allCurrencies
           )}
         </Text>
       </View>

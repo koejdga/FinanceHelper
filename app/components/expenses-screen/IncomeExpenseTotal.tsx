@@ -1,5 +1,5 @@
 import { useTheme } from "@react-navigation/native";
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import {
   ExpenseDark,
@@ -10,6 +10,7 @@ import {
 } from "../../constants/Colors";
 import { FontNames, Fonts } from "../../constants/Fonts";
 import { convertNumberToMoney } from "../../utils/Utils";
+import { SettingsContext } from "@/app/enums_and_contexts/EnumsAndContexts";
 
 type Props = {
   income?: number;
@@ -25,6 +26,7 @@ const IncomeExpenseTotal: React.FC<Props> = ({
   onlyTotal = false,
 }) => {
   const { dark } = useTheme();
+  const { currency, allCurrencies } = useContext(SettingsContext);
   const styles = StyleSheet.create({
     title: {
       ...Fonts[FontNames.BODY_2],
@@ -59,7 +61,7 @@ const IncomeExpenseTotal: React.FC<Props> = ({
                 { color: dark ? IncomeLight : IncomeDark },
               ]}
             >
-              {convertNumberToMoney(income)}
+              {convertNumberToMoney(income, currency, allCurrencies)}
             </Text>
           </View>
           <View style={{ alignItems: "center" }}>
@@ -70,7 +72,7 @@ const IncomeExpenseTotal: React.FC<Props> = ({
                 { color: dark ? ExpenseLight : ExpenseDark },
               ]}
             >
-              {convertNumberToMoney(expense)}
+              {convertNumberToMoney(expense, currency, allCurrencies)}
             </Text>
           </View>
         </>
@@ -83,7 +85,7 @@ const IncomeExpenseTotal: React.FC<Props> = ({
             { color: dark ? base.light.light80 : base.dark.dark100 },
           ]}
         >
-          {convertNumberToMoney(total)}
+          {convertNumberToMoney(total, currency, allCurrencies)}
         </Text>
       </View>
     </View>

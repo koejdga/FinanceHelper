@@ -1,14 +1,29 @@
 import SettingsRow from "@/app/components/one-row/SettingsRow";
 import { SafeAreaView, View } from "react-native";
 import { Choises } from "./ListWithChoices";
-import { ThemeEnum } from "@/app/enums/ThemeEnum";
 import { loadData } from "@/app/utils/SaveLocally";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useIsFocused } from "@react-navigation/native";
+import {
+  SettingsContext,
+  ThemeEnum,
+} from "@/app/enums_and_contexts/EnumsAndContexts";
+import { Currency } from "@/app/utils/Interfaces";
+
+// [
+//   "Ukraine (UAH)",
+//   "United States (USD)",
+//   "Japan (JPY)",
+//   "United Kingdom (GDP)",
+//   "Germany (EUR)",
+// ],
 
 const Settings = ({ navigation }) => {
   const isFocused = useIsFocused();
   const [currentTheme, setCurrentTheme] = useState(ThemeEnum.SYSTEM);
+  const { currency, allCurrencies } = useContext(SettingsContext);
+  const mostPopularCurrencies = ["UAH", "EUR", "USD", "GBP", "JPY"];
+
   useEffect(() => {
     const init = async () => {
       const loadedTheme = await loadData("theme");
@@ -23,16 +38,18 @@ const Settings = ({ navigation }) => {
     <SafeAreaView>
       <SettingsRow
         title="Currency"
-        additionalText="UAH"
+        additionalText={currency}
         onPress={() => {
-          navigation.push("ListWithChoices", {
-            options: [
-              "Ukraine (UAH)",
-              "United States (USD)",
-              "Japan (JPY)",
-              "United Kingdom (GDP)",
-              "Germany (EUR)",
-            ],
+          navigation.push("ListsWithChoices", {
+            topic: Choises.Currency,
+            mainOptions: mostPopularCurrencies,
+            otherOptions: allCurrencies
+              .map((c: Currency) => c.cc.toUpperCase())
+              .filter((c: string) => !mostPopularCurrencies.includes(c)),
+            defaultSelected: allCurrencies.findIndex(
+              (elem: Currency) =>
+                elem.cc.toUpperCase() === currency.toUpperCase()
+            ),
             title: "Currency",
           });
         }}
@@ -54,10 +71,10 @@ const Settings = ({ navigation }) => {
         }
         onPress={() => {
           navigation.push("ListWithChoices", {
-            theme: Choises.Theme,
+            topic: Choises.Theme,
             options: Object.values(ThemeEnum),
             defaultSelected: Object.values(ThemeEnum).findIndex(
-              (element) => element === currentTheme
+              (elem) => elem === currentTheme
             ),
             title: "Theme",
           });

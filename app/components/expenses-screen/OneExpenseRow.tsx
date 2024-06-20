@@ -9,6 +9,8 @@ import {
 } from "../../constants/Colors";
 import { FontNames, Fonts } from "../../constants/Fonts";
 import { convertNumberToMoney } from "../../utils/Utils";
+import { useContext } from "react";
+import { SettingsContext } from "@/app/enums_and_contexts/EnumsAndContexts";
 
 type Props = {
   name: string;
@@ -24,6 +26,7 @@ const OneExpenseRow: React.FC<Props> = ({
   isIncome = false,
 }) => {
   const { dark } = useTheme();
+  const { currency, allCurrencies } = useContext(SettingsContext);
 
   return (
     <View
@@ -66,7 +69,7 @@ const OneExpenseRow: React.FC<Props> = ({
           },
         ]}
       >
-        {convertNumberToMoney(amountOfMoney)}
+        {convertNumberToMoney(amountOfMoney, currency, allCurrencies)}
       </Text>
     </View>
   );

@@ -1,22 +1,21 @@
-import {
-  DefaultTheme,
-  DarkTheme,
-  NavigationContainer,
-  Theme,
-} from "@react-navigation/native";
+import EmailVerification from "@/app/screens/login-signup/EmailVerification";
+import { NavigationContainer, Theme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useEffect, useState } from "react";
+import { useColorScheme } from "react-native";
+import {
+  SettingsContext,
+  ThemeEnum,
+} from "./app/enums_and_contexts/EnumsAndContexts";
+import MainApp from "./app/screens/MainApp";
+import EmailOnTheWay from "./app/screens/login-signup/EmailOnTheWay";
+import ForgotPassword from "./app/screens/login-signup/ForgotPassword";
 import Launch from "./app/screens/login-signup/Launch";
 import Login from "./app/screens/login-signup/Login";
-import ForgotPassword from "./app/screens/login-signup/ForgotPassword";
-import EmailOnTheWay from "./app/screens/login-signup/EmailOnTheWay";
-import Signup from "./app/screens/login-signup/Signup";
-import MainApp from "./app/screens/MainApp";
 import OnboardingScreen from "./app/screens/login-signup/OnboardingScreen";
-import { useColorScheme } from "react-native";
-import EmailVerification from "@/app/screens/login-signup/EmailVerification";
-import { createContext, useEffect, useState } from "react";
-import { ThemeContext, ThemeEnum } from "./app/enums/ThemeEnum";
+import Signup from "./app/screens/login-signup/Signup";
 import { loadData } from "./app/utils/SaveLocally";
+import { updateCurrencies } from "./app/utils/Utils";
 
 const Stack = createNativeStackNavigator();
 
@@ -47,18 +46,35 @@ const CustomDarkTheme: Theme = {
 const App = () => {
   const scheme = useColorScheme();
   const [theme, setTheme] = useState(ThemeEnum.SYSTEM);
+  const [currency, setCurrency] = useState("UAH");
+  const [allCurrencies, setAllCurrencies] = useState([]);
 
   useEffect(() => {
     const init = async () => {
       const loadedTheme = await loadData("theme");
       setTheme(loadedTheme || ThemeEnum.SYSTEM);
+
+      const loadedCurrency = await loadData("currency");
+      setCurrency(loadedCurrency || "UAH");
+
+      const updatedCurrencies = await updateCurrencies();
+      setAllCurrencies(updatedCurrencies);
     };
 
     init();
   }, []);
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
+    <SettingsContext.Provider
+      value={{
+        currency,
+        setCurrency,
+        theme,
+        setTheme,
+        allCurrencies,
+        setAllCurrencies,
+      }}
+    >
       <NavigationContainer
         theme={
           theme === ThemeEnum.SYSTEM
@@ -97,7 +113,7 @@ const App = () => {
           <Stack.Screen name="MainApp" component={MainApp} />
         </Stack.Navigator>
       </NavigationContainer>
-    </ThemeContext.Provider>
+    </SettingsContext.Provider>
   );
 };
 

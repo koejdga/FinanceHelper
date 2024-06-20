@@ -27,3 +27,9 @@ export interface MonthSummary {
   incomeTotal: number;
   month: number;
 }
+
+export interface Currency {
+  cc: string;
+  rate: number;
+  txt: string;
+}
