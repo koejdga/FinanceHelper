@@ -54,7 +54,7 @@ const Settings = ({ navigation }) => {
           });
         }}
       />
-      <SettingsRow
+      {/* <SettingsRow
         title="Language"
         additionalText="English"
         onPress={() => {
@@ -63,7 +63,7 @@ const Settings = ({ navigation }) => {
             title: "Language",
           });
         }}
-      />
+      /> */}
       <SettingsRow
         title="Theme"
         additionalText={
@@ -81,14 +81,8 @@ const Settings = ({ navigation }) => {
         }}
       />
       <View style={{ marginTop: 32 }}></View>
-      <SettingsRow
-        title="About"
-        onPress={() => alert("Put something in About")}
-      />
-      <SettingsRow
-        title="Help"
-        onPress={() => alert("Put something in Help")}
-      />
+      <SettingsRow title="About" onPress={() => navigation.push("About")} />
+      <SettingsRow title="Help" onPress={() => navigation.push("Help")} />
     </SafeAreaView>
   );
 };

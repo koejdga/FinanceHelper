@@ -5,6 +5,8 @@ import ListWithChoices from "./ListWithChoices";
 import Profile from "./Profile";
 import Settings from "./Settings";
 import ListsWithChoices from "./ListsWithChoices";
+import About from "./About";
+import Help from "./Help";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +20,8 @@ const ProfileStack = () => {
       />
 
       <Stack.Screen name="Settings" component={Settings} />
+      <Stack.Screen name="About" component={About} />
+      <Stack.Screen name="Help" component={Help} />
       <Stack.Screen
         name="ListWithChoices"
         component={ListWithChoices}

@@ -48,6 +48,7 @@ const AccountForm = ({ route, navigation }) => {
           question={"Account name? For example, Salary Card or Cash"}
           inputField={
             <FormTextInput
+              placeholder="Enter your account name..."
               value={name}
               onChangeText={(value) => setName(value)}
               maxLength={25}
@@ -59,6 +60,7 @@ const AccountForm = ({ route, navigation }) => {
           question={"How much money do you have on this account?"}
           inputField={
             <FormTextInput
+              placeholder="I have..."
               value={balance ? balance.toString() : ""}
               onChangeText={(value) => setBalance(parseFloat(value))}
               maxLength={25}

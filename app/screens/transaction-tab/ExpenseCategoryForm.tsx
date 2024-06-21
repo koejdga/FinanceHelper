@@ -49,6 +49,7 @@ const ExpenseCategoryForm = ({ route, navigation }) => {
           inputField={
             <FormTextInput
               value={name}
+              placeholder="Enter category name..."
               onChangeText={(value) => setName(value)}
               maxLength={25}
               style={{ marginHorizontal: 0, marginTop: GAP_IN_QUESTION }}
@@ -62,6 +63,7 @@ const ExpenseCategoryForm = ({ route, navigation }) => {
           inputField={
             <FormTextInput
               value={limit ? limit.toString() : ""}
+              placeholder="I would like to spend..."
               onChangeText={(value) => setLimit(parseFloat(value))}
               maxLength={25}
               style={{ marginHorizontal: 0, marginTop: GAP_IN_QUESTION }}

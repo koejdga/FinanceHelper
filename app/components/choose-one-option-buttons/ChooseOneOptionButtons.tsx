@@ -7,7 +7,7 @@ export enum TransactionTabsOptions {
   LIMITS = "Limits",
   DAILY = "Daily",
   MONTHLY = "Monthly",
-  STATISTICS = "Statistics",
+  // STATISTICS = "Statistics",
 }
 
 export enum TransactionOptions {
