@@ -23,7 +23,6 @@ import {
   View,
 } from "react-native";
 import { FontNames, Fonts } from "../../constants/Fonts";
-const screenWidth = Dimensions.get("window").width;
 
 const Limits = ({ navigation, month, year }) => {
   const [editMode, setEditMode] = useState(false);
