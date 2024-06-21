@@ -4,7 +4,8 @@ import CancelIcon from "@/app/components/icons/CancelIcon";
 import EditIcon from "@/app/components/icons/EditIcon";
 import MoneyIcon from "@/app/components/icons/MoneyIcon";
 import { base } from "@/app/constants/Colors";
-import { Category } from "@/app/utils/Interfaces";
+import { shareReport } from "@/app/utils/InteractionsWithFiles";
+import { Category, ReportFormats } from "@/app/utils/Interfaces";
 import {
   deleteCategory,
   getAllExpenseCategoriesByDate,
@@ -13,7 +14,15 @@ import {
 import { appAuth } from "@/firebaseConfig";
 import { useIsFocused, useTheme } from "@react-navigation/native";
 import { useEffect, useState } from "react";
-import { Dimensions, Pressable, ScrollView, Text, View } from "react-native";
+import {
+  Alert,
+  Button,
+  Dimensions,
+  Pressable,
+  ScrollView,
+  Text,
+  View,
+} from "react-native";
 import { PieChart } from "react-native-chart-kit";
 import { FontNames, Fonts } from "../../constants/Fonts";
 const screenWidth = Dimensions.get("window").width;
@@ -78,9 +87,13 @@ const Limits = ({ navigation, month, year }) => {
   ];
 
   const deleteCategoryFunction = async (category: Category) => {
-    console.log(category);
     const deleted = await deleteCategory(category.id);
-    if (deleted) setCategories(categories.filter((c) => c.id !== category.id));
+    if (deleted === true)
+      setCategories(categories.filter((c) => c.id !== category.id));
+    else {
+      const errorMessage = deleted as string;
+      Alert.alert("Error", errorMessage, [{ text: "OK" }]);
+    }
   };
 
   return (

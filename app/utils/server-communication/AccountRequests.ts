@@ -1,6 +1,5 @@
-import axios from "./General";
-import { AxiosError } from "axios";
 import { Account } from "../Interfaces";
+import axios from "./General";
 
 export const getAllAccounts = async (): Promise<Account[]> => {
   try {
@@ -13,7 +12,7 @@ export const getAllAccounts = async (): Promise<Account[]> => {
           balance: account.balance,
         })
       );
-    }
+    } else return [];
   } catch (e) {
     return [];
   }
@@ -22,21 +21,23 @@ export const getAllAccounts = async (): Promise<Account[]> => {
 export const addAccount = async (
   name: string,
   balance: number
-): Promise<boolean> => {
+): Promise<boolean | string> => {
   try {
     const res = await axios.post("accounts/createAccount", {
       name: name,
       balance: balance,
     });
     return res.data.status === "success";
-  } catch (e) {}
+  } catch (e) {
+    return e.message;
+  }
 };
 
 export const editAccount = async (
   accountId: string,
   name: string,
   balance: number
-): Promise<boolean> => {
+): Promise<boolean | string> => {
   try {
     await axios.put(`accounts/updateAccount/${accountId}`, {
       name: name,
@@ -44,15 +45,17 @@ export const editAccount = async (
     });
     return true;
   } catch (e) {
-    return false;
+    return e.message;
   }
 };
 
-export const deleteAccount = async (accountId: string): Promise<boolean> => {
+export const deleteAccount = async (
+  accountId: string
+): Promise<boolean | string> => {
   try {
     await axios.delete(`accounts/deleteAccount/${accountId}`);
     return true;
   } catch (e) {
-    return false;
+    return e.message;
   }
 };

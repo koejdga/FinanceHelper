@@ -1,6 +1,5 @@
-import axios from "./General";
-import { AxiosError } from "axios";
 import { Category } from "../Interfaces";
+import axios from "./General";
 
 export const getAllExpenseCategoriesByDate = async (
   month: number,
@@ -84,7 +83,6 @@ export const getAllIncomeCategories = async (): Promise<Category[]> => {
       categoryName: c.name,
     }));
   } catch (e) {
-    console.log(e);
     return [];
   }
 };
@@ -92,39 +90,42 @@ export const getAllIncomeCategories = async (): Promise<Category[]> => {
 export const addExpenseCategory = async (
   name: string,
   limit: number | undefined
-) => {
+): Promise<boolean | string> => {
   try {
     await axios.post("expenseCategory/createExpenseCategory", {
       name: name,
       limit: limit,
     });
-  } catch (e) {}
+    return true;
+  } catch (e) {
+    return e.message;
+  }
 };
 
-export const addIncomeCategory = async (name: string): Promise<boolean> => {
+export const addIncomeCategory = async (
+  name: string
+): Promise<boolean | string> => {
   try {
     await axios.post("incomeCategory/createIncomeCategory", {
       name: name,
     });
     return true;
   } catch (e) {
-    return false;
+    return e.message;
   }
 };
 
 export const editIncomeCategory = async (
   categoryId: string,
   name: string
-): Promise<boolean> => {
+): Promise<boolean | string> => {
   try {
     await axios.put(`incomeCategory/update/${categoryId}`, {
       name: name,
     });
     return true;
   } catch (e) {
-    const err = e as AxiosError;
-    console.log(err.request);
-    return false;
+    return e.message;
   }
 };
 
@@ -132,7 +133,7 @@ export const editExpenseCategory = async (
   categoryId: string,
   name: string,
   limit: number
-): Promise<boolean> => {
+): Promise<boolean | string> => {
   try {
     await axios.put(`expenseCategory/updateExpenseCategory/${categoryId}`, {
       name: name,
@@ -140,17 +141,17 @@ export const editExpenseCategory = async (
     });
     return true;
   } catch (e) {
-    const err = e as AxiosError;
-    console.log(err.request);
-    return false;
+    return e.message;
   }
 };
 
-export const deleteCategory = async (categoryId: string): Promise<boolean> => {
+export const deleteCategory = async (
+  categoryId: string
+): Promise<boolean | string> => {
   try {
     await axios.delete(`users/deleteCategory/${categoryId}`);
     return true;
   } catch (e) {
-    return false;
+    return e.message;
   }
 };

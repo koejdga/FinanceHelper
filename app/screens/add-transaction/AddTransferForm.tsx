@@ -7,6 +7,7 @@ import { getAllAccounts } from "@/app/utils/server-communication/AccountRequests
 import { addTransfer } from "@/app/utils/server-communication/TransactionRequests";
 import { useEffect, useState } from "react";
 import {
+  Alert,
   Keyboard,
   SafeAreaView,
   TouchableWithoutFeedback,
@@ -34,7 +35,12 @@ const AddTransferForm = ({ navigation }) => {
 
   const add = async () => {
     const added = await addTransfer(amount, date, fromCard.id, toCard.id);
-    if (added) navigation.navigate("TransactionTabs");
+    if (added === true) {
+      navigation.navigate("TransactionTabs");
+    } else {
+      const errorMessage = added as string;
+      Alert.alert("Error", errorMessage, [{ text: "OK" }]);
+    }
   };
 
   return (

@@ -16,6 +16,7 @@ import {
 import { useIsFocused } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import {
+  Alert,
   Keyboard,
   SafeAreaView,
   TouchableWithoutFeedback,
@@ -39,6 +40,8 @@ const TransactionForm = ({ route, navigation }) => {
   const [category, setCategory] = useState<Category>(categories[0]);
   const [account, setAccount] = useState<Account>(accounts[0]);
   const [note, setNote] = useState<string>(transaction?.note);
+
+  const [openDatepicker, setOpenDatepicker] = useState(false);
 
   useEffect(() => {
     setEditting(transaction !== undefined);
@@ -73,43 +76,43 @@ const TransactionForm = ({ route, navigation }) => {
   }, [isFocused]);
 
   const add = async () => {
-    if (!category) {
-      console.log("no category, sorry");
-    } else if (!account) {
-      console.log("no account, sorry");
-    } else {
-      if (!isIncome)
-        await addExpense(
-          category.id,
-          account.id,
-          amount !== "" ? amount : 0,
-          date,
-          note
-        );
-      else
-        await addIncome(
-          category.id,
-          account.id,
-          amount !== "" ? amount : 0,
-          date,
-          note
-        );
+    let added: string | boolean;
+    if (!isIncome)
+      added = await addExpense(
+        category?.id,
+        account?.id,
+        amount !== "" ? amount : 0,
+        date,
+        note
+      );
+    else
+      added = await addIncome(
+        category?.id,
+        account?.id,
+        amount !== "" ? amount : 0,
+        date,
+        note
+      );
+    if (added === true) {
       navigation.navigate("TransactionTabs");
+    } else {
+      const errorMessage = added as string;
+      Alert.alert("Error", errorMessage, [{ text: "OK" }]);
     }
   };
 
   const edit = async () => {
     const edited = await editTransaction(
       transaction.id,
-      category.id,
-      account.id,
+      category?.id,
+      account?.id,
       date,
       amount !== "" ? amount : 0,
       note,
       transaction.type
     );
 
-    if (edited)
+    if (edited === true)
       navigation.navigate("FullScreenTransaction", {
         transaction: {
           id: transaction.id,
@@ -123,9 +126,11 @@ const TransactionForm = ({ route, navigation }) => {
         month,
         year,
       });
+    else {
+      const errorMessage = edited as string;
+      Alert.alert("Error", errorMessage, [{ text: "OK" }]);
+    }
   };
-
-  const [openDatepicker, setOpenDatepicker] = useState(false);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>

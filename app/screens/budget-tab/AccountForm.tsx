@@ -6,7 +6,7 @@ import {
   editAccount,
 } from "@/app/utils/server-communication/AccountRequests";
 import { useEffect, useState } from "react";
-import { Keyboard, TouchableWithoutFeedback, View } from "react-native";
+import { Alert, Keyboard, TouchableWithoutFeedback, View } from "react-native";
 
 const AccountForm = ({ route, navigation }) => {
   const GAP_IN_QUESTION = 12;
@@ -22,12 +22,23 @@ const AccountForm = ({ route, navigation }) => {
   }, []);
 
   const add = async () => {
-    await addAccount(name, balance);
-    navigation.navigate("Accounts");
+    const added = await addAccount(name, balance);
+    if (added === true) {
+      navigation.navigate("Accounts");
+    } else {
+      const errorMessage = added as string;
+      Alert.alert("Error", errorMessage, [{ text: "OK" }]);
+    }
   };
+
   const edit = async () => {
     const edited = await editAccount(accountId, name, balance);
-    if (edited) navigation.goBack();
+    if (edited === true) {
+      navigation.goBack();
+    } else {
+      const errorMessage = edited as string;
+      Alert.alert("Error", errorMessage, [{ text: "OK" }]);
+    }
   };
 
   return (
@@ -37,6 +48,7 @@ const AccountForm = ({ route, navigation }) => {
           question={"Account name? For example, Salary Card or Cash"}
           inputField={
             <FormTextInput
+              placeholder="Enter your account name..."
               value={name}
               onChangeText={(value) => setName(value)}
               maxLength={25}
@@ -48,6 +60,7 @@ const AccountForm = ({ route, navigation }) => {
           question={"How much money do you have on this account?"}
           inputField={
             <FormTextInput
+              placeholder="I have..."
               value={balance ? balance.toString() : ""}
               onChangeText={(value) => setBalance(parseFloat(value))}
               maxLength={25}

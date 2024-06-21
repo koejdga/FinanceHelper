@@ -33,3 +33,9 @@ export interface Currency {
   rate: number;
   txt: string;
 }
+
+export enum ReportFormats {
+  PDF = "PDF",
+  CSV = "CSV",
+  XLSX = "XLSX",
+}

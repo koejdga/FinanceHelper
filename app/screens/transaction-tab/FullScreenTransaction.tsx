@@ -26,13 +26,15 @@ const FullScreenTransaction = ({ route, navigation }) => {
   };
 
   const deleteFunction = async () => {
-    console.log(transaction.type);
     const deleted = await deleteTransaction(
       transaction.id,
       transaction.type === "income"
     );
-    if (deleted) {
+    if (deleted === true) {
       navigation.navigate("TransactionTabs");
+    } else {
+      const errorMessage = deleted as string;
+      Alert.alert("Error", errorMessage, [{ text: "OK" }]);
     }
   };
 

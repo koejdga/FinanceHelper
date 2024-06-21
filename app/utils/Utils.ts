@@ -1,7 +1,7 @@
+import currencySigns from "@/app/assets/currency_signs.json";
 import axios from "axios";
 import RNFS from "react-native-fs";
 import { Currency } from "./Interfaces";
-import currencySigns from "@/app/assets/currency_signs.json";
 
 export const updateCurrencies = async (): Promise<Currency[]> => {
   const path = `${RNFS.DocumentDirectoryPath}/all_currencies.json`;

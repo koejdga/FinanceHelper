@@ -100,9 +100,9 @@ const TransactionTabs = ({ navigation }) => {
         <Limits navigation={navigation} month={monthNumber} year={year} />
       )}
 
-      {selected === TransactionTabsOptions.STATISTICS.toString() && (
+      {/* {selected === TransactionTabsOptions.STATISTICS.toString() && (
         <Statistics />
-      )}
+      )} */}
 
       <AddTransactionButton
         onPress={async () => {
