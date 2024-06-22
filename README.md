@@ -11,7 +11,10 @@
 Before running the project, you need to:
 1. Install **npm** if you haven't done it yet.  
 Link to the documentation is [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
-2. Have an operational Android or IOS VM or a mobile phone.
+2. Have an operational Android or IOS VM or a mobile phone.  
+Instruction to set up your environment is [here](https://docs.expo.dev/get-started/set-up-your-environment/?platform=android&device=physical).  
+For Android emulator, Android Studio is recommended. Instruction is [here](https://docs.expo.dev/workflow/android-studio-emulator/).  
+For IOS emulator, XCode is recommended. Instruction is [here](https://docs.expo.dev/workflow/ios-simulator/).
 
 ### Run from terminal
 1. Clone the repository or download it as an archive.
