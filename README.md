@@ -5,10 +5,26 @@
  The application allows you to add, delete and edit your incomes and expenses,  
  and also to manage your financial goals.
 
-## Environment settings
+## Run project
+
+### Prerequisites
+Before running the project, you need to:
+1. Install **npm** if you haven't done it yet.  
+Link to the documentation is [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
+2. Have an operational Android or IOS VM or a mobile phone.
+
+### Run from terminal
+1. Clone the repository or download it as an archive.
+2. Turn on your Android/IOS virtual machine. Alternatively, you can connect your physical phone via USB.  
+Instructions to run npm project on physical device are [here](https://reactnative.dev/docs/running-on-device).
+3. Switch to the project root directory with the command:
+```
+cd /your/project/directory/FinanceHelper
+```
+4. Run **npm install** in the terminal to install all modules
  To run the script from terminal, do following:  
-1. Run **npm install** in the terminal to install all modules (do it only once)  
-2. Run **npm run android** to run script on android.  
- For android, script can be run either on virtual machine or on phone which is connected via USB (USB debugging must be turned on).  
- You can use **npm run web** or **npm run ios** instead to run on anther platform. 
- For development, usage of Android Studio is strongly recommended.
+ Run **npm run android** or **npm run ios** to run the project on the specific platform.
+ 
+## Backend
+
+Server is hosted independently. For development purposes, you can find its code [here](https://github.com/myrrhv/ServerFinanceHelper).
