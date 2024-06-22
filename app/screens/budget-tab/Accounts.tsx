@@ -39,6 +39,20 @@ const Accounts = ({ navigation }) => {
     init();
   }, [isFocused]);
 
+  const askAboutDeletion = async (account: Account) => {
+    Alert.alert(
+      `Delete ${account.name}`,
+      `Are you sure you want to delete ${account.name}`,
+      [
+        {
+          text: "Yes",
+          onPress: async () => await deleteFunction(account),
+        },
+        { text: "No", style: "cancel" },
+      ]
+    );
+  };
+
   const deleteFunction = async (account: Account) => {
     const deleted = await deleteAccount(account.id);
     if (deleted === true) {
@@ -130,7 +144,7 @@ const Accounts = ({ navigation }) => {
                   [
                     {
                       text: "Yes",
-                      onPress: async () => await deleteFunction(account),
+                      onPress: async () => await askAboutDeletion(account),
                     },
                     { text: "No", style: "cancel" },
                   ]

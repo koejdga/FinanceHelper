@@ -9,10 +9,10 @@ export const updateCurrencies = async (): Promise<Currency[]> => {
     const content = await RNFS.readFile(path, "utf8");
     const currencies = JSON.parse(content);
 
-    if (!isToday(currencies.exchangedate)) {
+    if (!isTodayOrInFuture(currencies.exchangedate)) {
       const newCurrencies = await getCurrencies();
       await RNFS.writeFile(path, JSON.stringify(newCurrencies), "utf8");
-      return newCurrencies.currecies;
+      return newCurrencies.currencies;
     } else {
       return currencies.currencies;
     }
@@ -20,19 +20,22 @@ export const updateCurrencies = async (): Promise<Currency[]> => {
     if (error.code === "ENOENT") {
       const newCurrencies = await getCurrencies();
       await RNFS.writeFile(path, JSON.stringify(newCurrencies), "utf8");
-      return newCurrencies.currecies;
+      return newCurrencies.currencies;
     } else return [];
   }
 };
 
-const isToday = (dateString: string) => {
+const isTodayOrInFuture = (dateString: string) => {
   const [day, month, year] = dateString.split(".");
   const today = new Date();
 
   return (
-    today.getDate() === parseInt(day) &&
-    today.getMonth() === parseInt(month) &&
-    today.getFullYear() === parseInt(year)
+    today.getDate() < parseInt(day) ||
+    today.getMonth() < parseInt(month) ||
+    today.getFullYear() < parseInt(year) ||
+    (today.getDate() === parseInt(day) &&
+      today.getMonth() === parseInt(month) &&
+      today.getFullYear() === parseInt(year))
   );
 };
 
@@ -52,7 +55,7 @@ const getCurrencies = async () => {
 
   const fileContent = {
     exchangedate: res.data[0].exchangedate,
-    currecies: currencies,
+    currencies: currencies,
   };
 
   return fileContent;
@@ -65,7 +68,15 @@ export const convertNumberToMoney = (
 ) => {
   const rate = currencies.find(
     (c) => c.cc.toUpperCase() === currency.toUpperCase()
-  ).rate;
+  )?.rate;
+
+  if (!rate) {
+    console.log("ERROR: no rate was found");
+    return `${amountOfMoneyInUAH
+      .toFixed(2)
+      .replace(".", ",")
+      .replace(/\B(?=(\d{3})+(?!\d))/g, " ")}`;
+  }
 
   if (!currencySigns[currency]) {
     console.log("WARNING: no currency sign for this currency was found");

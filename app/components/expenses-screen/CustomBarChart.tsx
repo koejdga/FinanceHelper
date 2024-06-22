@@ -1,4 +1,5 @@
 import { Accent } from "@/app/constants/Colors";
+import { FontNames, Fonts } from "@/app/constants/Fonts";
 import { hexToRgb } from "@/app/utils/Utils";
 import React from "react";
 import { Dimensions, Text } from "react-native";
@@ -36,7 +37,14 @@ const CustomBarChart: React.FC<Props> = ({ labels, values, legend }) => {
 
   return (
     <>
-      <Text style={{ textAlign: "center" }}>{legend}</Text>
+      <Text
+        style={[
+          Fonts[FontNames.BODY_4],
+          { textAlign: "center", marginTop: 5, color: Accent[100] },
+        ]}
+      >
+        {legend}
+      </Text>
       <BarChart
         style={{ paddingHorizontal: 16 }}
         data={data}

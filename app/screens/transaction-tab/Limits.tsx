@@ -1,34 +1,30 @@
 import CategoriesProgresses from "@/app/components/expenses-screen/CategoriesProgresses";
+import TotalExpensesPieChart from "@/app/components/expenses-screen/TotalExpensesPieChart";
 import AddIcon from "@/app/components/icons/AddIcon";
 import CancelIcon from "@/app/components/icons/CancelIcon";
 import EditIcon from "@/app/components/icons/EditIcon";
 import MoneyIcon from "@/app/components/icons/MoneyIcon";
 import { base } from "@/app/constants/Colors";
-import { shareReport } from "@/app/utils/InteractionsWithFiles";
-import { Category, ReportFormats } from "@/app/utils/Interfaces";
+import { Category } from "@/app/utils/Interfaces";
 import {
   deleteCategory,
   getAllExpenseCategoriesByDate,
   getAllIncomeCategories,
 } from "@/app/utils/server-communication/CategoryRequests";
 import { appAuth } from "@/firebaseConfig";
-import { useIsFocused, useTheme } from "@react-navigation/native";
+import { useIsFocused } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import {
   Alert,
-  Button,
   Dimensions,
   Pressable,
   ScrollView,
   Text,
   View,
 } from "react-native";
-import { PieChart } from "react-native-chart-kit";
 import { FontNames, Fonts } from "../../constants/Fonts";
-const screenWidth = Dimensions.get("window").width;
 
 const Limits = ({ navigation, month, year }) => {
-  const { dark } = useTheme();
   const [editMode, setEditMode] = useState(false);
   const [categories, setCategories] = useState<Category[]>();
   const [showIncomeCategories, setShowIncomeCategories] = useState(false);
@@ -75,17 +71,6 @@ const Limits = ({ navigation, month, year }) => {
     // refreshIdToken();
   });
 
-  const data = [
-    {
-      amount: 66,
-      color: "lightgreen",
-    },
-    {
-      amount: 33,
-      color: "orange",
-    },
-  ];
-
   const deleteCategoryFunction = async (category: Category) => {
     const deleted = await deleteCategory(category.id);
     if (deleted === true)
@@ -99,30 +84,7 @@ const Limits = ({ navigation, month, year }) => {
   return (
     <View style={{ flex: 1 }}>
       <Pressable onPress={() => setEditMode(false)}>
-        <PieChart
-          data={data}
-          width={screenWidth}
-          height={220}
-          chartConfig={{
-            color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
-          }}
-          accessor={"amount"}
-          backgroundColor={"transparent"}
-          paddingLeft={`${screenWidth * 0.25}`}
-          hasLegend={false}
-          avoidFalseZero
-        />
-        <Text
-          style={[
-            Fonts[FontNames.TITLE_3],
-            {
-              textAlign: "center",
-              color: dark ? base.light.light80 : base.dark.dark100,
-            },
-          ]}
-        >
-          $1500 spent, $3000 left
-        </Text>
+        <TotalExpensesPieChart month={month} year={year} />
       </Pressable>
       <ScrollView>
         <View
