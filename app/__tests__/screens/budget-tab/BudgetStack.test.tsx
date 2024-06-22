@@ -14,6 +14,15 @@ jest.mock("@react-navigation/native", () => (
     }
 ))
 
+jest.mock("@/app/utils/server-communication/AccountRequests", () => ({
+    addAccount: jest.fn(() => {return Promise.resolve(true)}),
+    editAccount: jest.fn(() => {return Promise.resolve(true)})
+}))
+
+jest.mock("@/app/utils/Utils", () => ({
+    convertNumberToMoney: jest.fn(() => {return "123"})
+}))
+
 describe('BudgetStack', () => {
     it('Renders successfully', () => {
         let budget = render(<BudgetStack/>);

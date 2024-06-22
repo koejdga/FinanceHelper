@@ -1,6 +1,6 @@
 import {render} from '@testing-library/react-native';
-import React from "react";
-import {mockNavigation} from "@/app/utils/test-utils";
+import React, {createContext} from "react";
+import { mockNavigation} from "@/app/utils/test-utils";
 import Limits from "@/app/screens/transaction-tab/Limits";
 import {getAllExpenseCategoriesByDate, getAllIncomeCategories} from "@/app/utils/server-communication/CategoryRequests";
 
@@ -32,7 +32,22 @@ jest.mock("@/app/utils/server-communication/CategoryRequests", () => ({
             categoriesWithNoExpenses: []
         })
     })
-}))
+}));
+
+jest.mock("@/app/utils/Utils", () => ({
+    convertNumberToMoney: jest.fn(() => {return "123"})
+}));
+
+jest.mock("@/app/utils/SaveLocally", () => ({
+    loadData: jest.fn(() => {return Promise.resolve(null)})
+}));
+
+function mockContext() {
+    return createContext("USD");
+}
+jest.mock( "@/app/enums_and_contexts/EnumsAndContexts", () => ({
+    SettingsContext: mockContext()
+}));
 
 describe('Limits', () => {
     it('Renders successfully', () => {

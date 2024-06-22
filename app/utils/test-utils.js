@@ -1,3 +1,5 @@
+import {createContext} from "react";
+
 export const mockNavigation = {
     route: {
         params: {
@@ -24,3 +26,5 @@ export const mockNavigation = {
         navigate: jest.fn()
     }
 }
+
+export const mockedContext = createContext("USD");

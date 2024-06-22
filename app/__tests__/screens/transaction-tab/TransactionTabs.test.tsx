@@ -1,7 +1,7 @@
 import {render} from '@testing-library/react-native';
 import React from "react";
 import TransactionTabs from "@/app/screens/transaction-tab/TransactionTabs";
-import {mockNavigation} from "@/app/utils/test-utils";
+import {mockedContext, mockNavigation} from "@/app/utils/test-utils";
 
 jest.mock("@/app/utils/server-communication/CategoryRequests", () => ({
     getAllExpenseCategoriesByDate: jest.fn(() => {return Promise.resolve({
@@ -38,6 +38,19 @@ jest.mock('@/firebaseConfig', () => {
         appAuth: null
     }
 });
+
+jest.mock("@/app/utils/Utils", () => ({
+    convertNumberToWeekDay: jest.fn(() => {return "Sunday"}),
+    convertNumberToMonthName: jest.fn(() => {return "June"})
+}))
+
+jest.mock("@/app/utils/SaveLocally", () => ({
+    loadData: jest.fn(() => {return Promise.resolve(null)}),
+    removeValue: jest.fn(() => {return Promise.resolve(true)})
+}));
+jest.mock( "@/app/enums_and_contexts/EnumsAndContexts", () => ({
+    SettingsContext: mockedContext
+}));
 
 describe('TransactionTabs', () => {
     it('Renders successfully', () => {

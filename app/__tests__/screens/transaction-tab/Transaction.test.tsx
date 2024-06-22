@@ -17,6 +17,13 @@ jest.mock('@/firebaseConfig', () => {
     }
 });
 
+jest.mock("@/app/utils/Utils", () => ({
+    convertNumberToMoney: jest.fn(() => {return "123"})
+}));
+
+jest.mock("@/app/utils/SaveLocally", () => ({
+    loadData: jest.fn(() => {return Promise.resolve(null)})
+}));
 
 describe('Transaction', () => {
     it('Renders successfully', () => {
