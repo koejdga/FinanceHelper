@@ -13,7 +13,15 @@ jest.mock('@/firebaseConfig', () => ({
 
 jest.mock("@firebase/auth", () => ({
     updateProfile: jest.fn(() => {return Promise.resolve()})
-}))
+}));
+
+jest.mock("@/app/utils/InteractionsWithFiles", () => ({
+    shareReport: jest.fn(() => {return Promise.resolve(true)})
+}));
+
+jest.mock("@/app/utils/SaveLocally", () => ({
+    saveData: jest.fn(() => {return Promise.resolve(true)})
+}));
 
 
 describe('ProfileStack', () => {

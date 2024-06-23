@@ -18,6 +18,15 @@ jest.mock("@/app/utils/server-communication/CategoryRequests", () => ({
     })}),
     getAllIncomeCategories: jest.fn(() => {return Promise.resolve([])})
 }))
+jest.mock("@/app/utils/server-communication/AccountRequests", () => ({
+    getAllAccounts: jest.fn(() => {return Promise.resolve([])})
+}));
+
+jest.mock("@/app/utils/server-communication/TransactionRequests", () => ({
+    addExpense: jest.fn(() => {return Promise.resolve(true)}),
+    addIncome: jest.fn(() => {return Promise.resolve(true)}),
+    editTransaction:  jest.fn(() => {return Promise.resolve(true)})
+}));
 
 describe('AddTransactionForm', () => {
     it('Renders successfully', () => {
