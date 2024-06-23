@@ -80,6 +80,13 @@ const FullScreenTransaction = ({ route, navigation }) => {
         </Text>
       </View>
 
+      <View style={{ flexDirection: "row" }}>
+        <Text style={[Fonts[FontNames.TITLE_3], { flex: 1 }]}>Note</Text>
+        <Text style={[Fonts[FontNames.BODY_3], { flex: 1 }]}>
+          {transaction.note ? transaction.note : "-"}
+        </Text>
+      </View>
+
       <Pressable
         onPress={edit}
         style={{

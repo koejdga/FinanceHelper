@@ -1,10 +1,7 @@
 import CustomBarChart from "@/app/components/expenses-screen/CustomBarChart";
 import CustomLineGraph from "@/app/components/expenses-screen/CustomLineGraph";
 import { Category } from "@/app/utils/Interfaces";
-import {
-  convertNumberToMonthName,
-  convertNumberToWeekDay,
-} from "@/app/utils/Utils";
+import { convertNumberToWeekDay } from "@/app/utils/Utils";
 import { getAllExpenseCategoriesByDate } from "@/app/utils/server-communication/CategoryRequests";
 import { getAllTransactions } from "@/app/utils/server-communication/TransactionRequests";
 import { useIsFocused } from "@react-navigation/native";

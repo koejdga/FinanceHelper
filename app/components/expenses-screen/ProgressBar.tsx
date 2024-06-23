@@ -8,7 +8,7 @@ type Props = {
 
 const ProgressBar: React.FC<Props> = ({ category }) => {
   const getProgressBarColor = (progress: number) => {
-    if (progress < 0 || progress > 1) {
+    if (progress < 0) {
       console.log("ERROR: wrong progress provided");
       return "violet";
     }
@@ -18,6 +18,7 @@ const ProgressBar: React.FC<Props> = ({ category }) => {
     if (progress < 0.5) return "gold";
     if (progress < 0.7) return "orange";
     if (progress <= 1) return "tomato";
+    if (progress > 1) return "red";
   };
 
   return (

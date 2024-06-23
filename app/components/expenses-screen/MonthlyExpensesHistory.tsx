@@ -36,8 +36,8 @@ const MonthlyExpensesHistory: React.FC<Props> = ({ year }) => {
   return (
     <View>
       <IncomeExpenseTotal
-        income={yearInfo?.expenseTotal || 0}
-        expense={yearInfo?.incomeTotal || 0}
+        income={yearInfo?.incomeTotal || 0}
+        expense={yearInfo?.expenseTotal || 0}
         total={yearInfo?.incomeTotal - yearInfo?.expenseTotal || 0}
       />
       <Separator />

@@ -64,7 +64,10 @@ const DailyExpensesHistory: React.FC<Props> = ({
           <Pressable
             onPress={() => {
               navigation.navigate("FullScreenTransaction", {
-                transaction: transaction,
+                transaction: {
+                  ...transaction,
+                  fullDate: transaction.fullDate.toDateString(),
+                },
               });
             }}
           >
